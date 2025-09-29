@@ -82,11 +82,13 @@ const {
               ) : (
                 <Image
                   class="mx-auto rounded-md w-full"
-                  widths={[400, 768, 1024, 2040]}
-                  sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                  widths={[400, 768, 1024, 1440, 1920]}
+                  sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 1439px) 1024px, (max-width: 1919px) 1440px, 1920px"
                   loading="eager"
-                  width={1024}
-                  height={576}
+                  decoding="async"
+                  fetchpriority="high"
+                  width={1920}
+                  height={1281}
                   {...image}
                 />
               )}
