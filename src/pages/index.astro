@@ -7,11 +7,75 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Prices from '~/components/widgets/Pricing.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
+import FAQSchema from '~/components/seo/FAQSchema.astro';
 
 const metadata = {
   title: 'Rock Bookkeeping - We handle your bookkeeping. You handle your business.',
   ignoreTitleTemplate: true,
 };
+
+const faqItems = [
+      {
+        title: 'What are the fees?',
+        description:
+          'We use a flat monthly fee. We’ll talk through your specific business needs and design a plan that serves you best.',
+      },
+      {
+        title: 'What type of bookkeeping services do you offer?',
+        description:
+          'We specialize in QuickBooks Online and are Certified ProAdvisors. Our work is fully remote, and we use simple online tools to make sharing documents and information convenient for you.',
+      },
+      {
+        title: 'How does monthly bookkeeping work?',
+        description:
+          'Each month we analyze and record your business transactions in QuickBooks Online. From there, we prepare accurate financial reports like your Profit & Loss and Balance Sheet so you can clearly see how your business is performing.',
+      },
+      {
+        title: 'What if I need a more frequent schedule than monthly?',
+        description:
+          'We provide flexible service to fit your needs. For businesses that want closer tracking, we can meet weekly or bi-weekly to review cash flow and help you stay ahead.',
+      },
+      {
+        title: 'When and how do I send my documents to you?',
+        description:
+          'We’ll need your bank and credit card statements each month. We can set up QuickBooks Online to bring them in automatically, or you can share the statements with us directly.',
+      },
+      {
+        title: 'When do you deliver my monthly financial reports?',
+        description:
+          'Your financial reports are delivered by the 10th of each month, giving you plenty of time to review results and plan with confidence.',
+      },
+      {
+        title: 'What if my books are behind schedule or need a clean-up?',
+        description:
+          'That’s no problem. We have experience cleaning up past records and bringing books up to date. We’ll review your situation in detail and put everything back in order.',
+      },
+      {
+        title: 'What if I need assistance with special projects?',
+        description:
+          'We’re happy to help. Whether you need deeper financial analysis, support for a business decision, or a one-time review, we can work with you to provide clear answers and reliable numbers.',
+      },
+      {
+        title: 'What if I need tax preparation?',
+        description:
+          'We don’t prepare taxes ourselves, but we ensure your books are accurate and ready for your CPA. We also communicate directly with your tax professional when needed so they have everything required to do their work effectively.',
+      },
+      {
+        title: 'Why should I choose Rock Bookkeeping?',
+        description:
+          'We bring both accounting training and hands-on business experience. With QuickBooks certifications and real-world knowledge, we provide accurate books and clear reports so you can make better decisions for your business.',
+      },
+      {
+        title: 'How do I know my books will be accurate?',
+        description:
+          'Accuracy is at the heart of what we do. Every transaction is reviewed and matched against your bank and credit card statements. This ensures that your records and reports reflect the real numbers in your business.',
+      },
+      {
+        title: 'Do you work with businesses outside of Pittsburgh?',
+        description:
+          'Yes. Because we use QuickBooks Online, we can work with small businesses anywhere in the U.S. Whether you’re local or across the country, our process is the same — reliable, timely, and professional.',
+      },
+    ]
 ---
 
 <Layout metadata={metadata}>
@@ -516,69 +580,10 @@ const metadata = {
     tagline="FAQs"
     classes={{ container: 'max-w-6xl' }}
     columns={1}
-    items={[
-      {
-        title: 'What are the fees?',
-        description:
-          'We use a flat monthly fee. We’ll talk through your specific business needs and design a plan that serves you best.',
-      },
-      {
-        title: 'What type of bookkeeping services do you offer?',
-        description:
-          'We specialize in QuickBooks Online and are Certified ProAdvisors. Our work is fully remote, and we use simple online tools to make sharing documents and information convenient for you.',
-      },
-      {
-        title: 'How does monthly bookkeeping work?',
-        description:
-          'Each month we analyze and record your business transactions in QuickBooks Online. From there, we prepare accurate financial reports like your Profit & Loss and Balance Sheet so you can clearly see how your business is performing.',
-      },
-      {
-        title: 'What if I need a more frequent schedule than monthly?',
-        description:
-          'We provide flexible service to fit your needs. For businesses that want closer tracking, we can meet weekly or bi-weekly to review cash flow and help you stay ahead.',
-      },
-      {
-        title: 'When and how do I send my documents to you?',
-        description:
-          'We’ll need your bank and credit card statements each month. We can set up QuickBooks Online to bring them in automatically, or you can share the statements with us directly.',
-      },
-      {
-        title: 'When do you deliver my monthly financial reports?',
-        description:
-          'Your financial reports are delivered by the 10th of each month, giving you plenty of time to review results and plan with confidence.',
-      },
-      {
-        title: 'What if my books are behind schedule or need a clean-up?',
-        description:
-          'That’s no problem. We have experience cleaning up past records and bringing books up to date. We’ll review your situation in detail and put everything back in order.',
-      },
-      {
-        title: 'What if I need assistance with special projects?',
-        description:
-          'We’re happy to help. Whether you need deeper financial analysis, support for a business decision, or a one-time review, we can work with you to provide clear answers and reliable numbers.',
-      },
-      {
-        title: 'What if I need tax preparation?',
-        description:
-          'We don’t prepare taxes ourselves, but we ensure your books are accurate and ready for your CPA. We also communicate directly with your tax professional when needed so they have everything required to do their work effectively.',
-      },
-      {
-        title: 'Why should I choose Rock Bookkeeping?',
-        description:
-          'We bring both accounting training and hands-on business experience. With QuickBooks certifications and real-world knowledge, we provide accurate books and clear reports so you can make better decisions for your business.',
-      },
-      {
-        title: 'How do I know my books will be accurate?',
-        description:
-          'Accuracy is at the heart of what we do. Every transaction is reviewed and matched against your bank and credit card statements. This ensures that your records and reports reflect the real numbers in your business.',
-      },
-      {
-        title: 'Do you work with businesses outside of Pittsburgh?',
-        description:
-          'Yes. Because we use QuickBooks Online, we can work with small businesses anywhere in the U.S. Whether you’re local or across the country, our process is the same — reliable, timely, and professional.',
-      },
-    ]}
+    items={faqItems}
   />
+
+  <FAQSchema faqs={faqItems.map(i => ({ question: i.title, answer: i.description }))} />
 
   <!-- <FAQs2
   items={[
