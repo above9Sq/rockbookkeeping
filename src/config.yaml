@@ -11,16 +11,16 @@ metadata:
   title:
     default: Rock Bookkeeping
     template: '%s — Rock Bookkeeping'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+  description: "Simple, accurate QuickBooks Online bookkeeping for small businesses. Clear reconciliations and monthly reports so you can focus on running your business."
   robots:
     index: true
     follow: true
   openGraph:
     site_name: Rock Bookkeeping
     images:
-      - url: '~/assets/images/default.png'
+      - url: '~/assets/images/rockbookkeeping-og.png'
         width: 1200
-        height: 628
+        height: 630
     type: website
   twitter:
     handle: '@joshcesana'
