@@ -2,10 +2,15 @@
 import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const { inputs, textarea, disclaimer, button = 'Contact us', description = '', name = 'contact' } = Astro.props;
 ---
 
-<form>
+<form name={name} method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+  <div class="hidden">
+    <label>
+      Don’t fill this out if you’re human: <input name="bot-field" type="text" />
+    </label>
+  </div>
   {
     inputs &&
       inputs.map(
@@ -36,7 +41,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
       <div>
         <label for="textarea" class="block text-sm font-medium">
           {textarea.label} <span class="font-bold text-xs text-blue-500">*</span>
-        </label> 
+        </label>
         <textarea
           id="textarea"
           name={textarea.name ? textarea.name : 'message'}
@@ -68,7 +73,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
       </div>
     )
   }
-
+  <div data-netlify-recaptcha="true"></div>
   {
     button && (
       <div class="mt-10 grid">
