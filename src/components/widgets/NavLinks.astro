@@ -1,0 +1,34 @@
+---
+export interface LinkItem {
+  href?: string;
+  label?: string;
+  text?: string;
+  title?: string;
+}
+
+export interface Props {
+  items: LinkItem[];
+  aClass?: string;
+  liClass?: string;
+  closeOnClick?: boolean;
+  overlayId?: string;
+}
+
+const { items = [], aClass = '', liClass = '', closeOnClick = false, overlayId = '' } = Astro.props;
+---
+
+<ul class="flex flex-col gap-6 md:flex-row md:gap-6">
+  {
+    items.map((it) => {
+      const label = it.label ?? it.text ?? it.title ?? '';
+      const href = it.href ?? '#';
+      return (
+        <li class={liClass}>
+          <a href={href} class={aClass} {...(closeOnClick && overlayId ? { 'data-hs-overlay': `#${overlayId}` } : {})}>
+            {label}
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>

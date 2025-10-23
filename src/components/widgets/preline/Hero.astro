@@ -1,0 +1,130 @@
+---
+import Image from '~/components/common/Image.astro';
+import heroImage from '~/assets/images/accounting-hero-tall.png';
+import bookkeeperCertImage from '~/assets/images/cert-bookkeeper.png';
+import level1CertImage from '~/assets/images/cert-level1.png';
+import FiveStars from '../tailwind/FiveStars.astro';
+---
+
+<section class="max-w-[85rem] mx-auto px-4 py-8 lg:py-20 pb-20 lg:pb-24">
+  <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
+    <div class="flex flex-col gap-8 lg:gap-10 items-center md:items-start justify-center text-center md:text-left">
+      <p
+        class="-mb-8 inline-block text-sm font-medium bg-clip-text bg-linear-to-l from-blue-600 to-violet-500 text-transparent"
+      >
+        Most trusted
+      </p>
+      <h1
+        class="block text-4xl font-semibold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-[1.1] text-balance text-center md:text-left"
+      >
+        Your bookkeeping<br class="md:hidden" />
+        on <span class="text-blue-600">autopilot</span>.
+      </h1>
+      <p class="text-lg text-gray-800 text-center px-10 md:px-0 md:text-left md:-mt-4">
+        Buy back your time, peace, and calm. Never stress about your books again.
+      </p>
+
+      <!-- Button -->
+      <div class="flex flex-col gap-2">
+        <div class="flex w-full justify-center md:justify-start">
+          <button
+            type="button"
+            class="btn-pop py-3 px-16 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            data-hs-overlay="#contact-modal"
+            aria-haspopup="dialog"
+            aria-controls="contact-modal"
+            aria-expanded="false"
+          >
+            Get a free quote
+            <svg
+              class="shrink-0 size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg
+            >
+          </button>
+        </div>
+        <p class="text-sm">
+          <span><span class="text-accent">Fast:</span> quote within 1 business day</span>
+        </p>
+      </div>
+
+      <!-- Certs -->
+      <div class="flex w-full items-center justify-center md:justify-start gap-x-0 sm:gap-x-5">
+        <Image
+          class="scale-80 md:scale-100 w-auto object-contain"
+          src={bookkeeperCertImage}
+          alt="Certified QuickBooks Bookkeeper certification"
+          width={100}
+          height={100}
+        />
+        <Image
+          class="scale-80 md:scale-100 w-auto object-contain"
+          src={level1CertImage}
+          alt="QuickBooks ProAdvisor Level 1 certification"
+          width={100}
+          height={100}
+        />
+        <div class="pl-3 pb-4 md:pl-0">
+          <FiveStars />
+        </div>
+      </div>
+      <!-- End Certs -->
+    </div>
+    <!-- End Col -->
+
+    <div class="relative md:ms-4">
+      <Image
+        class="rounded-md mx-auto"
+        src={heroImage}
+        alt="Laptop and documents hero image"
+        loading="eager"
+        width={563}
+        height={643}
+      />
+      <div
+        class="absolute inset-0 -z-1 bg-linear-to-tr from-gray-200 via-white/0 to-white/0 size-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6"
+      >
+      </div>
+
+      <!-- SVG-->
+      <div class="absolute bottom-0 start-0">
+        <svg
+          class="w-2/3 ms-auto h-auto text-white"
+          width="630"
+          height="451"
+          viewBox="0 0 630 451"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="531" y="352" width="99" height="99" fill="currentColor"></rect>
+          <rect x="140" y="352" width="106" height="99" fill="currentColor"></rect>
+          <rect x="482" y="402" width="64" height="49" fill="currentColor"></rect>
+          <rect x="433" y="402" width="63" height="49" fill="currentColor"></rect>
+          <rect x="384" y="352" width="49" height="50" fill="currentColor"></rect>
+          <rect x="531" y="328" width="50" height="50" fill="currentColor"></rect>
+          <rect x="99" y="303" width="49" height="58" fill="currentColor"></rect>
+          <rect x="99" y="352" width="49" height="50" fill="currentColor"></rect>
+          <rect x="99" y="392" width="49" height="59" fill="currentColor"></rect>
+          <rect x="44" y="402" width="66" height="49" fill="currentColor"></rect>
+          <rect x="234" y="402" width="62" height="49" fill="currentColor"></rect>
+          <rect x="334" y="303" width="50" height="49" fill="currentColor"></rect>
+          <rect x="581" width="49" height="49" fill="currentColor"></rect>
+          <rect x="581" width="49" height="64" fill="currentColor"></rect>
+          <rect x="482" y="123" width="49" height="49" fill="currentColor"></rect>
+          <rect x="507" y="124" width="49" height="24" fill="currentColor"></rect>
+          <rect x="531" y="49" width="99" height="99" fill="currentColor"></rect>
+        </svg>
+      </div>
+      <!-- End SVG-->
+    </div>
+    <!-- End Col -->
+  </div>
+  <!-- End Grid -->
+</section>

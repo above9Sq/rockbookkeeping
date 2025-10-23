@@ -1,5 +1,7 @@
 ---
 import { UI } from 'astrowind:config';
+
+import prelineScript from '../../utils/preline-init.ts?url';
 ---
 
 <script is:inline define:vars={{ defaultTheme: UI.theme }}>
@@ -272,3 +274,5 @@ import { UI } from 'astrowind:config';
     Observer.start();
   });
 </script>
+
+<script is:inline type="module" src={prelineScript}></script>

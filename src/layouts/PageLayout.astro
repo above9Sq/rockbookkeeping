@@ -1,6 +1,10 @@
 ---
 import Layout from '~/layouts/Layout.astro';
-import Header from '~/components/widgets/Header.astro';
+// import Header from '~/components/widgets/Header.astro';
+// import Header from '~/components/widgets/tailwind/Header.astro';
+
+import Header from '~/components/widgets/preline/Header.astro';
+
 import Footer from '~/components/widgets/Footer.astro';
 import Announcement from '~/components/widgets/Announcement.astro';
 
@@ -20,7 +24,8 @@ const { metadata } = Astro.props;
     <Announcement />
   </slot> -->
   <slot name="header">
-    <Header {...headerData} />
+    <!-- <Header {...headerData} /> -->
+     <Header />
   </slot>
   <main id="main">
     <slot />
