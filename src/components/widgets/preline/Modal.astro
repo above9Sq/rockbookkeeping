@@ -142,7 +142,7 @@
   </div>
 </div>
 
-<style>
+<style is:global>
   /* Force flex when open */
   #contact-modal:not(.hidden) {
     display: flex !important;
@@ -162,7 +162,7 @@
   /* Error messages */
   @reference "tailwindcss";
   .rb-error {
-    @apply mt-1 text-xs text-red-600;
+    @apply mt-1 text-sm leading-tight text-red-600 font-medium;
   }
 
   /* Respect reduced motion */
@@ -312,11 +312,21 @@
 
     function showInlineSuccess() {
       card.innerHTML = `
-      <div class="text-center p-2">
-        <h3 class="text-xl font-semibold text-gray-800">Thanks — you’re all set.</h3>
-        <p class="mt-2 text-gray-600">We’ll call you within 1 business day with a simple plan to get your books stress-free.</p>
-        <button type="button" class="mt-6 inline-flex items-center justify-center rounded-xl bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" data-close-modal>Close</button>
-      </div>`;
+        <div class="text-center p-2">
+          <h3 class="text-xl font-semibold text-gray-800">✅ You’re all set!</h3>
+          <span class="text-3xl block animate-bounce">✅</span>
+          <p class="mt-2 text-gray-600">
+            We’re excited to help you clear the chaos and enjoy calm books again. 
+            We’ll reach out within 1 business day.
+          </p>
+          <button 
+            type="button"
+            class="mt-6 inline-flex items-center justify-center rounded-xl bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            data-close-modal
+          >
+            Back to site
+          </button>
+        </div>`;
       // wire up the new Close button
       card.querySelector('[data-close-modal]')?.addEventListener('click', close);
     }
