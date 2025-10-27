@@ -37,7 +37,7 @@
 html {
   scroll-behavior: smooth !important;
   overflow-y: scroll;
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
 }
 body {
   font-family: var(--font-sans);
