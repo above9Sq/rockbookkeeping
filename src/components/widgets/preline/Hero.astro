@@ -1,41 +1,40 @@
 ---
 import Image from '~/components/common/Image.astro';
-import heroImage from '~/assets/images/accounting-hero-tall.png';
+import heroImage from '~/assets/images/accounting-hero-wide.png';
 import bookkeeperCertImage from '~/assets/images/cert-bookkeeper.png';
 import level1CertImage from '~/assets/images/cert-level1.png';
 import FiveStars from '../tailwind/FiveStars.astro';
 ---
 
-<section class="max-w-[85rem] mx-auto px-4 py-8 lg:py-20 pb-20 lg:pb-24">
-  <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
-    <div class="flex flex-col gap-8 lg:gap-10 items-center md:items-start justify-center text-center md:text-left">
-      <p
-        class="-mb-8 inline-block text-sm font-medium bg-clip-text bg-linear-to-l from-blue-600 to-violet-500 text-transparent"
-      >
-        Most trusted
-      </p>
+<section class="max-w-[1600px] mx-auto px-4 xl:px-[120px] py-3 xl:py-14">
+  <div
+    class="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8 items-start justify-items-center xl:justify-items-stretch max-w-[85rem] mx-auto"
+  >
+    <div
+      class="flex flex-col gap-4 xl:gap-8 items-center xl:items-start justify-center text-center xl:text-left w-full max-w-[720px] xl:max-w-none"
+    >
       <h1
-        class="block text-4xl font-semibold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-[1.1] text-balance text-center md:text-left"
+        class="mt-0 block text-[32px] leading-[1.2] sm:text-[38px] sm:leading-[1.2] md:text-[45px] md:leading-[49.5px] tracking-[0.45px] font-black text-gray-800 text-balance text-center xl:text-left"
       >
-        Your bookkeeping<br class="md:hidden" /> on <span class="text-blue-600">autopilot</span>.
+        Your books are a mess. We'll fix them — fast.
       </h1>
-      <p class="text-lg text-gray-800 text-center px-10 md:px-0 md:text-left md:-mt-4">
-        Buy back your time, peace, and calm. Never stress about your books again.
+      <p class="text-lg md:text-xl text-gray-800 text-center xl:text-left xl:-mt-1 max-w-[52ch]">
+        Stop dreading tax season. We'll clean up your QuickBooks, organize everything, and give you total peace of mind.
       </p>
 
       <!-- Button -->
-      <div class="flex flex-col gap-2">
-        <div class="flex w-full justify-center md:justify-start">
+      <div class="max-[400px]:w-full flex flex-col gap-1.5">
+        <div class="flex w-full justify-center xl:justify-start">
           <button
             type="button"
-            class="btn-pop py-3 px-16 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            class="btn-pop py-3 pl-16 pr-11 max-[400px]:px-0 w-full max-w-md max-[400px]:max-w-none max-[400px]:w-full inline-flex justify-center items-center gap-x-2 text-base uppercase font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
             data-hs-overlay="#contact-modal"
             data-open-modal
             aria-haspopup="dialog"
             aria-controls="contact-modal"
             aria-expanded="false"
           >
-            Get my clean books plan
+            Get Your Clean Books Plan
             <svg
               class="shrink-0 size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -51,12 +50,12 @@ import FiveStars from '../tailwind/FiveStars.astro';
           </button>
         </div>
         <p class="text-sm">
-          <span><span class="text-accent">Fast:</span> quote within 1 business day</span>
+          <span><span class="text-accent">No spam.</span> We’ll call you within one business day.</span>
         </p>
       </div>
 
       <!-- Certs -->
-      <div class="flex w-full items-center justify-center md:justify-start gap-x-0 sm:gap-x-5">
+      <div class="flex w-full items-center justify-center xl:justify-start gap-x-4">
         <Image
           class="scale-80 md:scale-100 w-auto object-contain"
           src={bookkeeperCertImage}
@@ -81,50 +80,15 @@ import FiveStars from '../tailwind/FiveStars.astro';
     </div>
     <!-- End Col -->
 
-    <div class="relative md:ms-4">
+    <div class="w-full flex justify-center xl:justify-start xl:ms-0">
       <Image
-        class="rounded-md mx-auto"
+        class="mx-auto lg:mx-0 rounded-lg max-w-[800px] w-full sm:max-w-[600px] md:max-w-[700px] aspect-[16/9] object-cover"
         src={heroImage}
         alt="Laptop and documents hero image"
         loading="eager"
-        width={563}
-        height={643}
+        width={665}
+        height={374}
       />
-      <div
-        class="absolute inset-0 -z-1 bg-linear-to-tr from-gray-200 via-white/0 to-white/0 size-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6"
-      >
-      </div>
-
-      <!-- SVG-->
-      <div class="absolute bottom-0 start-0">
-        <svg
-          class="w-2/3 ms-auto h-auto text-white"
-          width="630"
-          height="451"
-          viewBox="0 0 630 451"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect x="531" y="352" width="99" height="99" fill="currentColor"></rect>
-          <rect x="140" y="352" width="106" height="99" fill="currentColor"></rect>
-          <rect x="482" y="402" width="64" height="49" fill="currentColor"></rect>
-          <rect x="433" y="402" width="63" height="49" fill="currentColor"></rect>
-          <rect x="384" y="352" width="49" height="50" fill="currentColor"></rect>
-          <rect x="531" y="328" width="50" height="50" fill="currentColor"></rect>
-          <rect x="99" y="303" width="49" height="58" fill="currentColor"></rect>
-          <rect x="99" y="352" width="49" height="50" fill="currentColor"></rect>
-          <rect x="99" y="392" width="49" height="59" fill="currentColor"></rect>
-          <rect x="44" y="402" width="66" height="49" fill="currentColor"></rect>
-          <rect x="234" y="402" width="62" height="49" fill="currentColor"></rect>
-          <rect x="334" y="303" width="50" height="49" fill="currentColor"></rect>
-          <rect x="581" width="49" height="49" fill="currentColor"></rect>
-          <rect x="581" width="49" height="64" fill="currentColor"></rect>
-          <rect x="482" y="123" width="49" height="49" fill="currentColor"></rect>
-          <rect x="507" y="124" width="49" height="24" fill="currentColor"></rect>
-          <rect x="531" y="49" width="99" height="99" fill="currentColor"></rect>
-        </svg>
-      </div>
-      <!-- End SVG-->
     </div>
     <!-- End Col -->
   </div>

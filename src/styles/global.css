@@ -1,9 +1,29 @@
+@custom-variant xxl {
+  @media (width >= 87.5rem) {
+    @slot;
+  }
+}
+
+
 /* ── Fonts ─────────────────────────────────────────────── */
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/noto-sans';
 @import '@fontsource-variable/ibm-plex-sans';
 @import '@fontsource-variable/bricolage-grotesque';
 @import '@fontsource-variable/special-gothic';
+
+@import '@fontsource/lato';
+@import '@fontsource/lato/100.css';
+@import '@fontsource/lato/300.css';
+@import '@fontsource/lato/400.css';
+@import '@fontsource/lato/700.css';
+@import '@fontsource/lato/900.css';
+
+/* Breakpoints - Tailwind v4 custom variant */
+:root {
+  /* 1400px / 16 = 87.5rem */
+  --breakpoint-xxl: 87.5rem;
+}
 
 /* ── Tailwind core (v4) ────────────────────────────────── */
 @import 'tailwindcss';
@@ -18,8 +38,8 @@
 /* ── Tailwind theme tokens (fonts + colors) ─────────────── */
 @theme {
   /* Fonts */
-  --font-sans: 'Inter Variable', sans-serif;
-  --font-heading: 'Special Gothic Variable', sans-serif;
+  --font-sans: 'Lato', sans-serif;
+  --font-heading: 'Lato', sans-serif;
 
   /* Brand colors */
   --color-primary: rgb(1 97 239);
@@ -41,7 +61,7 @@ html {
 }
 body {
   font-family: var(--font-sans);
-  color: var(--color-text-default);
+
   background-color: var(--color-bg-page);
 }
 

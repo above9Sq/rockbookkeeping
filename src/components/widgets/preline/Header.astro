@@ -3,16 +3,26 @@ import { Image } from 'astro:assets';
 import logoImage from '/src/assets/images/logo.svg';
 ---
 
-<!-- ========== HEADER ========== -->
 <header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7">
   <nav
-    class="relative max-w-[85rem] w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 mx-auto"
+    class="relative max-w-[1600px] w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 xl:px-[120px] mx-auto"
   >
     <div class="md:col-span-3 flex items-center">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-x-1 md:gap-x-2 focus:outline-hidden focus:opacity-80" aria-label="Rock Bookkeeping">
-        <Image src={logoImage} alt="Rock Bookkeeping logo" width={50} height={50} loading="eager" class="shrink-0 h-10 md:h-13" />
-        <span class=" font-heading text-lg lg:text-2xl font-semibold text-gray-800">Rock&nbsp;Bookkeeping</span>
+      <a
+        href="/"
+        class="flex items-center gap-x-1 md:gap-x-2 focus:outline-hidden focus:opacity-80"
+        aria-label="Rock Bookkeeping"
+      >
+        <Image
+          src={logoImage}
+          alt="Rock Bookkeeping logo"
+          width={50}
+          height={50}
+          loading="eager"
+          class="shrink-0 h-10 md:h-13"
+        />
+        <span class="font-heading text-lg lg:text-2xl font-semibold text-gray-800">Rock&nbsp;Bookkeeping</span>
       </a>
       <!-- End Logo -->
     </div>
@@ -47,12 +57,13 @@ import logoImage from '/src/assets/images/logo.svg';
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            ><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line
+          >
+            <line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line
               x1="3"
               x2="21"
               y1="18"
-              y2="18"></line></svg
-          >
+              y2="18"></line>
+          </svg>
           <svg
             class="hs-collapse-open:block hidden shrink-0 size-4"
             xmlns="http://www.w3.org/2000/svg"
@@ -63,8 +74,10 @@ import logoImage from '/src/assets/images/logo.svg';
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
-            stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+            stroke-linejoin="round"
           >
+            <path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>
+          </svg>
         </button>
       </div>
     </div>
@@ -109,4 +122,3 @@ import logoImage from '/src/assets/images/logo.svg';
     <!-- End Collapse -->
   </nav>
 </header>
-<!-- ========== END HEADER ========== -->
