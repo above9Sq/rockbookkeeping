@@ -1,0 +1,100 @@
+---
+// src/components/MobileMenu.astro
+interface Props {
+  navItems: { label: string; href: string; current?: boolean }[];
+  ctaLabel: string;
+}
+
+const { navItems, ctaLabel } = Astro.props;
+---
+
+<div
+  id="mobile-wrapper"
+  class="lg:hidden border-b border-gray-200 fixed inset-x-0 top-[56px] z-[70] pointer-events-none"
+  client:load
+>
+  <div
+    id="rb-menu"
+    class="overflow-hidden max-h-0 transition-[max-height] duration-250 ease-out bg-white shadow-sm pointer-events-auto"
+  >
+    <nav class="px-4 pb-5">
+      <ul>
+        {
+          navItems.map((item) => (
+            <li class="border-b border-gray-200">
+              <a
+                href={item.href}
+                class="block py-6 text-xl font-bold text-gray-800 hover:text-gray-600 transition-colors"
+                aria-current={item.current ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div id="rb-cta" class="px-4 pt-1 pb-2 bg-white pointer-events-auto transition-padding duration-250 ease-out">
+    <button
+      type="button"
+      class="w-full py-2.5 px-4 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+    >
+      {ctaLabel}
+    </button>
+  </div>
+</div>
+
+<script>
+  // Runs only in browser, after DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('rb-toggle');
+    const menu = document.getElementById('rb-menu');
+    const cta = document.getElementById('rb-cta');
+    const wrapper = document.getElementById('mobile-wrapper');
+    const navBar = document.querySelector('header > nav');
+    const iconMenu = toggle?.querySelector('.icon-menu');
+    const iconClose = toggle?.querySelector('.icon-close');
+
+    if (!toggle || !menu || !cta || !wrapper || !navBar || !iconMenu || !iconClose) return;
+
+    const setTop = () => (wrapper.style.top = navBar.offsetHeight + 'px');
+    const open = () => {
+      toggle.setAttribute('aria-expanded', 'true');
+      iconMenu.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+      const max = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7));
+      menu.style.maxHeight = max + 'px';
+      cta.classList.replace('pb-2', 'pb-6');
+    };
+    const close = () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      iconMenu.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      menu.style.maxHeight = '0px';
+      cta.classList.replace('pb-6', 'pb-2');
+    };
+
+    const onToggle = () => (toggle.getAttribute('aria-expanded') === 'true' ? close() : open());
+    const onEsc = (e) => e.key === 'Escape' && close();
+    const onOutside = (e) => {
+      if (!menu.contains(e.target) && !toggle.contains(e.target)) close();
+    };
+    const onLink = () => close();
+
+    setTop();
+    window.addEventListener('resize', () => {
+      setTop();
+      if (toggle.getAttribute('aria-expanded') === 'true') {
+        const max = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7));
+        menu.style.maxHeight = max + 'px';
+      }
+    });
+
+    toggle.addEventListener('click', onToggle);
+    document.addEventListener('keydown', onEsc);
+    document.addEventListener('click', onOutside, true);
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', onLink));
+  });
+</script>
