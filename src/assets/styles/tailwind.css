@@ -60,6 +60,12 @@
   padding: 0 5px;
 }
 
+.no-fouc [data-hero],
+.no-fouc #mobile-wrapper,
+.no-fouc .intersect {
+  opacity: 0 !important;
+}
+
 .dropdown:focus .dropdown-menu,
 .dropdown:focus-within .dropdown-menu,
 .dropdown:hover .dropdown-menu {

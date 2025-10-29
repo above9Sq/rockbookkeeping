@@ -9,7 +9,7 @@ const navItems = [
   { label: 'Listings', href: '#' },
   { label: 'Product', href: '#' },
   { label: 'Checkout', href: '#' },
-] as const;
+];
 
 const ctaLabel = 'Contact';
 ---
@@ -95,7 +95,8 @@ const ctaLabel = 'Contact';
 </header>
 
 <script is:inline>
-  const runCTAScript = () => {
+  // === HEADER-SPECIFIC: Mobile CTA + Dynamic Height ===
+  const runHeaderScript = () => {
     if (window.innerWidth >= 1024) return;
 
     const header = document.querySelector('header');
@@ -106,17 +107,17 @@ const ctaLabel = 'Contact';
     if (!header || !wrapper || !cta || !hero) return;
 
     let shouldShowCTA = false;
-
     header.style.height = '64px';
     wrapper.style.opacity = '0';
+    wrapper.style.visibility = 'hidden';
 
     const showCTA = () => {
       if (shouldShowCTA) return;
       shouldShowCTA = true;
-      const ctaHeight = cta.offsetHeight;
-      header.style.height = `${64 + ctaHeight}px`;
+      const h = cta.offsetHeight;
+      header.style.height = `${64 + h}px`;
       wrapper.style.opacity = '1';
-      wrapper.style.visibility = 'visible'; // ← SHOW BORDER
+      wrapper.style.visibility = 'visible';
       cta.classList.remove('opacity-0', 'translate-y-2');
       cta.classList.add('opacity-100', 'translate-y-0');
     };
@@ -127,37 +128,36 @@ const ctaLabel = 'Contact';
       header.style.height = '64px';
       if (wrapper.dataset.state !== 'open') {
         wrapper.style.opacity = '0';
-        wrapper.style.visibility = 'hidden'; // ← HIDE BORDER
+        wrapper.style.visibility = 'hidden';
       }
       cta.classList.remove('opacity-100', 'translate-y-0');
       cta.classList.add('opacity-0', 'translate-y-2');
     };
 
-    const observer = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) hideCTA();
-        else showCTA();
-      },
+    const obs = new IntersectionObserver(
+      ([e]) => e.isIntersecting ? hideCTA() : showCTA(),
       { threshold: 0.1 }
     );
-    observer.observe(hero);
+    obs.observe(hero);
 
-    // Watch menu state
-    const menuObserver = new MutationObserver(() => {
+    const menuObs = new MutationObserver(() => {
       if (wrapper.dataset.state === 'open') {
         wrapper.style.opacity = '1';
-        // Ensure CTA is visible
+        wrapper.style.visibility = 'visible';
         cta.classList.remove('opacity-0', 'translate-y-2');
         cta.classList.add('opacity-100', 'translate-y-0');
       } else if (!shouldShowCTA) {
         wrapper.style.opacity = '0';
+        wrapper.style.visibility = 'hidden';
         cta.classList.remove('opacity-100', 'translate-y-0');
         cta.classList.add('opacity-0', 'translate-y-2');
       }
     });
-    menuObserver.observe(wrapper, { attributes: true, attributeFilter: ['data-state'] });
+    menuObs.observe(wrapper, { attributes: true, attributeFilter: ['data-state'] });
   };
 
-  document.addEventListener('DOMContentLoaded', runCTAScript);
-  window.addEventListener('astro:page-load', runCTAScript);
+  document.addEventListener('DOMContentLoaded', runHeaderScript);
+  window.addEventListener('astro:page-load', runHeaderScript);
 </script>
+
+
