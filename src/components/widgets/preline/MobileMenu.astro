@@ -10,8 +10,10 @@ const { navItems, ctaLabel } = Astro.props;
 
 <div
   id="mobile-wrapper"
-  class="lg:hidden border-b border-gray-200 fixed inset-x-0 top-[56px] z-[70] pointer-events-none"
+  class="lg:hidden border-b border-gray-200 fixed inset-x-0 z-[70] pointer-events-none
+         opacity-0 visibility-hidden transition-[opacity,visibility] duration-300 ease-out"
   client:load
+  data-state="closed"
 >
   <div
     id="rb-menu"
@@ -36,7 +38,11 @@ const { navItems, ctaLabel } = Astro.props;
     </nav>
   </div>
 
-  <div id="rb-cta" class="px-4 pt-1 pb-2 bg-white pointer-events-auto transition-padding duration-250 ease-out">
+  <div
+    id="rb-cta"
+    class="px-4 pt-1 pb-2 bg-white pointer-events-auto transition-padding duration-250 ease-out
+           opacity-0 translate-y-2 transition-all duration-300 ease-out"
+  >
     <button
       type="button"
       class="w-full py-2.5 px-4 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
@@ -47,7 +53,6 @@ const { navItems, ctaLabel } = Astro.props;
 </div>
 
 <script>
-  // Runs only in browser, after DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.getElementById('rb-toggle');
     const menu = document.getElementById('rb-menu');
@@ -64,37 +69,51 @@ const { navItems, ctaLabel } = Astro.props;
       toggle.setAttribute('aria-expanded', 'true');
       iconMenu.classList.add('hidden');
       iconClose.classList.remove('hidden');
-      const max = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7));
-      menu.style.maxHeight = max + 'px';
+      menu.style.maxHeight = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7)) + 'px';
       cta.classList.replace('pb-2', 'pb-6');
+
+      // FORCE CTA TO SHOW WHEN MENU OPENS
+      cta.classList.remove('opacity-0', 'translate-y-2');
+      cta.classList.add('opacity-100', 'translate-y-0');
+
+      wrapper.dataset.state = 'open';
+      wrapper.style.visibility = 'visible'; // ← SHOW BORDER
+      wrapper.style.opacity = '1';
     };
+
     const close = () => {
       toggle.setAttribute('aria-expanded', 'false');
       iconMenu.classList.remove('hidden');
       iconClose.classList.add('hidden');
       menu.style.maxHeight = '0px';
       cta.classList.replace('pb-6', 'pb-2');
-    };
 
-    const onToggle = () => (toggle.getAttribute('aria-expanded') === 'true' ? close() : open());
-    const onEsc = (e) => e.key === 'Escape' && close();
-    const onOutside = (e) => {
-      if (!menu.contains(e.target) && !toggle.contains(e.target)) close();
+      // DO NOT HIDE CTA HERE — let Header.astro control it
+      wrapper.dataset.state = 'closed';
+      // Only hide if CTA shouldn't be shown
+      if (!document.getElementById('rb-cta').classList.contains('opacity-100')) {
+        wrapper.style.visibility = 'hidden';
+        wrapper.style.opacity = '0';
+      }
     };
-    const onLink = () => close();
 
     setTop();
     window.addEventListener('resize', () => {
       setTop();
       if (toggle.getAttribute('aria-expanded') === 'true') {
-        const max = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7));
-        menu.style.maxHeight = max + 'px';
+        menu.style.maxHeight = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7)) + 'px';
       }
     });
 
-    toggle.addEventListener('click', onToggle);
-    document.addEventListener('keydown', onEsc);
-    document.addEventListener('click', onOutside, true);
-    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', onLink));
+    toggle.addEventListener('click', () => (toggle.getAttribute('aria-expanded') === 'true' ? close() : open()));
+    document.addEventListener('keydown', (e) => e.key === 'Escape' && close());
+    document.addEventListener(
+      'click',
+      (e) => {
+        if (!menu.contains(e.target) && !toggle.contains(e.target)) close();
+      },
+      true
+    );
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
   });
 </script>

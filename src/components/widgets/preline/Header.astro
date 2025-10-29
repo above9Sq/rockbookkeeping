@@ -14,7 +14,7 @@ const navItems = [
 const ctaLabel = 'Contact';
 ---
 
-<header class="sticky top-0 z-[80] w-full bg-white">
+<header class="sticky top-0 z-[80] w-full bg-white h-16 transition-[height] duration-300 ease-out">
   <nav
     class="relative w-full flex flex-wrap lg:grid lg:grid-cols-12 items-center px-4 xl:px-[120px] mx-auto py-2 lg:py-3 lg:border-b lg:border-gray-200"
   >
@@ -93,3 +93,71 @@ const ctaLabel = 'Contact';
   <!-- Mobile Menu (client-only) -->
   <MobileMenu navItems={navItems} ctaLabel={ctaLabel} />
 </header>
+
+<script is:inline>
+  const runCTAScript = () => {
+    if (window.innerWidth >= 1024) return;
+
+    const header = document.querySelector('header');
+    const wrapper = document.getElementById('mobile-wrapper');
+    const cta = document.getElementById('rb-cta');
+    const hero = document.querySelector('[data-hero]');
+
+    if (!header || !wrapper || !cta || !hero) return;
+
+    let shouldShowCTA = false;
+
+    header.style.height = '64px';
+    wrapper.style.opacity = '0';
+
+    const showCTA = () => {
+      if (shouldShowCTA) return;
+      shouldShowCTA = true;
+      const ctaHeight = cta.offsetHeight;
+      header.style.height = `${64 + ctaHeight}px`;
+      wrapper.style.opacity = '1';
+      wrapper.style.visibility = 'visible'; // ← SHOW BORDER
+      cta.classList.remove('opacity-0', 'translate-y-2');
+      cta.classList.add('opacity-100', 'translate-y-0');
+    };
+
+    const hideCTA = () => {
+      if (!shouldShowCTA) return;
+      shouldShowCTA = false;
+      header.style.height = '64px';
+      if (wrapper.dataset.state !== 'open') {
+        wrapper.style.opacity = '0';
+        wrapper.style.visibility = 'hidden'; // ← HIDE BORDER
+      }
+      cta.classList.remove('opacity-100', 'translate-y-0');
+      cta.classList.add('opacity-0', 'translate-y-2');
+    };
+
+    const observer = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) hideCTA();
+        else showCTA();
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(hero);
+
+    // Watch menu state
+    const menuObserver = new MutationObserver(() => {
+      if (wrapper.dataset.state === 'open') {
+        wrapper.style.opacity = '1';
+        // Ensure CTA is visible
+        cta.classList.remove('opacity-0', 'translate-y-2');
+        cta.classList.add('opacity-100', 'translate-y-0');
+      } else if (!shouldShowCTA) {
+        wrapper.style.opacity = '0';
+        cta.classList.remove('opacity-100', 'translate-y-0');
+        cta.classList.add('opacity-0', 'translate-y-2');
+      }
+    });
+    menuObserver.observe(wrapper, { attributes: true, attributeFilter: ['data-state'] });
+  };
+
+  document.addEventListener('DOMContentLoaded', runCTAScript);
+  window.addEventListener('astro:page-load', runCTAScript);
+</script>
