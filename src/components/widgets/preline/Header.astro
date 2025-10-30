@@ -16,7 +16,7 @@ const ctaLabel = 'Contact';
 
 <header class="sticky top-0 z-[80] w-full bg-white h-16 transition-[height] duration-300 ease-out">
   <nav
-    class="relative w-full flex flex-wrap lg:grid lg:grid-cols-12 items-center px-4 xl:px-[120px] mx-auto py-2 lg:py-3 lg:border-b lg:border-gray-200"
+    class="relative w-full flex flex-wrap lg:grid lg:grid-cols-12 items-center px-8 xl:px-[120px] mx-auto py-2 lg:py-3 lg:border-b lg:border-gray-200"
   >
     <!-- Logo -->
     <div class="lg:col-span-3 flex items-center">
@@ -49,13 +49,19 @@ const ctaLabel = 'Contact';
         }
       </div>
 
-      <!-- Desktop CTA -->
-      <button
-        type="button"
+      <!-- Desktop CTA: <a> instead of <button> -->
+      <a
+        href="#contact-modal"
+        data-hs-overlay="#contact-modal"
+        data-open-modal
+        role="button"
+        aria-haspopup="dialog"
+        aria-controls="contact-modal"
+        aria-expanded="false"
         class="hidden lg:inline-flex py-2 px-8 text-sm font-medium rounded-lg border border-blue-600 text-blue-600 hover:border-blue-500 hover:text-blue-500 transition-colors"
       >
         {ctaLabel}
-      </button>
+      </a>
 
       <!-- Mobile toggle -->
       <div class="lg:hidden">
@@ -134,10 +140,7 @@ const ctaLabel = 'Contact';
       cta.classList.add('opacity-0', 'translate-y-2');
     };
 
-    const obs = new IntersectionObserver(
-      ([e]) => e.isIntersecting ? hideCTA() : showCTA(),
-      { threshold: 0.1 }
-    );
+    const obs = new IntersectionObserver(([e]) => (e.isIntersecting ? hideCTA() : showCTA()), { threshold: 0.1 });
     obs.observe(hero);
 
     const menuObs = new MutationObserver(() => {
@@ -159,5 +162,3 @@ const ctaLabel = 'Contact';
   document.addEventListener('DOMContentLoaded', runHeaderScript);
   window.addEventListener('astro:page-load', runHeaderScript);
 </script>
-
-
