@@ -8,7 +8,14 @@ import Hero from '~/components/widgets/preline/Hero.astro';
 import Modal from '~/components/widgets/preline/Modal.astro';
 import Testimonial from '~/components/widgets/preline/Testimonial.astro';
 import PainPoints from '~/components/widgets/PainPoints.astro';
-import WhyMostDread from '~/components/widgets/preline/WhyMostDread.astro';
+import EmpathyAndConversion from '~/components/widgets/preline/EmpathyAndConversion.astro';
+import ContentBlock from '~/components/widgets/preline/ContentBlock.astro';
+
+import step1Image from '~/assets/images/step1.png';
+import step2Image from '~/assets/images/step2.png';
+import step3Image from '~/assets/images/step3.png';
+
+// import CleanBooksProcess from '~/components/widgets/preline/CleanBooksProcess.astro';
 
 import Steps2 from '~/components/widgets/Steps2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -23,76 +30,125 @@ const metadata = {
 };
 
 const faqItems = [
-      {
-        title: 'What are the fees?',
-        description:
-          'We use a flat monthly fee. We’ll talk through your specific business needs and design a plan that serves you best.',
-      },
-      {
-        title: 'What type of bookkeeping services do you offer?',
-        description:
-          'We specialize in QuickBooks Online and are Certified ProAdvisors. Our work is fully remote, and we use simple online tools to make sharing documents and information convenient for you.',
-      },
-      {
-        title: 'How does monthly bookkeeping work?',
-        description:
-          'Each month we analyze and record your business transactions in QuickBooks Online. From there, we prepare accurate financial reports like your Profit & Loss and Balance Sheet so you can clearly see how your business is performing.',
-      },
-      {
-        title: 'What if I need a more frequent schedule than monthly?',
-        description:
-          'We provide flexible service to fit your needs. For businesses that want closer tracking, we can meet weekly or bi-weekly to review cash flow and help you stay ahead.',
-      },
-      {
-        title: 'When and how do I send my documents to you?',
-        description:
-          'We’ll need your bank and credit card statements each month. We can set up QuickBooks Online to bring them in automatically, or you can share the statements with us directly.',
-      },
-      {
-        title: 'When do you deliver my monthly financial reports?',
-        description:
-          'Your financial reports are delivered by the 10th of each month, giving you plenty of time to review results and plan with confidence.',
-      },
-      {
-        title: 'What if my books are behind schedule or need a clean-up?',
-        description:
-          'That’s no problem. We have experience cleaning up past records and bringing books up to date. We’ll review your situation in detail and put everything back in order.',
-      },
-      {
-        title: 'What if I need assistance with special projects?',
-        description:
-          'We’re happy to help. Whether you need deeper financial analysis, support for a business decision, or a one-time review, we can work with you to provide clear answers and reliable numbers.',
-      },
-      {
-        title: 'What if I need tax preparation?',
-        description:
-          'We don’t prepare taxes ourselves, but we ensure your books are accurate and ready for your CPA. We also communicate directly with your tax professional when needed so they have everything required to do their work effectively.',
-      },
-      {
-        title: 'Why should I choose Rock Bookkeeping?',
-        description:
-          'We bring both accounting training and hands-on business experience. With QuickBooks certifications and real-world knowledge, we provide accurate books and clear reports so you can make better decisions for your business.',
-      },
-      {
-        title: 'How do I know my books will be accurate?',
-        description:
-          'Accuracy is at the heart of what we do. Every transaction is reviewed and matched against your bank and credit card statements. This ensures that your records and reports reflect the real numbers in your business.',
-      },
-      {
-        title: 'Do you work with businesses outside of Pittsburgh?',
-        description:
-          'Yes. Because we use QuickBooks Online, we can work with small businesses anywhere in the U.S. Whether you’re local or across the country, our process is the same — reliable, timely, and professional.',
-      },
-    ]
+  {
+    title: 'What are the fees?',
+    description:
+      "'We use a flat monthly fee. We'll talk through your specific business needs and design a plan that serves you best.',",
+  },
+  {
+    title: 'What type of bookkeeping services do you offer?',
+    description:
+      "'We specialize in QuickBooks Online and are Certified ProAdvisors. Our work is fully remote, and we use simple online tools to make sharing documents and information convenient for you.'",
+  },
+  {
+    title: 'How does monthly bookkeeping work?',
+    description:
+      "'Each month we analyze and record your business transactions in QuickBooks Online. From there, we prepare accurate financial reports like your Profit & Loss and Balance Sheet so you can clearly see how your business is performing.'",
+  },
+  {
+    title: 'What if I need a more frequent schedule than monthly?',
+    description:
+      "'We provide flexible service to fit your needs. For businesses that want closer tracking, we can meet weekly or bi-weekly to review cash flow and help you stay ahead.'",
+  },
+  {
+    title: 'When and how do I send my documents to you?',
+    description:
+      "'We'll need your bank and credit card statements each month. We can set up QuickBooks Online to bring them in automatically, or you can share the statements with us directly.'",
+  },
+  {
+    title: 'When do you deliver my monthly financial reports?',
+    description:
+      'Your financial reports are delivered by the 10th of each month, giving you plenty of time to review results and plan with confidence.',
+  },
+  {
+    title: 'What if my books are behind schedule or need a clean-up?',
+    description:
+      "'That's no problem. We have experience cleaning up past records and bringing books up to date. We'll review your situation in detail and put everything back in order.'",
+  },
+  {
+    title: 'What if I need assistance with special projects?',
+    description:
+      "'We're happy to help. Whether you need deeper financial analysis, support for a business decision, or a one-time review, we can work with you to provide clear answers and reliable numbers.',",
+  },
+  {
+    title: 'What if I need tax preparation?',
+    description:
+      "'We don't prepare taxes ourselves, but we ensure your books are accurate and ready for your CPA. We also communicate directly with your tax professional when needed so they have everything required to do their work effectively.',",
+  },
+  {
+    title: 'Why should I choose Rock Bookkeeping?',
+    description:
+      "'We bring both accounting training and hands-on business experience. With QuickBooks certifications and real-world knowledge, we provide accurate books and clear reports so you can make better decisions for your business.',",
+  },
+  {
+    title: 'How do I know my books will be accurate?',
+    description:
+      "'Accuracy is at the heart of what we do. Every transaction is reviewed and matched against your bank and credit card statements. This ensures that your records and reports reflect the real numbers in your business.',",
+  },
+  {
+    title: 'Do you work with businesses outside of Pittsburgh?',
+    description:
+      "'Yes. Because we use QuickBooks Online, we can work with small businesses anywhere in the U.S. Whether you're local or across the country, our process is the same — reliable, timely, and professional.'",
+  },
+];
 ---
 
 <Layout metadata={metadata}>
   <Hero />
   <Modal />
-  <WhyMostDread />
+  <EmpathyAndConversion />
+
+  {/* BLOCK 1: Step 1 – Free Audit */}
+  <ContentBlock
+    headline="Step 1: Call or Submit — We Audit Free"
+    image={step1Image}
+    imageAlt="Phone icon and magnifying glass over bank statements"
+    imageHeight={1434}
+    imageWidth={1430}
+    quotes={[
+      { emoji: '📞', text: 'Call 412-256-8411 or submit request' },
+      { emoji: '🔍', text: "We'll evaluate your acccounts and spot gaps" },
+      { emoji: '💰', text: 'Exact quote in 24 hrs' },
+    ]}
+    bottomText="No obligation. Just clarity."
+    reverse={true}
+  />
+
+  {/* BLOCK 2: Step 2 – Your Path (REVERSED) */}
+  <ContentBlock
+    headline="Step 2: Assess & Choose"
+    image={step2Image}
+    imageAlt="Split road showing current vs. behind paths"
+    imageHeight={1434}
+    imageWidth={1430}
+    quotes={[
+      { emoji: '✅', text: 'Already current? Jump to monthly' },
+      { emoji: '🧹', text: 'Behind? 14-day cleanup first' },
+      { emoji: '🔄', text: 'We set up QuickBooks if needed' },
+    ]}
+    bottomText="Upfront timeline. You decide."
+    reverse={false}
+  />
+
+  {/* BLOCK 3: Step 3 – We Work Together */}
+  <ContentBlock
+    headline="Step 3: Clean Books. No Stress."
+    image={step3Image}
+    imageAlt="Handshake and green profit & loss report"
+    imageHeight={1434}
+    imageWidth={1430}
+    quotes={[
+      { emoji: '📊', text: 'Categorized, reconciled, reports delivered' },
+      { emoji: '📅', text: 'No more tax deadline dread' },
+      { emoji: '💪', text: 'You run your business' },
+    ]}
+    bottomText="Starts at $200/mo. Guaranteed quality."
+    reverse={true}
+  />
+
   <Testimonial />
   <PainPoints />
-  
+
   <Steps2
     id="our-process"
     title="Our Process"
@@ -101,7 +157,7 @@ const faqItems = [
       {
         title: 'Call Us Today',
         description:
-          "Reach out by phone or message, and we’ll connect to learn about your bookkeeping goals. <br> <a class='font-bold text-blue-600' href='tel:412-256-8411'>412-256-8411</a>",
+          "Reach out by phone or message, and we'll connect to learn about your bookkeeping goals. <br> <a class='font-bold text-blue-600' href='tel:412-256-8411'>412-256-8411</a>",
       },
       {
         title: 'Review & Estimate',
@@ -131,9 +187,7 @@ const faqItems = [
   >
     <!-- <Fragment slot="tagline"> We got you. </Fragment> -->
 
-    <Fragment slot="title">
-      Focus on growth, not bookkeeping.
-    </Fragment>
+    <Fragment slot="title"> Focus on growth, not bookkeeping. </Fragment>
 
     <Fragment slot="subtitle">
       We keep your QuickBooks clean, accurate, and up-to-date so you can spend more time running your business.
@@ -371,14 +425,14 @@ const faqItems = [
     items={faqItems}
   />
 
-  <FAQSchema faqs={faqItems.map(i => ({ question: i.title, answer: i.description }))} />
+  <FAQSchema faqs={faqItems.map((i) => ({ question: i.title, answer: i.description }))} />
 
   <!-- <FAQs2
   items={[
     {
       question: 'What are the fees?',
       answer:
-        'We use a flat monthly fee. We’ll talk through your specific business needs and design a plan that serves you best.',
+        'We use a flat monthly fee. We'll talk through your specific business needs and design a plan that serves you best.',
     },
     {
       question: 'What type of bookkeeping services do you offer?',
@@ -398,7 +452,7 @@ const faqItems = [
     {
       question: 'When and how do I send my documents to you?',
       answer:
-        'We’ll need your bank and credit card statements each month. We can set up QuickBooks Online to bring them in automatically, or you can share the statements with us directly.',
+        'We'll need your bank and credit card statements each month. We can set up QuickBooks Online to bring them in automatically, or you can share the statements with us directly.',
     },
     {
       question: 'When do you deliver my monthly financial reports?',
@@ -408,17 +462,17 @@ const faqItems = [
     {
       question: 'What if my books are behind schedule or need a clean-up?',
       answer:
-        'That’s no problem. We have experience cleaning up past records and bringing books up to date. We’ll review your situation in detail and put everything back in order.',
+        'That's no problem. We have experience cleaning up past records and bringing books up to date. We'll review your situation in detail and put everything back in order.',
     },
     {
       question: 'What if I need assistance with special projects?',
       answer:
-        'We’re happy to help. Whether you need deeper financial analysis, support for a business decision, or a one-time review, we can work with you to provide clear answers and reliable numbers.',
+        'We're happy to help. Whether you need deeper financial analysis, support for a business decision, or a one-time review, we can work with you to provide clear answers and reliable numbers.',
     },
     {
       question: 'What if I need tax preparation?',
       answer:
-        'We don’t prepare taxes ourselves, but we ensure your books are accurate and ready for your CPA. We also communicate directly with your tax professional when needed so they have everything required to do their work effectively.',
+        'We don't prepare taxes ourselves, but we ensure your books are accurate and ready for your CPA. We also communicate directly with your tax professional when needed so they have everything required to do their work effectively.',
     },
     {
       question: 'Why should I choose Rock Bookkeeping?',
@@ -433,7 +487,7 @@ const faqItems = [
     {
       question: 'Do you work with businesses outside of Pittsburgh?',
       answer:
-        'Yes. Because we use QuickBooks Online, we can work with small businesses anywhere in the U.S. Whether you’re local or across the country, our process is the same — reliable, timely, and professional.',
+        'Yes. Because we use QuickBooks Online, we can work with small businesses anywhere in the U.S. Whether you're local or across the country, our process is the same — reliable, timely, and professional.',
     },
   ]}
 /> -->
@@ -453,9 +507,7 @@ const faqItems = [
   >
     <!-- <Fragment slot="tagline"> We got you. </Fragment> -->
 
-    <Fragment slot="title">
-      Focus on growth, not bookkeeping.
-    </Fragment>
+    <Fragment slot="title"> Focus on growth, not bookkeeping. </Fragment>
 
     <Fragment slot="subtitle">
       We keep your QuickBooks clean, accurate, and up-to-date so you can spend more time running your business.

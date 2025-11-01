@@ -1,5 +1,4 @@
 ---
-// src/components/Header.astro
 import { Image } from 'astro:assets';
 import logoImage from '/src/assets/images/logo.svg';
 import MobileMenu from './MobileMenu.astro';
@@ -11,7 +10,7 @@ const navItems = [
   { label: 'Checkout', href: '#' },
 ];
 
-const ctaLabel = 'Contact';
+const ctaLabel = 'Fix My Books Now';
 ---
 
 <header class="sticky top-0 z-[80] w-full bg-white h-16 transition-[height] duration-300 ease-out">
@@ -49,19 +48,34 @@ const ctaLabel = 'Contact';
         }
       </div>
 
-      <!-- Desktop CTA: <a> instead of <button> -->
-      <a
-        href="#contact-modal"
+      <!-- Desktop CTA: Matches Hero Button -->
+      <button
+        type="button"
         data-hs-overlay="#contact-modal"
         data-open-modal
-        role="button"
         aria-haspopup="dialog"
         aria-controls="contact-modal"
         aria-expanded="false"
-        class="hidden lg:inline-flex py-2 px-8 text-sm font-medium rounded-lg border border-blue-600 text-blue-600 hover:border-blue-500 hover:text-blue-500 transition-colors"
+        id="desktop-cta"
+        class="hidden lg:inline-flex justify-center items-center gap-x-2 py-2.5 pl-6 pr-5 text-sm uppercase font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none transition-colors
+               data-[state=hero]:bg-transparent data-[state=hero]:text-blue-600 data-[state=hero]:border-blue-600 data-[state=hero]:hover:bg-blue-50"
       >
         {ctaLabel}
-      </a>
+        <svg
+          class="shrink-0 size-4"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </button>
 
       <!-- Mobile toggle -->
       <div class="lg:hidden">
@@ -96,12 +110,11 @@ const ctaLabel = 'Contact';
     </div>
   </nav>
 
-  <!-- Mobile Menu (client-only) -->
   <MobileMenu navItems={navItems} ctaLabel={ctaLabel} />
 </header>
 
 <script is:inline>
-  // === HEADER-SPECIFIC: Mobile CTA + Dynamic Height ===
+  // === SCROLL + MOBILE CTA LOGIC ===
   const runHeaderScript = () => {
     if (window.innerWidth >= 1024) return;
 
@@ -159,6 +172,27 @@ const ctaLabel = 'Contact';
     menuObs.observe(wrapper, { attributes: true, attributeFilter: ['data-state'] });
   };
 
-  document.addEventListener('DOMContentLoaded', runHeaderScript);
-  window.addEventListener('astro:page-load', runHeaderScript);
+  // === DESKTOP CTA STATE ON SCROLL ===
+  const runDesktopCTA = () => {
+    const cta = document.getElementById('desktop-cta');
+    const hero = document.querySelector('[data-hero]');
+    if (!cta || !hero) return;
+
+    const observer = new IntersectionObserver(
+      ([e]) => {
+        cta.dataset.state = e.isIntersecting ? 'hero' : 'scrolled';
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(hero);
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    runHeaderScript();
+    runDesktopCTA();
+  });
+  window.addEventListener('astro:page-load', () => {
+    runHeaderScript();
+    runDesktopCTA();
+  });
 </script>

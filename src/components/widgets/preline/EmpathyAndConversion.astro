@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import Container from './Container.astro';
+import painGraphic from '~/assets/images/empathy-cred-bridge.png';
+---
+
+<section class="bg-[#f4f7ff] py-12 lg:py-22">
+  <Container>
+    <div class="flex flex-col gap-8 md:gap-22">
+      <h2
+        class="mt-0 block text-[32px] leading-[1.0] sm:text-[38px] sm:leading-[1.2] md:text-[45px] md:leading-[49.5px] tracking-[0.45px] font-black text-gray-800 text-balance text-center"
+      >
+        You're Drowning in Bookkeeping Chaos
+      </h2>
+      <div class="flex flex-col xl:flex-row gap-14 xl:gap-24 items-start">
+        <div class="w-full">
+          <Image
+            src={painGraphic}
+            alt="Why Most Businesses Dread Their Books - Pain vs. Fix"
+            width={1430}
+            height={1434}
+            class="w-full h-auto border border-gray-800 rounded-lg object-contain"
+            loading="eager"
+          />
+        </div>
+        <div class="flex flex-col gap-8 text-base md:text-lg text-gray-900 w-full">
+          <div class="bg-white border border-gray-800 rounded-lg p-6 space-y-4">
+            <div class="flex items-start gap-2 sm:gap-4">
+              <span class="flex-shrink-0 text-2xl">🔥</span>
+              <div class="flex-1">
+                <p class="font-bold leading-tight">“I hate this every month. Steals my weekends.”</p>
+                <p class="italic text-sm text-gray-600">— Mike, Reddit</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-2 sm:gap-4">
+              <span class="flex-shrink-0 text-2xl">😢</span>
+              <div class="flex-1">
+                <p class="font-bold leading-tight">"CPA said 'disaster'... I wanted to cry."</p>
+                <p class="italic text-sm text-gray-600">— Sarah, LinkedIn</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-2 sm:gap-4">
+              <span class="flex-shrink-0 text-2xl">✈️</span>
+              <div class="flex-1">
+                <p class="font-bold leading-tight">"Flying blind. No clue if I'm profitable."</p>
+                <p class="italic text-sm text-gray-600">— Tom, X</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-2 sm:gap-4">
+              <span class="flex-shrink-0 text-2xl">🚨</span>
+              <div class="flex-1">
+                <p class="font-bold leading-tight">"Tried myself… now scared of audit."</p>
+                <p class="italic text-sm text-gray-600">— Lisa, Yelp</p>
+              </div>
+            </div>
+          </div>
+          <p class="max-w-[620px]">You're not alone. 9 out of 10 owners feel this.</p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
