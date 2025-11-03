@@ -37,9 +37,7 @@ const cleanup = {
       <div class="text-left">
         <h2 class="text-4xl md:text-5xl font-black text-black mb-3">Pricing & What You Get</h2>
         <p class="text-xl text-black mb-2">Transparent. No long-term contracts. First month guarantee.</p>
-        <p class="text-xl text-black">
-          Most owners save $10k/yr and 15 hrs/mo. Buy back your time and peace of mind.
-        </p>
+        <p class="text-xl text-black">Most owners save $10k/yr and 15 hrs/mo. Buy back your time and peace of mind.</p>
       </div>
 
       <!-- Monthly Tiers: Flex, full-width, large gap -->
@@ -63,7 +61,7 @@ const cleanup = {
               </p>
               <ul class="space-y-2 flex-1">
                 {tier.features.map((feature) => (
-                  <li class="flex items-center gap-2">
+                  <li class="flex items-center items-start gap-2">
                     <span class="text-xl">✅</span>
                     <p class="text-black text-base">{feature}</p>
                   </li>
@@ -86,7 +84,7 @@ const cleanup = {
           <ul class="space-y-4 max-w-md mx-auto text-left">
             {
               cleanup.features.map((feature) => (
-                <li class="flex items-start gap-3">
+                <li class="flex items-center items-start gap-3">
                   <span class="text-green-600 text-xl mt-0.5">✅</span>
                   <span class="text-gray-800 text-base">{feature}</span>
                 </li>
