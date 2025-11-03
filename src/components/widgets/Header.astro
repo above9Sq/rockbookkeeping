@@ -1,179 +1,198 @@
 ---
-import { Icon } from 'astro-icon/components';
-import Logo from '~/components/Logo.astro';
-import ToggleTheme from '~/components/common/ToggleTheme.astro';
-import ToggleMenu from '~/components/common/ToggleMenu.astro';
-import Button from '~/components/ui/Button.astro';
+import { Image } from 'astro:assets';
+import logoImage from '/src/assets/images/logo.svg';
+import MobileMenu from './MobileMenu.astro';
 
-import { getHomePermalink } from '~/utils/permalinks';
-import { trimSlash, getAsset } from '~/utils/permalinks';
-import type { CallToAction } from '~/types';
+const navItems = [
+  { label: 'Home', href: '#', current: true },
+  { label: 'Listings', href: '#' },
+  { label: 'Product', href: '#' },
+  { label: 'Checkout', href: '#' },
+];
 
-interface Link {
-  text?: string;
-  href?: string;
-  ariaLabel?: string;
-  icon?: string;
-}
-
-interface MenuLink extends Link {
-  links?: Array<MenuLink>;
-}
-
-export interface Props {
-  id?: string;
-  links?: Array<MenuLink>;
-  actions?: Array<CallToAction>;
-  isSticky?: boolean;
-  isDark?: boolean;
-  isFullWidth?: boolean;
-  showToggleTheme?: boolean;
-  showRssFeed?: boolean;
-  position?: string;
-}
-
-const {
-  id = 'header',
-  links = [],
-  actions = [],
-  isSticky = false,
-  isDark = false,
-  isFullWidth = false,
-  showToggleTheme = false,
-  showRssFeed = false,
-  position = 'center',
-} = Astro.props;
-
-const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+const ctaLabel = 'Fix My Books Now';
 ---
 
-<header
-  class:list={[
-    { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-opacity ease-in-out',
-  ]}
-  {...isSticky ? { 'data-aw-sticky-header': true } : {}}
-  {...id ? { id } : {}}
->
-  <div class="absolute inset-0"></div>
-  <div
-    class:list={[
-      'relative text-default py-3 px-3 md:px-6 mx-auto w-full',
-      { 'md:flex md:justify-between': position !== 'center' },
-      { 'md:grid md:grid-cols-3 md:items-center': position === 'center' },
-      { 'max-w-7xl': !isFullWidth },
-    ]}
+<header class="sticky top-0 z-[80] w-full bg-white h-16 transition-[height] duration-300 ease-out">
+  <nav
+    class="relative w-full flex flex-wrap lg:grid lg:grid-cols-12 items-center px-8 xl:px-[120px] mx-auto py-2 lg:py-3 lg:border-b lg:border-gray-200"
   >
-    <!-- Left: logo + mobile menu toggle -->
-    <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
-      <a class="flex items-center" href={getHomePermalink()}>
-        <Logo />
+    <!-- Logo -->
+    <div class="lg:col-span-3 flex items-center">
+      <a href="/" class="flex items-center gap-x-1 md:gap-x-2" aria-label="Rock Bookkeeping">
+        <Image
+          src={logoImage}
+          alt="Rock Bookkeeping logo"
+          width={50}
+          height={50}
+          loading="eager"
+          class="shrink-0 h-10"
+        />
+        <span class="font-heading text-lg md:text-2xl font-semibold text-gray-700">Rock&nbsp;Bookkeeping</span>
       </a>
-      <div class="flex items-center md:hidden">
-        <ToggleMenu />
-      </div>
     </div>
 
-    <!-- Center: links -->
-    <nav
-      class="hidden w-full items-center overflow-y-auto overflow-x-hidden text-default md:mx-5 md:flex md:w-auto md:justify-self-center md:overflow-x-auto md:overflow-y-visible"
-      aria-label="Main navigation"
-    >
-      <ul
-        class="flex w-full flex-col text-xl font-medium tracking-[0.01rem] md:w-auto md:flex-row md:justify-center md:self-center md:text-[0.9375rem]"
-      >
+    <div class="flex items-center gap-x-1 lg:gap-x-6 ms-auto lg:ps-6 lg:order-3 lg:col-span-9">
+      <!-- Desktop nav -->
+      <div class="hidden lg:flex lg:items-center lg:gap-x-7">
         {
-          links.map(({ text, href, links }) => (
-            <li class={links?.length ? 'dropdown' : ''}>
-              {links?.length ?
-                <>
-                  <button
-                    type="button"
-                    class="hover:text-link flex items-center whitespace-nowrap px-4 py-3 dark:hover:text-white"
-                  >
-                    {text}{' '}
-                    <Icon name="tabler:chevron-down" class="ml-0.5 hidden h-3.5 w-3.5 md:inline rtl:ml-0 rtl:mr-0.5" />
-                  </button>
-                  <ul class="dropdown-menu dark:md:bg-dark rounded-sm pl-4 font-medium drop-shadow-xl md:absolute md:hidden md:min-w-[200px] md:bg-white/90 md:pl-0 md:backdrop-blur-md">
-                    {links.map(({ text: text2, href: href2 }) => (
-                      <li>
-                        <a
-                          class:list={[
-                            'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap',
-                            { 'aw-link-active': href2 === currentPath },
-                          ]}
-                          href={href2}
-                        >
-                          {text2}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              : <a
-                  class:list={[
-                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap',
-                    { 'aw-link-active': href === currentPath },
-                  ]}
-                  href={href}
-                >
-                  {text}
-                </a>
-              }
-            </li>
+          navItems.map((item) => (
+            <a
+              class="text-gray-800 hover:text-gray-600 font-semibold text-sm uppercase tracking-wide transition-colors"
+              href={item.href}
+              aria-current={item.current ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
           ))
         }
+      </div>
 
-        <!-- Mobile-only: put Contact as a normal text item at the end -->
-        {
-          actions?.length ?
-            <li class="md:hidden">
-              {actions.map((btn) => (
-                <a
-                  href={btn.href}
-                  class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
-                >
-                  {btn.text}
-                </a>
-              ))}
-            </li>
-          : null
-        }
-      </ul>
-    </nav>
+      <!-- Desktop CTA: Matches Hero Button -->
+      <button
+        type="button"
+        data-hs-overlay="#contact-modal"
+        data-open-modal
+        aria-haspopup="dialog"
+        aria-controls="contact-modal"
+        aria-expanded="false"
+        id="desktop-cta"
+        class="hidden lg:inline-flex justify-center items-center gap-x-2 py-2.5 pl-6 pr-5 text-sm uppercase font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none transition-colors
+               data-[state=hero]:bg-transparent data-[state=hero]:text-blue-600 data-[state=hero]:border-blue-600 data-[state=hero]:hover:bg-blue-50"
+      >
+        {ctaLabel}
+        <svg
+          class="shrink-0 size-4"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </button>
 
-    <!-- Right: actions (desktop only) -->
-    <div
-      class={`hidden md:flex md:self-center items-center md:mb-0 md:w-auto md:static md:justify-self-end ${
-        position === 'left' ? 'ml-auto rtl:ml-0 rtl:mr-auto' : ''
-      }`}
-    >
-      <div class="hidden md:flex w-full items-center justify-between md:w-auto">
-        <div class="hidden md:flex">
-          {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
-          {
-            showRssFeed && (
-              <a
-                class="inline-flex items-center rounded-lg p-2.5 text-sm text-muted hover:bg-gray-100 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-                aria-label="RSS Feed"
-                href={getAsset('/rss.xml')}
-              >
-                <Icon name="tabler:rss" class="h-5 w-5" />
-              </a>
-            )
-          }
-        </div>
-
-        {
-          actions?.length ?
-            <span class="hidden md:inline-flex ml-4 rtl:ml-0 rtl:mr-4">
-              {actions.map((btnProps) => (
-                <Button {...btnProps} class="px-5.5 ml-2 w-auto py-2.5 text-sm font-semibold shadow-none md:px-6" />
-              ))}
-            </span>
-          : null
-        }
+      <!-- Mobile toggle -->
+      <div class="lg:hidden">
+        <button
+          id="rb-toggle"
+          aria-expanded="false"
+          aria-controls="rb-menu"
+          aria-label="Toggle navigation"
+          class="size-12 ml-2 flex justify-center items-center rounded-xl text-gray-900 hover:bg-gray-100 transition-colors"
+        >
+          <svg
+            class="icon-menu block size-7 stroke-[1.5]"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <line x1="3" x2="21" y1="6" y2="6" stroke="currentColor" stroke-linecap="round"></line>
+            <line x1="3" x2="21" y1="12" y2="12" stroke="currentColor" stroke-linecap="round"></line>
+            <line x1="3" x2="21" y1="18" y2="18" stroke="currentColor" stroke-linecap="round"></line>
+          </svg>
+          <svg
+            class="icon-close hidden size-7 stroke-[1.5]"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path d="M18 6 6 18" stroke="currentColor" stroke-linecap="round"></path>
+            <path d="m6 6 12 12" stroke="currentColor" stroke-linecap="round"></path>
+          </svg>
+        </button>
       </div>
     </div>
-  </div>
+  </nav>
+
+  <MobileMenu navItems={navItems} ctaLabel={ctaLabel} />
 </header>
+
+<script is:inline>
+  // === SCROLL + MOBILE CTA LOGIC ===
+  const runHeaderScript = () => {
+    if (window.innerWidth >= 1024) return;
+
+    const header = document.querySelector('header');
+    const wrapper = document.getElementById('mobile-wrapper');
+    const cta = document.getElementById('rb-cta');
+    const hero = document.querySelector('[data-hero]');
+
+    if (!header || !wrapper || !cta || !hero) return;
+
+    let shouldShowCTA = false;
+    header.style.height = '64px';
+    wrapper.style.opacity = '0';
+    wrapper.style.visibility = 'hidden';
+
+    const showCTA = () => {
+      if (shouldShowCTA) return;
+      shouldShowCTA = true;
+      const h = cta.offsetHeight;
+      header.style.height = `${64 + h}px`;
+      wrapper.style.opacity = '1';
+      wrapper.style.visibility = 'visible';
+      cta.classList.remove('opacity-0', 'translate-y-2');
+      cta.classList.add('opacity-100', 'translate-y-0');
+    };
+
+    const hideCTA = () => {
+      if (!shouldShowCTA) return;
+      shouldShowCTA = false;
+      header.style.height = '64px';
+      if (wrapper.dataset.state !== 'open') {
+        wrapper.style.opacity = '0';
+        wrapper.style.visibility = 'hidden';
+      }
+      cta.classList.remove('opacity-100', 'translate-y-0');
+      cta.classList.add('opacity-0', 'translate-y-2');
+    };
+
+    const obs = new IntersectionObserver(([e]) => (e.isIntersecting ? hideCTA() : showCTA()), { threshold: 0.1 });
+    obs.observe(hero);
+
+    const menuObs = new MutationObserver(() => {
+      if (wrapper.dataset.state === 'open') {
+        wrapper.style.opacity = '1';
+        wrapper.style.visibility = 'visible';
+        cta.classList.remove('opacity-0', 'translate-y-2');
+        cta.classList.add('opacity-100', 'translate-y-0');
+      } else if (!shouldShowCTA) {
+        wrapper.style.opacity = '0';
+        wrapper.style.visibility = 'hidden';
+        cta.classList.remove('opacity-100', 'translate-y-0');
+        cta.classList.add('opacity-0', 'translate-y-2');
+      }
+    });
+    menuObs.observe(wrapper, { attributes: true, attributeFilter: ['data-state'] });
+  };
+
+  // === DESKTOP CTA STATE ON SCROLL ===
+  const runDesktopCTA = () => {
+    const cta = document.getElementById('desktop-cta');
+    const hero = document.querySelector('[data-hero]');
+    if (!cta || !hero) return;
+
+    const observer = new IntersectionObserver(
+      ([e]) => {
+        cta.dataset.state = e.isIntersecting ? 'hero' : 'scrolled';
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(hero);
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    runHeaderScript();
+    runDesktopCTA();
+  });
+  window.addEventListener('astro:page-load', () => {
+    runHeaderScript();
+    runDesktopCTA();
+  });
+</script>
