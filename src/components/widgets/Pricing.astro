@@ -69,8 +69,8 @@ const priceStyling = "mt-3 text-3xl lg:text-4xl font-black text-gray-900";
             <!-- Popular Badge -->
             {tier.popular && (
               <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-                <span class="inline-flex items-center gap-1 bg-[#ADF0C7] text-[#265A2D] border border-[#265A2D] text-sm font-bold px-4 py-1.5 rounded-md">
-                  <span class="text-orange-300">🔥</span> MOST POPULAR
+                <span class="inline-flex items-center gap-1 bg-[#cff2dc] text-[#265A2D] border border-[#265A2D] text-sm font-bold px-4 py-1.5 rounded-md uppercase">
+                  <span class="text-orange-300">🔥</span> Most popular
                 </span>
               </div>
             )}
@@ -110,14 +110,15 @@ const priceStyling = "mt-3 text-3xl lg:text-4xl font-black text-gray-900";
             </ul>
         </div>
       
-      <div class="bg-white rounded-2xl p-8 lg:p-10 border border-gray-800 text-center">
-        <h3 class="text-2xl lg:text-3xl font-black text-gray-900 mb-2">
-          Ready For Your Free Audit?
-        </h3>
-        <p class="text-gray-700 mb-6">
-          Final quote after audit. Cancel anytime.
-        </p>
-        <CTAbutton />
+      <div class="flex flex-col lg:flex-row bg-white rounded-2xl p-8 lg:p-10 border border-gray-800 text-center">
+        <div class="flex-1 mb-6 lg:mb-0 text-center lg:text-left">
+          <h3 class="text-2xl lg:text-3xl font-black text-gray-900 mb-2">
+            Ready For Your Free Audit?
+          </h3>
+        </div>
+        <div>
+          <CTAbutton />
+        </div>
       </div>
     </div>
   </Container>
