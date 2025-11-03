@@ -10,6 +10,9 @@ import Testimonial from '~/components/widgets/preline/Testimonial.astro';
 import PainPoints from '~/components/widgets/PainPoints.astro';
 import EmpathyAndConversion from '~/components/widgets/preline/EmpathyAndConversion.astro';
 import ContentBlock from '~/components/widgets/preline/ContentBlock.astro';
+import Services from '~/components/widgets/preline/Services.astro';
+// import Pricing from '~/components/widgets/preline/Pricing.astro';
+import Pricing2 from '~/components/widgets/preline/Pricing2.astro';
 
 import step1Image from '~/assets/images/step1.png';
 import step2Image from '~/assets/images/step2.png';
@@ -129,7 +132,7 @@ const faqItems = [
     ]}
     bottomText="Upfront timeline. You decide."
     reverse={false}
-    whiteBg={false}
+    whiteBg={true}
   />
 
   {/* BLOCK 3: Step 3 – We Work Together */}
@@ -148,6 +151,8 @@ const faqItems = [
     reverse={true}
     whiteBg={true}
   />
+  <Services />
+  <Pricing2 />
 
   <Testimonial />
   <PainPoints />

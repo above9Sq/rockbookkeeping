@@ -1,0 +1,82 @@
+---
+// src/sections/Services.astro
+import H2 from '~/components/widgets/preline/H2.astro';
+import Container from '~/components/widgets/preline/Container.astro';
+
+interface Service {
+  title: string;
+  subtitle: string;
+  features: string[];
+}
+
+const services: Service[] = [
+  {
+    title: 'Monthly bookkeeping',
+    subtitle:
+      'Stay on top of your finances with a reliable monthly process that keeps your books accurate and tax-ready.',
+    features: [
+      'Bank & credit cards reconciled monthly',
+      'Financial statements delivered within 15 days',
+      'Smart rules for automated categorization',
+      'Responsive email and phone support for quick money questions',
+    ],
+  },
+  {
+    title: 'Cleanup or Catch-up',
+    subtitle:
+      'Behind on your books? We fix and organize everything fast so you can file taxes, have clarity, and peace of mind about your finances.',
+    features: [
+      'Fix months or years of records',
+      'Used advanced tools to import statements',
+      'Every transaction reviewed and correct',
+      'Tax-ready handoff for your CPA',
+    ],
+  },
+];
+---
+
+<section class="bg-[#F5F5F5] py-12 lg:py-22">
+  <Container narrow maxWidth="max-w-[93rem]">
+    <div class="flex flex-col gap-8 md:gap-16">
+      <div class="w-auto">
+        <H2 align="left">Bookkeeping Services</H2>
+        <p class="mt-4 text-lg text-gray-700 text-left">
+          Pick the help you need.<br class="hidden sm:block" />
+          Want to do it yourself? Or let us do it all? We can help either way!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 xl:gap-24 w-full">
+        {
+          services.map((service) => (
+            <div class="bg-white p-8 lg:p-10 bg-white border border-gray-800 rounded-lg flex flex-col h-full">
+              <h3 class="text-2xl lg:text-3xl font-black text-gray-900 mb-3">{service.title}</h3>
+              <p class="text-gray-800 mb-6 flex-grow">{service.subtitle}</p>
+              <ul class="space-y-3">
+                {service.features.map((feature) => (
+                  <li class="flex items-center gap-3">
+                    <p>✅</p>
+                    <p class="text-gray-800">{feature}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="text-center mt-8">
+        <a
+          href="#contact-modal"
+          data-open-modal
+          class="inline-flex items-center justify-center gap-2 bg-blue-600 text-white font-bold uppercase rounded-lg px-8 py-4 text-base hover:bg-blue-700 transition"
+        >
+          Fix My Books Now
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18 6-6-6-6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </Container>
+</section>

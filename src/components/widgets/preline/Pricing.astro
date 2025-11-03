@@ -1,0 +1,117 @@
+---
+// src/components/PricingSection.astro
+import Container from './Container.astro';
+
+const tiers = [
+  {
+    name: 'Basic',
+    price: '$200+',
+    per: 'per month',
+    features: [
+      'Reconcile all accounts',
+      'Categorization of all transactions',
+      'Monthly P&L and Balance Sheet statements',
+    ],
+    popular: false,
+  },
+  {
+    name: 'Full Service',
+    price: '$1000+',
+    per: 'per month',
+    features: ['All Basic', 'Full A/R & A/P', 'Cash flow'],
+    popular: true,
+  },
+];
+
+const cleanup = {
+  name: 'One Time Cleanup',
+  price: '$1500+',
+  features: ['Fix messy or behind books', 'QBO setup if needed', 'Jump to monthly for maintenance'],
+};
+---
+
+<section data-preserve-scroll class="py-12 lg:py-22 bg-[#F5F5F5] overflow-auto">
+  <Container>
+    <div class="flex flex-col gap-12 md:gap-20 max-w-[1600px] mx-auto">
+      <!-- Header -->
+      <div class="text-left">
+        <h2 class="text-4xl md:text-5xl font-black text-black mb-3">Pricing & What You Get</h2>
+        <p class="text-xl text-black mb-2">Transparent. No long-term contracts. First month guarantee.</p>
+        <p class="text-xl text-black">
+          Most owners save $10k/yr and 15 hrs/mo. Buy back your time and peace of mind.
+        </p>
+      </div>
+
+      <!-- Monthly Tiers: Flex, full-width, large gap -->
+      <div class="flex flex-col md:flex-row gap-12 md:gap-24 w-full">
+        {
+          tiers.map((tier) => (
+            <div
+              class={`relative flex-1 rounded-lg border border-gray-800 p-8 md:p-10 flex flex-col bg-white ${
+                tier.popular ? 'popular' : ''
+              }`}
+            >
+              {tier.popular && (
+                <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 border border-[#2e7d32] bg-[#e8f5e9] text-[#2e7d32] font-bold text-xs px-4 py-1.5 rounded-md whitespace-nowrap z-10 md:-top-4 md:text-sm md:px-4 md:py-1.5">
+                  🔥 MOST POPULAR
+                </div>
+              )}
+              <h3 class="text-2xl font-medium uppercase text-gray-800 mb-3 text-center">{tier.name}</h3>
+              <p class="text-center mb-8">
+                <span class="text-4xl font-bold text-gray-800">{tier.price}</span>
+                <span class="text-xl text-gray-600"> {tier.per}</span>
+              </p>
+              <ul class="space-y-2 flex-1">
+                {tier.features.map((feature) => (
+                  <li class="flex items-center gap-2">
+                    <span class="text-xl">✅</span>
+                    <p class="text-black text-base">{feature}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- One-Time Cleanup: Full-width -->
+      <div class="w-full">
+        <div class="rounded-lg border border-gray-800 p-8 md:p-10 bg-white text-center">
+          <h3 class="text-2xl font-black text-gray-800 mb-3">
+            {cleanup.name}
+          </h3>
+          <p class="text-4xl font-black text-gray-800 mb-8">
+            {cleanup.price}
+          </p>
+          <ul class="space-y-4 max-w-md mx-auto text-left">
+            {
+              cleanup.features.map((feature) => (
+                <li class="flex items-start gap-3">
+                  <span class="text-green-600 text-xl mt-0.5">✅</span>
+                  <span class="text-gray-800 text-base">{feature}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="flex justify-center">
+        <button
+          type="button"
+          data-hs-overlay="#contact-modal"
+          data-open-modal
+          aria-haspopup="dialog"
+          aria-controls="contact-modal"
+          aria-expanded="false"
+          class="py-3 px-8 inline-flex justify-center items-center gap-x-2 text-xl uppercase font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+        >
+          FIX MY BOOKS NOW →
+        </button>
+      </div>
+
+      <p class="text-center text-gray-600">Final quote after audit. Cancel anytime.</p>
+    </div>
+  </Container>
+</section>
