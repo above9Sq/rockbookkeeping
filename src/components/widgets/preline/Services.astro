@@ -2,6 +2,7 @@
 // src/sections/Services.astro
 import H2 from '~/components/widgets/preline/H2.astro';
 import Container from '~/components/widgets/preline/Container.astro';
+import CTAbutton from './CTAbutton.astro';
 
 interface Service {
   title: string;
@@ -66,16 +67,7 @@ const services: Service[] = [
       </div>
 
       <div class="text-center mt-8">
-        <a
-          href="#contact-modal"
-          data-open-modal
-          class="inline-flex items-center justify-center gap-2 bg-blue-600 text-white font-bold uppercase rounded-lg px-8 py-4 text-base hover:bg-blue-700 transition"
-        >
-          Fix My Books Now
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18 6-6-6-6"></path>
-          </svg>
-        </a>
+        <CTAbutton />
       </div>
     </div>
   </Container>
