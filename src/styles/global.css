@@ -1,21 +1,9 @@
-@custom-variant xxl {
-  @media (width >= 87.5rem) {
-    @slot;
-  }
-}
-
 @import '@fontsource/lato';
 @import '@fontsource/lato/100.css';
 @import '@fontsource/lato/300.css';
 @import '@fontsource/lato/400.css';
 @import '@fontsource/lato/700.css';
 @import '@fontsource/lato/900.css';
-
-/* Breakpoints - Tailwind v4 custom variant */
-:root {
-  /* 1400px / 16 = 87.5rem */
-  --breakpoint-xxl: 87.5rem;
-}
 
 /* ── Tailwind core (v4) ────────────────────────────────── */
 @import 'tailwindcss';
@@ -50,10 +38,17 @@ html {
   scroll-behavior: smooth !important;
   overflow-y: scroll;
   scrollbar-gutter: stable;
+  /* Mobile offset (≈5rem) */
+  scroll-padding-top: 3rem;
+}
+@media (min-width: 768px) {
+  html {
+    /* Desktop offset (≈3rem) */
+    scroll-padding-top: 3rem;
+  }
 }
 body {
   font-family: var(--font-sans);
-
   background-color: var(--color-bg-page);
 }
 
@@ -149,13 +144,6 @@ html.rb-menu-open #rb-hamburger {
   box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
 }
 
-/* Optional slight shrink on scroll */
-/*
-#header.scroll > div:last-child {
-  @apply py-3;
-}
-*/
-
 /* Responsive nav expansion */
 #header.expanded nav {
   position: fixed;
@@ -214,5 +202,15 @@ html.rb-menu-open #rb-hamburger {
 @layer components {
   .site-wrap {
     @apply max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* ── SCROLL-OFFSET FOR FIXED NAVBAR (mobile vs desktop) ── */
+html {
+  scroll-padding-top: 5rem;               /* mobile – 5rem */
+}
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 3rem;             /* desktop – 3rem */
   }
 }
