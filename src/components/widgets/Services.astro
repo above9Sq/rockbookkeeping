@@ -2,7 +2,7 @@
 // src/sections/Services.astro
 import H2 from '~/components/widgets/H2.astro';
 import Container from '~/components/widgets/Container.astro';
-import CTAbutton from './CTAbutton.astro';
+import CtaButton from './CtaButton.astro';
 
 interface Service {
   title: string;
@@ -47,10 +47,10 @@ const services: Service[] = [
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 xl:gap-24 w-full">
+      <div class="flex flex-col lg:flex-row gap-14 xl:gap-24 w-full">
         {
           services.map((service) => (
-            <div class="bg-white p-8 lg:p-10 bg-white border border-gray-800 rounded-lg flex flex-col h-full">
+            <div class="flex-1 bg-white p-8 lg:p-10 border border-gray-800 rounded-lg flex flex-col">
               <h3 class="text-2xl lg:text-3xl font-black text-gray-900 mb-3">{service.title}</h3>
               <p class="text-gray-800 mb-6 flex-grow">{service.subtitle}</p>
               <ul class="space-y-3">
@@ -67,7 +67,7 @@ const services: Service[] = [
       </div>
 
       <div class="text-center mt-8">
-        <CTAbutton />
+        <CtaButton />
       </div>
     </div>
   </Container>

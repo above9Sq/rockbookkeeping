@@ -1,0 +1,18 @@
+---
+import CtaButton from './CtaButton.astro';
+
+export interface Props {
+  header: string;
+}
+
+const { header } = Astro.props;
+---
+
+<div class="flex flex-col lg:flex-row bg-white rounded-2xl p-8 lg:p-10 border border-gray-800 text-center">
+  <div class="flex-1 mb-6 lg:mb-0 text-center lg:text-left">
+    <h3 class="text-2xl lg:text-3xl font-black text-gray-900 mb-2">{header}</h3>
+  </div>
+  <div>
+    <CtaButton />
+  </div>
+</div>
