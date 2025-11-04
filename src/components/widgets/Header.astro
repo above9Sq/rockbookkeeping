@@ -1,10 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-import logoImage from '/src/assets/images/logo.svg';
+// import logoImage from '/src/assets/images/logo.svg';
+import logoGraphImage from '/src/assets/images/logo-graph.svg';
 import MobileMenu from './MobileMenu.astro';
 import { headerData } from '~/navigation';
 
-const { links, ctaLabel } = headerData; // ← ONLY THIS LINE CHANGED
+const { links, ctaLabel } = headerData;
 ---
 
 <header class="sticky top-0 z-[80] w-full bg-white transition-[height] duration-300 ease-out">
@@ -15,7 +16,7 @@ const { links, ctaLabel } = headerData; // ← ONLY THIS LINE CHANGED
     <div class="lg:col-span-3 flex items-center">
       <a href="/" class="flex items-center gap-x-1 md:gap-x-2" aria-label="Rock Bookkeeping">
         <Image
-          src={logoImage}
+          src={logoGraphImage}
           alt="Rock Bookkeeping logo"
           width={50}
           height={50}
