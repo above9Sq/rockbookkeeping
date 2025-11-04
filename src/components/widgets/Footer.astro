@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
 
@@ -23,7 +22,7 @@ export interface Props {
   theme?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const { secondaryLinks = [], links = [], footNote = '' } = Astro.props;
 
 // flatten all groups into a single list
 const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filter(Boolean);

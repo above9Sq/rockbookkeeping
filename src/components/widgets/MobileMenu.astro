@@ -1,6 +1,7 @@
 ---
+// src/components/MobileMenu.astro
 interface Props {
-  navItems: { label: string; href: string; current?: boolean }[];
+  navItems: { text: string; href: string }[];
   ctaLabel: string;
 }
 
@@ -25,9 +26,8 @@ const { navItems, ctaLabel } = Astro.props;
               <a
                 href={item.href}
                 class="block py-6 text-xl font-bold text-gray-800 hover:text-gray-600 transition-colors"
-                aria-current={item.current ? 'page' : undefined}
               >
-                {item.label}
+                {item.text}
               </a>
             </li>
           ))
@@ -45,10 +45,7 @@ const { navItems, ctaLabel } = Astro.props;
       type="button"
       data-hs-overlay="#contact-modal"
       data-open-modal
-      aria-haspopup="dialog"
-      aria-controls="contact-modal"
-      aria-expanded="false"
-      class="btn-pop py-2.5 pl-16 pr-11 w-full inline-flex justify-center items-center gap-x-2 text-base uppercase font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+      class="btn-pop py-2.5 pl-16 pr-11 w-full inline-flex justify-center items-center gap-x-2 text-base uppercase font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700"
     >
       {ctaLabel}
       <svg

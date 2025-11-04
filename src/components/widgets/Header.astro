@@ -2,16 +2,9 @@
 import { Image } from 'astro:assets';
 import logoImage from '/src/assets/images/logo.svg';
 import MobileMenu from './MobileMenu.astro';
+import { headerData } from '~/navigation';
 
-const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Pricing', href: '/#pricing' },
-  { label: 'FAQ', href: '/#faq' },
-  { label: 'About', href: '/about' },
-];
-
-const ctaLabel = 'Fix My Books Now';
+const { links, ctaLabel } = headerData; // ← ONLY THIS LINE CHANGED
 ---
 
 <header class="sticky top-0 z-[80] w-full bg-white h-16 transition-[height] duration-300 ease-out">
@@ -37,19 +30,18 @@ const ctaLabel = 'Fix My Books Now';
       <!-- Desktop nav -->
       <div class="hidden lg:flex lg:items-center lg:gap-x-7">
         {
-          navItems.map((item) => (
+          links.map((item) => (
             <a
               class="text-gray-800 hover:text-gray-600 font-semibold text-sm uppercase tracking-wide transition-colors"
               href={item.href}
-              aria-current={item.current ? 'page' : undefined}
             >
-              {item.label}
+              {item.text}
             </a>
           ))
         }
       </div>
 
-      <!-- Desktop CTA: Matches Hero Button -->
+      <!-- Desktop CTA -->
       <button
         type="button"
         data-hs-overlay="#contact-modal"
@@ -111,9 +103,11 @@ const ctaLabel = 'Fix My Books Now';
     </div>
   </nav>
 
-  <MobileMenu navItems={navItems} ctaLabel={ctaLabel} />
+  <!-- Pass `links` directly (MobileMenu will use `text` → `label`) -->
+  <MobileMenu navItems={links} ctaLabel={ctaLabel} />
 </header>
 
+<!-- Your existing script (unchanged) -->
 <script is:inline>
   // === SCROLL + MOBILE CTA LOGIC ===
   const runHeaderScript = () => {
