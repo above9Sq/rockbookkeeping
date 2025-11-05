@@ -11,6 +11,13 @@ interface Tier {
   popular?: boolean;
 }
 
+interface Props {
+  bgColor?: string; // Optional background color prop
+}
+
+const { bgColor = '#f3fff8' } = Astro.props; // Default to existing color
+
+
 const monthlyTiers: Tier[] = [
   {
     name: 'Essential',
@@ -47,7 +54,7 @@ const tierStyling = "text-xl lg:text-2xl font-semibold text-gray-900 uppercase";
 const priceStyling = "mt-3 text-3xl lg:text-4xl font-black text-gray-900";
 ---
 
-<section id="pricing" class="bg-[#ECFFF5] py-12 lg:py-22">
+<section id="pricing" class={`py-12 lg:py-22`} style={`background-color: ${bgColor}`}>
   <Container narrow maxWidth="max-w-[93rem]">
     <div class="flex flex-col gap-14 xl:gap-24">
       <!-- Header -->
