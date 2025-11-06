@@ -2,7 +2,8 @@
 // src/sections/FAQ.astro
 import H2 from '~/components/widgets/H2.astro';
 import Container from '~/components/widgets/Container.astro';
-import BookCallButton from './BookCallButton.astro';
+// import BookCallButton from './BookCallButton.astro';
+import CalButton from './CalButton.astro';
 
 interface Props {
   bgColor?: string;
@@ -172,7 +173,7 @@ const faqs: FAQItem[] = [
           <p class="text-lg text-gray-700">Still got a question?</p>
           <p class="text-gray-700">We love curveballs.</p>
           <p class="text-lg text-gray-700">Submit a question or book a call.</p>
-          <div><BookCallButton /></div>
+          <div><CalButton /></div>
         </div>
       </div>
 
