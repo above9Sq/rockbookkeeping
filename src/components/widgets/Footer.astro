@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
 
@@ -16,37 +15,39 @@ interface LinksGroup {
 }
 
 export interface Props {
-  links: Array<LinksGroup>; // keep original grouped shape
+  links: Array<LinksGroup>;
   secondaryLinks: Array<Link>;
   socialLinks: Array<Link>;
   footNote?: string;
   theme?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const { secondaryLinks = [], links = [], footNote = '' } = Astro.props;
 
 // flatten all groups into a single list
 const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filter(Boolean);
+
+// If you prefer a default copyright, uncomment below:
+// const year = new Date().getFullYear();
+// const defaultFoot = `© ${year} Rock Bookkeeping. Made with <span class="text-red-400">❤️</span> in Pittsburgh.`;
 ---
 
-<footer class="relative border-t border-gray-700 bg-gray-800 text-white not-prose">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 flex flex-col items-center text-center gap-4">
-    <!-- Logo -->
+<footer class="relative border-t border-gray-700 bg-[#0d1b2a] not-prose">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-12 flex flex-col items-center text-center gap-6">
+    <!-- Brand -->
     <div>
-      <a class="inline-block font-bold text-xl text-white" href={getHomePermalink()}>{SITE?.name}</a>
+      <a class="inline-block font-bold text-xl text-white tracking-tight" href={getHomePermalink()}>
+        {SITE?.name}
+      </a>
     </div>
 
     <!-- Main Links -->
     {
       flatLinks.length > 0 && (
-        <ul class="flex flex-col gap-3 text-base font-medium sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base text-gray-300">
           {flatLinks.map(({ text, href, ariaLabel }) => (
             <li>
-              <a
-                class="text-white hover:text-gray-300 transition duration-150 ease-in-out"
-                href={href}
-                aria-label={ariaLabel}
-              >
+              <a class="hover:text-white transition-colors duration-150" href={href} aria-label={ariaLabel}>
                 <Fragment set:html={text} />
               </a>
             </li>
@@ -58,21 +59,17 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
     <!-- Legal Links -->
     {
       secondaryLinks?.length > 0 && (
-        <div class="text-xs flex flex-wrap justify-center gap-2 mt-4">
+        <div class="text-sm text-gray-400 flex flex-wrap justify-center gap-x-4 gap-y-1 mt-1" aria-label="Legal">
           {secondaryLinks.map(({ text, href }) => (
-            <a class="text-white hover:text-gray-300 transition duration-150 ease-in-out" href={href} set:html={text} />
+            <a class="hover:text-gray-200 transition-colors duration-150" href={href} set:html={text} />
           ))}
         </div>
       )
     }
 
-    <!-- Copyright -->
-    {
-      footNote && (
-        <div class="text-xs mt-2 text-white">
-          <Fragment set:html={footNote} />
-        </div>
-      )
-    }
+    <!-- Copyright / Made with ❤️ -->
+    <div class="text-sm text-gray-400 mt-1 leading-relaxed">
+      {footNote ? <Fragment set:html={footNote} /> : null}
+    </div>
   </div>
 </footer>

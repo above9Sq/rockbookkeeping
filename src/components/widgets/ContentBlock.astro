@@ -1,0 +1,96 @@
+---
+// src/components/PainSection.astro
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Container from './Container.astro';
+import H2 from './H2.astro';
+
+export interface Quote {
+  emoji: string;
+  text: string;
+}
+
+export interface Props {
+  headline: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  imageHeight: number;
+  imageWidth: number;
+  quotes: Quote[];
+  bottomText: string;
+  reverse?: boolean;
+  whiteBg?: boolean;
+}
+
+const {
+  headline,
+  image,
+  imageAlt,
+  imageHeight,
+  imageWidth,
+  quotes,
+  bottomText,
+  reverse = false,
+  whiteBg = true,
+} = Astro.props;
+
+const imageOrder = reverse ? 'xl:order-2' : 'xl:order-1';
+const contentOrder = reverse ? 'xl:order-1' : 'xl:order-2';
+---
+
+<section class={`py-12 lg:py-22 ${whiteBg ? 'bg-white' : 'bg-[#f4f7ff]'}`}>
+  <Container>
+    <div class="flex flex-col gap-8 md:gap-22">
+      <H2>
+        {headline}
+      </H2>
+
+      <div class="flex flex-col xl:flex-row gap-14 xl:gap-24 items-start">
+        <div class={`w-full ${imageOrder}`}>
+          <Image
+            src={image}
+            alt={imageAlt}
+            width={imageWidth}
+            height={imageHeight}
+            class="w-full h-auto border border-gray-800 rounded-lg object-contain"
+            loading="lazy"
+          />
+        </div>
+
+        <div class={`flex flex-col gap-8 text-base md:text-lg text-gray-900 w-full ${contentOrder}`}>
+          <div class="bg-white border border-gray-800 rounded-lg p-6 space-y-4">
+            {
+              quotes.map(({ emoji, text }) => {
+                // Basic phone pattern — catches formats like 717-448-5993 or (717) 448-5993
+                const phonePattern = /(\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4})/;
+
+                const match = text.match(phonePattern);
+
+                return (
+                  <div class="flex items-center gap-2 sm:gap-4">
+                    <span class="flex-shrink-0 text-2xl">{emoji}</span>
+                    <div class="flex-1">
+                      <p
+                        class="font-bold leading-tight"
+                        set:html={
+                          match ?
+                            text.replace(
+                              phonePattern,
+                              `<a href="tel:${match[1].replace(/[^0-9]/g, '')}" class="px-1 text-blue-600 font-black hover:underline">$&</a>`
+                            )
+                          : text
+                        }
+                      />
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </div>
+
+          <p class="max-w-[620px]">{bottomText}</p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

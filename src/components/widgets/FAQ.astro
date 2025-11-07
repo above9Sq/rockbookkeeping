@@ -1,0 +1,266 @@
+---
+// src/sections/FAQ.astro
+import H2 from '~/components/widgets/H2.astro';
+import Container from '~/components/widgets/Container.astro';
+// import BookCallButton from './BookCallButton.astro';
+import CalButton from './CalButton.astro';
+
+interface Props {
+  bgColor?: string;
+}
+
+const { bgColor = '#f8f8f8' } = Astro.props;
+
+interface FAQItem {
+  question: string;
+  paragraphs: string[];
+}
+
+const faqs: FAQItem[] = [
+  {
+    question: 'What are the fees?',
+    paragraphs: [
+      'We use a flat monthly fee.',
+      "We'll talk through your specific business needs and design a plan that serves you best.",
+      'Most owners save $10k/yr and 15 hrs/mo. Buy back your time and peace of mind.',
+    ],
+  },
+  {
+    question: 'What if my books are behind schedule or need a clean-up?',
+    paragraphs: [
+      "That's no problem.",
+      'We have experience cleaning up past records and bringing books up to date.',
+      "We'll review your situation in detail and put everything back in order.",
+    ],
+  },
+  {
+    question: 'Is my financial information secure?',
+    paragraphs: [
+      'Yes — all bookkeeping is done directly inside QuickBooks Online, which uses bank-level encryption and secure cloud storage.',
+      "We don't download or store your data locally. Documents are shared by email or through a secure Google Drive or Dropbox link if you prefer extra protection.",
+    ],
+  },
+  {
+    question: 'What type of bookkeeping services do you offer?',
+    paragraphs: [
+      'We offer two core services:',
+      '• Monthly Bookkeeping – Full reconciliation, categorization, and financial reporting',
+      '• One-Time Cleanup – Fix messy or outdated books fast',
+      'All work is fully remote using secure, simple tools.',
+    ],
+  },
+  {
+    question: 'How does monthly bookkeeping work?',
+    paragraphs: [
+      'Each month we:',
+      '1. Pull in your bank/credit card transactions (automatically or via secure upload)',
+      '2. Categorize every transaction with smart rules',
+      '3. Reconcile all accounts to the penny',
+      '4. Deliver clean Profit & Loss, Balance Sheet, and Cash Flow reports',
+      'You get full clarity — no guesswork.',
+    ],
+  },
+  {
+    question: 'When do you deliver my monthly financial reports?',
+    paragraphs: [
+      'Your reports are delivered by the 10th of each month.',
+      'This gives you time to review performance, spot trends, and plan with confidence.',
+    ],
+  },
+  {
+    question: 'When and how do I send my documents to you?',
+    paragraphs: [
+      "You don't have to chase statements.",
+      'We connect directly to your bank feeds in QuickBooks Online for automatic import.',
+      "Or, upload PDFs securely — we'll handle the rest.",
+    ],
+  },
+  {
+    question: 'How soon can we get started?',
+    paragraphs: [
+      'We can get started right away.',
+      "Once we connect your QuickBooks Online account and bank feeds, we'll begin reviewing your books and catching up any past months if needed.",
+    ],
+  },
+  {
+    question: 'What does onboarding look like?',
+    paragraphs: [
+      'Onboarding is simple and usually takes less than a day.',
+      "We'll connect your bank and credit card accounts, confirm your chart of accounts, and set up or clean up your QuickBooks file so everything runs smoothly moving forward.",
+    ],
+  },
+  {
+    question: 'Do you only work with QuickBooks Online?',
+    paragraphs: [
+      'Yes — we are QuickBooks Online Certified ProAdvisors and use QBO exclusively.',
+      "This lets us deliver faster, more accurate results. If you're on Xero, Wave, or spreadsheets, we'll migrate you to QBO for free during onboarding — most clients are live in under a week.",
+    ],
+  },
+  {
+    question: 'What if I need tax preparation?',
+    paragraphs: [
+      "We don't prepare or file taxes.",
+      "But we do make your CPA's job easy: clean, organized, audit-ready books delivered on time.",
+      "We'll even connect directly with your tax pro to answer questions.",
+    ],
+  },
+  {
+    question: 'Do you handle sales tax?',
+    paragraphs: [
+      'No — we do not file or manage sales tax.',
+      'We track and categorize all sales tax collected and paid so your CPA can file accurately and on time. Clean books = zero tax headaches.',
+    ],
+  },
+  {
+    question: 'How do I know my books will be accurate?',
+    paragraphs: [
+      'Accuracy is non-negotiable.',
+      'Every transaction is manually reviewed and matched to your statements. We use bank rules + human oversight — no automation-only errors.',
+      "You'll see proof in reconciled accounts and real-time reports.",
+    ],
+  },
+  {
+    question: 'Is there a contract or commitment?',
+    paragraphs: [
+      'No contracts — you can pause or cancel service at any time.',
+      "We want you to stay because you're happy with the work, not because you're locked in.",
+    ],
+  },
+  {
+    question: 'How do payments work?',
+    paragraphs: [
+      'Monthly payments are set up automatically by ACH for convenience.',
+      'Credit card payments are also accepted, with a 3% processing fee to cover merchant costs.',
+    ],
+  },
+  {
+    question: 'Do you handle payroll or invoicing?',
+    paragraphs: [
+      "Payroll isn't included in standard bookkeeping plans. We recommend ADP or Gusto for payroll and can help manage setup or ongoing support for an additional fee.",
+      "We can also assist with invoicing (accounts receivable) if you'd like help sending and tracking customer payments.",
+    ],
+  },
+  {
+    question: 'Why should I choose Rock Bookkeeping?',
+    paragraphs: [
+      'You get more than a bookkeeper — you get a business partner.',
+      '• Certified QuickBooks ProAdvisors',
+      '• Real-world small business experience',
+      '• Flat monthly pricing (no surprises)',
+      '• 48–72 hour cleanup turnaround',
+      '• Direct access via email or phone',
+      'We help you understand your numbers, not just record them.',
+    ],
+  },
+  {
+    question: 'Do you work with businesses outside of Pittsburgh?',
+    paragraphs: [
+      'Yes — 100% remote, nationwide.',
+      "Because we use QuickBooks Online, location doesn't matter. From California to Florida, our process is the same: secure, fast, and professional.",
+    ],
+  },
+];
+---
+
+<section id="faq" class="py-12 lg:py-22" style={`background-color: ${bgColor}`}>
+  <Container>
+    <div class="flex flex-col xl:flex-row gap-14 xl:gap-24 items-start max-w-none">
+      <div class="w-full xl:w-1/2 xl:sticky xl:top-24">
+        <p class="text-sm font-bold uppercase text-gray-600 mb-2">Frequently Asked Questions</p>
+        <H2 align="left">Everything You Were About to Ask Us</H2>
+
+        <div class="flex flex-col gap-3 mt-3">
+          <p class="text-lg text-gray-700">Still got a question?</p>
+          <p class="text-gray-700">We love curveballs.</p>
+          <p class="text-lg text-gray-700">Submit a question or book a call.</p>
+          <div><CalButton /></div>
+        </div>
+      </div>
+
+      <div class="w-full xl:w-1/2">
+        <div class="bg-white border border-gray-800 rounded-lg p-6 lg:p-8">
+          {
+            faqs.map((faq) => (
+              <details class="group border-b border-gray-300 py-5 first:pt-0 last:border-b-0">
+                <summary class="flex items-center items-start gap-4 cursor-pointer list-none select-none">
+                  <svg
+                    class="w-6 h-6 mt-0.5 text-gray-900 transition-transform duration-300 group-open:rotate-45"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span class="flex-1 text-lg font-bold text-gray-900">{faq.question}</span>
+                </summary>
+
+                <div class="answer mt-4 pl-10 pb-2 overflow-hidden">
+                  <div class="space-y-4">
+                    {faq.paragraphs.map((paragraph) => (
+                      <p class="text-lg text-gray-800 leading-relaxed">{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .answer {
+    height: 0;
+    transition: height 240ms ease;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .answer {
+      will-change: height;
+    }
+  }
+
+  .leading-relaxed {
+    line-height: 1.75;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('details').forEach((details) => {
+    const answer = details.querySelector('.answer');
+    if (!answer) return;
+
+    if (details.open) answer.style.height = 'auto';
+
+    details.addEventListener('click', (e) => {
+      const summary = details.querySelector('summary');
+      if (!summary?.contains(e.target)) return;
+      e.preventDefault();
+
+      const shouldOpen = !details.open;
+
+      if (shouldOpen) {
+        details.open = true;
+        const targetHeight = answer.scrollHeight;
+        answer.style.height = '0px';
+        requestAnimationFrame(() => (answer.style.height = `${targetHeight}px`));
+        const onEnd = () => {
+          answer.style.height = 'auto';
+          answer.removeEventListener('transitionend', onEnd);
+        };
+        answer.addEventListener('transitionend', onEnd);
+      } else {
+        const startHeight = answer.scrollHeight;
+        answer.style.height = `${startHeight}px`;
+        requestAnimationFrame(() => (answer.style.height = '0px'));
+        const onEnd = () => {
+          details.open = false;
+          answer.style.height = '0px';
+          answer.removeEventListener('transitionend', onEnd);
+        };
+        answer.addEventListener('transitionend', onEnd);
+      }
+    });
+  });
+</script>

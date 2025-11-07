@@ -1,6 +1,23 @@
 ---
 import { UI } from 'astrowind:config';
+
+import prelineScript from '../../utils/preline-init.ts?url';
 ---
+
+<!-- === PREVENT FOUC === -->
+<script is:inline>
+  document.documentElement.classList.add('no-fouc');
+</script>
+<style>
+  .no-fouc #mobile-wrapper {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+</style>
+<script is:inline>
+  document.documentElement.classList.remove('no-fouc');
+</script>
+<!-- ===================== -->
 
 <script is:inline define:vars={{ defaultTheme: UI.theme }}>
   if (window.basic_script) {
@@ -270,5 +287,35 @@ import { UI } from 'astrowind:config';
 
   document.addEventListener('astro:after-swap', () => {
     Observer.start();
+  });
+</script>
+
+<script is:inline type="module" src={prelineScript}></script>
+
+<script>
+  // Smooth scroll with offset for mobile menu links
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const targetId = link.getAttribute('href');
+    if (targetId === '#') return;
+
+    const target = document.querySelector(targetId);
+    if (!target) return;
+
+    e.preventDefault();
+
+    const navbarHeight = window.innerWidth < 768 ? 80 : 48; // 5rem mobile, 3rem desktop
+    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+    window.scrollTo({
+      top: offsetTop,
+      behavior: 'smooth',
+    });
+
+    // Close mobile menu if open
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    if (mobileMenu) mobileMenu.classList.add('hidden');
   });
 </script>

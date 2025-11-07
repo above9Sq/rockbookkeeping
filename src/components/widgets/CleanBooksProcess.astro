@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import Container from './Container.astro';
+import painGraphic from '~/assets/images/empathy-cred-bridge.png';
+---
+
+<section class="bg-white py-12 lg:py-22">
+  <Container>
+    <div class="flex flex-col gap-8 md:gap-22">
+      <h2
+        class="text-balance mt-0 block text-[32px] leading-[1.0] sm:text-[38px] sm:leading-[1.2] md:text-[45px] md:leading-[49.5px] tracking-[0.45px] font-black text-gray-800 text-balance text-center"
+      >
+        How We Get Your Books Clean
+        <br />
+        (and Keep Them That Way)
+      </h2>
+      <div class="flex flex-col xl:flex-row gap-14 xl:gap-24 items-start">
+        <div class="order-2 md:order-1 w-full">
+          <Image
+            src={painGraphic}
+            alt="Why Most Businesses Dread Their Books - Pain vs. Fix"
+            width={1430}
+            height={1434}
+            class="w-full h-auto border border-gray-800 rounded-lg object-contain"
+            loading="eager"
+          />
+        </div>
+        <div class="order-1 md:order-2 flex flex-col gap-8 text-base md:text-lg text-gray-900 w-full">
+          <p class="max-w-[620px]">Messy books don't mean you failed. They just need a better system.</p>
+          <p class="max-w-[620px]">
+            Here's the simple way we help you go from stress and confusion to clear and confident.
+          </p>
+          <div class="bg-white border border-gray-800 rounded-lg p-6 space-y-4">
+            <div class="flex gap-4">
+              <span>👎</span><span class="font-bold">Haven't opened QuickBooks</span>
+            </div>
+            <div class="flex gap-4">
+              <span>👎</span><span class="font-bold">No idea where to start</span>
+            </div>
+            <div class="flex gap-4">
+              <span>👎</span><span class="font-bold">Afraid of what's inside</span>
+            </div>
+          </div>
+          <p class="max-w-[620px]">
+            These problems cause stress and confusion. Bills pile up. Reports don't make sense. You start to worry about
+            tax time and feel lost about where your money is really going.
+          </p>
+          <p class="max-w-[620px]">
+            You've tried to keep up. Maybe you watch videos or spend hours clicking through QuickBooks. But every time
+            you try to fix things, it feels even messier.
+          </p>
+          <p class="max-w-[620px]">
+            So you stop opening QuickBooks altogether and tell yourself you'll get to it later. Or you try small fixes
+            that don't last. But the truth is, those only hide the real problem and make it harder later.
+          </p>
+          <p class="max-w-[620px]">
+            And before you know it, you're right back where you started… stressed, behind, and unsure what's really
+            going on with your books.
+          </p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

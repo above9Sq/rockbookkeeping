@@ -1,0 +1,126 @@
+---
+interface Props {
+  navItems: { text: string; href: string }[];
+  ctaLabel: string;
+}
+
+const { navItems, ctaLabel } = Astro.props;
+---
+
+<div
+  id="mobile-wrapper"
+  class="lg:hidden border-b border-gray-200 fixed inset-x-0 z-[70] pointer-events-none
+         opacity-0 visibility-hidden transition-[opacity,visibility] duration-150 ease-out"
+  data-state="closed"
+>
+  <div
+    id="rb-menu"
+    class="overflow-hidden max-h-0 transition-[max-height] duration-150 ease-out bg-white shadow-sm pointer-events-auto"
+  >
+    <nav class="px-4 pb-5">
+      <ul>
+        {
+          navItems.map((item) => (
+            <li class="border-b border-gray-200">
+              <a
+                href={item.href}
+                class="block py-6 text-xl font-bold text-gray-800 hover:text-gray-600 transition-colors"
+              >
+                {item.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div
+    id="rb-cta"
+    class="px-4 pt-1 pb-2 bg-white pointer-events-auto transition-padding ease-out
+           opacity-0 translate-y-2 transition-all duration-150 ease-out"
+  >
+    <button
+      type="button"
+      data-hs-overlay="#contact-modal"
+      data-open-modal
+      class="btn-pop py-2.5 pl-16 pr-11 w-full inline-flex justify-center items-center gap-x-2 text-base uppercase font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700"
+    >
+      {ctaLabel}
+      <svg
+        class="shrink-0 size-4"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m9 18 6-6-6-6"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('rb-toggle');
+    const menu = document.getElementById('rb-menu');
+    const cta = document.getElementById('rb-cta');
+    const wrapper = document.getElementById('mobile-wrapper');
+    const navBar = document.querySelector('header > nav');
+    const iconMenu = toggle?.querySelector('.icon-menu');
+    const iconClose = toggle?.querySelector('.icon-close');
+
+    if (!toggle || !menu || !cta || !wrapper || !navBar || !iconMenu || !iconClose) return;
+
+    const setTop = () => (wrapper.style.top = navBar.offsetHeight + 'px');
+    const open = () => {
+      toggle.setAttribute('aria-expanded', 'true');
+      iconMenu.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+      menu.style.maxHeight = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7)) + 'px';
+      cta.classList.replace('pb-2', 'pb-6');
+      cta.classList.remove('opacity-0', 'translate-y-2');
+      cta.classList.add('opacity-100', 'translate-y-0');
+      wrapper.dataset.state = 'open';
+      wrapper.style.visibility = 'visible';
+      wrapper.style.opacity = '1';
+    };
+
+    const close = () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      iconMenu.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      menu.style.maxHeight = '0px';
+      cta.classList.replace('pb-6', 'pb-2');
+      wrapper.dataset.state = 'closed';
+      if (!document.getElementById('rb-cta').classList.contains('opacity-100')) {
+        wrapper.style.visibility = 'hidden';
+        wrapper.style.opacity = '0';
+      }
+    };
+
+    setTop();
+    window.addEventListener('resize', () => {
+      setTop();
+      if (toggle.getAttribute('aria-expanded') === 'true') {
+        menu.style.maxHeight = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7)) + 'px';
+      }
+    });
+
+    toggle.addEventListener('click', () => (toggle.getAttribute('aria-expanded') === 'true' ? close() : open()));
+    document.addEventListener('keydown', (e) => e.key === 'Escape' && close());
+    document.addEventListener(
+      'click',
+      (e) => {
+        if (!menu.contains(e.target) && !toggle.contains(e.target)) close();
+      },
+      true
+    );
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+  });
+</script>

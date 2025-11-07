@@ -2,686 +2,81 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Prices from '~/components/widgets/Pricing.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
-import FAQSchema from '~/components/seo/FAQSchema.astro';
+import Testimonial from '~/components/widgets/Testimonial.astro';
+import EmpathyAndConversion from '~/components/widgets/EmpathyAndConversion.astro';
+import ContentBlock from '~/components/widgets/ContentBlock.astro';
+import Services from '~/components/widgets/Services.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+import FAQ from '~/components/widgets/FAQ.astro';
+
+import step1Image from '~/assets/images/step1.png';
+import step2Image from '~/assets/images/step2.png';
+import step3Image from '~/assets/images/step3.png';
 
 const metadata = {
   title: 'Rock Bookkeeping - We handle your bookkeeping. You handle your business.',
   ignoreTitleTemplate: true,
 };
-
-const faqItems = [
-      {
-        title: 'What are the fees?',
-        description:
-          'We use a flat monthly fee. We’ll talk through your specific business needs and design a plan that serves you best.',
-      },
-      {
-        title: 'What type of bookkeeping services do you offer?',
-        description:
-          'We specialize in QuickBooks Online and are Certified ProAdvisors. Our work is fully remote, and we use simple online tools to make sharing documents and information convenient for you.',
-      },
-      {
-        title: 'How does monthly bookkeeping work?',
-        description:
-          'Each month we analyze and record your business transactions in QuickBooks Online. From there, we prepare accurate financial reports like your Profit & Loss and Balance Sheet so you can clearly see how your business is performing.',
-      },
-      {
-        title: 'What if I need a more frequent schedule than monthly?',
-        description:
-          'We provide flexible service to fit your needs. For businesses that want closer tracking, we can meet weekly or bi-weekly to review cash flow and help you stay ahead.',
-      },
-      {
-        title: 'When and how do I send my documents to you?',
-        description:
-          'We’ll need your bank and credit card statements each month. We can set up QuickBooks Online to bring them in automatically, or you can share the statements with us directly.',
-      },
-      {
-        title: 'When do you deliver my monthly financial reports?',
-        description:
-          'Your financial reports are delivered by the 10th of each month, giving you plenty of time to review results and plan with confidence.',
-      },
-      {
-        title: 'What if my books are behind schedule or need a clean-up?',
-        description:
-          'That’s no problem. We have experience cleaning up past records and bringing books up to date. We’ll review your situation in detail and put everything back in order.',
-      },
-      {
-        title: 'What if I need assistance with special projects?',
-        description:
-          'We’re happy to help. Whether you need deeper financial analysis, support for a business decision, or a one-time review, we can work with you to provide clear answers and reliable numbers.',
-      },
-      {
-        title: 'What if I need tax preparation?',
-        description:
-          'We don’t prepare taxes ourselves, but we ensure your books are accurate and ready for your CPA. We also communicate directly with your tax professional when needed so they have everything required to do their work effectively.',
-      },
-      {
-        title: 'Why should I choose Rock Bookkeeping?',
-        description:
-          'We bring both accounting training and hands-on business experience. With QuickBooks certifications and real-world knowledge, we provide accurate books and clear reports so you can make better decisions for your business.',
-      },
-      {
-        title: 'How do I know my books will be accurate?',
-        description:
-          'Accuracy is at the heart of what we do. Every transaction is reviewed and matched against your bank and credit card statements. This ensures that your records and reports reflect the real numbers in your business.',
-      },
-      {
-        title: 'Do you work with businesses outside of Pittsburgh?',
-        description:
-          'Yes. Because we use QuickBooks Online, we can work with small businesses anywhere in the U.S. Whether you’re local or across the country, our process is the same — reliable, timely, and professional.',
-      },
-    ]
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <Hero />
+  <EmpathyAndConversion bgColor="#f4f7ff" />
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get a free quote',
-        href: '#contact',
-        // target: '_blank',
-        // icon: 'tabler:download',
-      },
-      { text: 'Services', href: '#services' },
+  {/* BLOCK 1: Step 1 – Free Audit */}
+  <ContentBlock
+    headline="Step 1: Call or Submit — We Audit Free"
+    image={step1Image}
+    imageAlt="Phone icon and magnifying glass over bank statements"
+    imageHeight={1434}
+    imageWidth={1430}
+    quotes={[
+      { emoji: '📞', text: 'Call 412-256-8411 or submit request' },
+      { emoji: '🔍', text: "We'll evaluate your acccounts and spot gaps" },
+      { emoji: '💰', text: 'Exact quote in 24 hrs' },
     ]}
-    image={{ src: '~/assets/images/accounting.jpg', alt: 'Laptop and documents hero image' }}
-  >
-    <Fragment slot="title">
-      We handle your <span class="text-primary dark:text-white">bookkeeping</span>. <br />You handle your <span
-        class="text-primary dark:text-white">business</span
-      >.
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">We will manage your QuickBooks so you can focus on running your business.</span>
-      <span class="mb-1 block font-bold text-blue-600 sm:hidden">QuickBooks Online Certified ProAdvisor</span>
-    </Fragment>
-  </Hero>
-
-  <!-- Note Widget ******************* -->
-
-  <!-- <Note title="What we do:" description="Monthly account reconciliation and financial statements." /> -->
-
-  <!-- Features Widget *************** -->
-
-  <!-- <Features
-    id="features"
-    tagline="Features"
-    title="Why Rock Bookkeeping?"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
-    items={[
-      {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  /> -->
-
-  <!-- Content Widget **************** -->
-
-  <!-- <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="mb-2 text-2xl font-bold tracking-tight dark:text-white sm:text-3xl">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content> -->
-
-  <!-- Content Widget **************** -->
-
-  <!-- <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content> -->
-
-  <!-- Content Widget **************** -->
-
-  <!-- <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content> -->
-
-  <!-- Steps Widget ****************** -->
-
-  <!-- <Steps
-    title="Our Process"
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Call Us Today</span>',
-        description:
-          "Reach out by phone or message, and we’ll connect to learn about your bookkeeping goals. <br> <a class='font-bold text-blue-600' href='tel:412-256-8411'>412-256-8411</a>",
-        icon: 'tabler:phone',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Review & Estimate</span>',
-        description:
-          "We'll review all current accounts in depth to determine a timeline and an upfront one-time or monthly estimate.",
-        icon: 'tabler:file-search',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Partner With Us</span>',
-        description:
-          'With us managing your books, tax time becomes stress-free and you stay confident about your numbers.',
-        icon: 'tabler:heart-handshake',
-      },
-      // {
-      //   title: 'Ready!',
-      //   icon: 'tabler:check',
-      // },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  /> -->
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Our Process"
-    subtitle="We make bookkeeping simple and stress-free, guiding you every step of the way."
-    items={[
-      {
-        title: 'Call Us Today',
-        description:
-          "Reach out by phone or message, and we’ll connect to learn about your bookkeeping goals. <br> <a class='font-bold text-blue-600' href='tel:412-256-8411'>412-256-8411</a>",
-      },
-      {
-        title: 'Review & Estimate',
-        description:
-          "We'll review all current accounts in depth to determine a timeline and an upfront one-time or monthly estimate.",
-      },
-      {
-        title: 'Partner With Us',
-        description:
-          'With us managing your books, tax time becomes stress-free and you stay confident about your numbers.',
-      },
-    ]}
+    bottomText="No obligation. Just clarity."
+    reverse={true}
+    whiteBg={true}
   />
 
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get a free quote',
-        href: '#contact',
-        // target: '_blank',
-        // icon: 'tabler:download',
-      },
+  {/* BLOCK 2: Step 2 – Your Path (REVERSED) */}
+  <ContentBlock
+    headline="Step 2: Assess & Choose"
+    image={step2Image}
+    imageAlt="Split road showing current vs. behind paths"
+    imageHeight={1434}
+    imageWidth={1430}
+    quotes={[
+      { emoji: '✅', text: 'Already current? Jump to monthly' },
+      { emoji: '🧹', text: 'Behind? 14-day cleanup first' },
+      { emoji: '🔄', text: 'We set up QuickBooks if needed' },
     ]}
-  >
-    <!-- <Fragment slot="tagline"> We got you. </Fragment> -->
-
-    <Fragment slot="title">
-      Focus on growth, not bookkeeping.
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      We keep your QuickBooks clean, accurate, and up-to-date so you can spend more time running your business.
-    </Fragment>
-  </CallToAction>
-
-  <!-- Pricing Widget *************** -->
-
-  <Prices
-    id="services"
-    title="Online Bookkeeping Services"
-    subtitle="Prices are estimates. Contact us for a custom quote."
-    prices={[
-      {
-        title: 'essential',
-        subtitle: 'Accurate books with the basics covered',
-        price: 300,
-        period: 'per month',
-        items: [
-          {
-            description: 'Categorize your transactions for your P&L and Schedule C',
-          },
-          {
-            description: 'Reconcile your accounts',
-          },
-        ],
-        callToAction: {
-          // target: '_blank',
-          text: 'Get started',
-          href: '#contact',
-        },
-      },
-      {
-        title: 'growth',
-        subtitle: 'Deeper insights and support to guide your business',
-        price: 600,
-        period: 'Per Month',
-        items: [
-          {
-            description: 'Categorize your transactions for your P&L and Schedule C',
-          },
-          {
-            description: 'Reconcile your accounts',
-          },
-          {
-            description:
-              'Manage your Financial Statements: Profit & Loss, Balance Sheet, Accounts Payable, & Accounts Receivable',
-          },
-          {
-            description: 'Monthly business consultation based on your business needs to enable growth and optimization',
-          },
-        ],
-        callToAction: {
-          // target: '_blank',
-          text: 'Get started',
-          href: '#contact',
-        },
-        hasRibbon: true,
-        ribbonTitle: 'popular',
-      },
-      {
-        title: 'complete',
-        subtitle: 'All-inclusive bookkeeping with full A/P & A/R management',
-        price: 1200,
-        period: 'Per Month',
-        items: [
-          {
-            description: 'Categorize your transactions for your P&L and Schedule C',
-          },
-          {
-            description: 'Reconcile your accounts',
-          },
-          {
-            description:
-              'Manage your Financial Statements: Profit & Loss, Balance Sheet, Accounts Payable, & Accounts Receivable',
-          },
-          {
-            description: 'Monthly business consultation based on your business needs to enable growth and optimization',
-          },
-          {
-            description: 'Full-service A/P & A/R management. We will create your bills & invoices and track payments',
-          },
-        ],
-        callToAction: {
-          // target: '_blank',
-          text: 'Get started',
-          href: '#contact',
-        },
-      },
-    ]}
+    bottomText="Upfront timeline. You decide."
+    reverse={false}
+    whiteBg={true}
   />
 
-  <!-- Features2 Widget ************** -->
-
-  <!-- <Features2
-    title="Contact Us"
-    id="contact"
-    columns={2}
-    items={[
-      {
-        title: 'Phone',
-        description: '412-256-8411',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'josh@rockbookkeeping.com',
-        icon: 'tabler:mail',
-      },
-      // {
-      //   title: 'Location',
-      //   description: 'Pittsburgh, PA 15221',
-      //   icon: 'tabler:map-pin',
-      // },
+  {/* BLOCK 3: Step 3 – We Work Together */}
+  <ContentBlock
+    headline="Step 3: Clean Books. No Stress."
+    image={step3Image}
+    imageAlt="Handshake and green profit & loss report"
+    imageHeight={1434}
+    imageWidth={1430}
+    quotes={[
+      { emoji: '📊', text: 'Categorized, reconciled, reports delivered' },
+      { emoji: '📅', text: 'No more tax deadline dread' },
+      { emoji: '💪', text: 'You run your business' },
     ]}
-  /> -->
-
-  <ContactUs
-    id="contact"
-    title="Contact Us"
-    subtitle="<a class='font-bold text-blue-600' href='tel:412-256-8411'>412-256-8411</a><br><a class='font-bold text-blue-600' href='mailto:josh@rockbookkeeping.com'>josh@rockbookkeeping.com</a>"
-    description="We value your privacy. We'll get back to you as soon as possible."
-    button="Send"
-    name="main-contact-form"
-    inputs={[
-      {
-        type: 'text',
-        name: 'firstname',
-        label: 'First name',
-      },
-      {
-        type: 'text',
-        name: 'lastname',
-        label: 'Last name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-      // need phone:
-      {
-        type: 'text',
-        name: 'phone',
-        label: 'Phone',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
+    bottomText="Starts at $200/mo. Guaranteed quality."
+    reverse={true}
+    whiteBg={true}
   />
 
-  <!-- Features2 Widget ************** -->
+  <Testimonial bgColor="#fefbf8" />
+  <Services bgColor="white" />
+  <Pricing bgColor="#f7f9ff" />
+  <FAQ bgColor="#f9fafb" />
 
-  <!-- <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
-    items={[
-      {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
-      },
-      {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
-      },
-      {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
-      },
-      {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2> -->
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <!-- <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  /> -->
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    id="faq"
-    title="Frequently Asked Questions"
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    columns={1}
-    items={faqItems}
-  />
-
-  <FAQSchema faqs={faqItems.map(i => ({ question: i.title, answer: i.description }))} />
-
-  <!-- <FAQs2
-  items={[
-    {
-      question: 'What are the fees?',
-      answer:
-        'We use a flat monthly fee. We’ll talk through your specific business needs and design a plan that serves you best.',
-    },
-    {
-      question: 'What type of bookkeeping services do you offer?',
-      answer:
-        'We specialize in QuickBooks Online and are Certified ProAdvisors. Our work is fully remote, and we use simple online tools to make sharing documents and information convenient for you.',
-    },
-    {
-      question: 'How does monthly bookkeeping work?',
-      answer:
-        'Each month we analyze and record your business transactions in QuickBooks Online. From there, we prepare accurate financial reports like your Profit & Loss and Balance Sheet so you can clearly see how your business is performing.',
-    },
-    {
-      question: 'What if I need a more frequent schedule than monthly?',
-      answer:
-        'We provide flexible service to fit your needs. For businesses that want closer tracking, we can meet weekly or bi-weekly to review cash flow and help you stay ahead.',
-    },
-    {
-      question: 'When and how do I send my documents to you?',
-      answer:
-        'We’ll need your bank and credit card statements each month. We can set up QuickBooks Online to bring them in automatically, or you can share the statements with us directly.',
-    },
-    {
-      question: 'When do you deliver my monthly financial reports?',
-      answer:
-        'Your financial reports are delivered by the 10th of each month, giving you plenty of time to review results and plan with confidence.',
-    },
-    {
-      question: 'What if my books are behind schedule or need a clean-up?',
-      answer:
-        'That’s no problem. We have experience cleaning up past records and bringing books up to date. We’ll review your situation in detail and put everything back in order.',
-    },
-    {
-      question: 'What if I need assistance with special projects?',
-      answer:
-        'We’re happy to help. Whether you need deeper financial analysis, support for a business decision, or a one-time review, we can work with you to provide clear answers and reliable numbers.',
-    },
-    {
-      question: 'What if I need tax preparation?',
-      answer:
-        'We don’t prepare taxes ourselves, but we ensure your books are accurate and ready for your CPA. We also communicate directly with your tax professional when needed so they have everything required to do their work effectively.',
-    },
-    {
-      question: 'Why should I choose Rock Bookkeeping?',
-      answer:
-        'We bring both accounting training and hands-on business experience. With QuickBooks certifications and real-world knowledge, we provide accurate books and clear reports so you can make better decisions for your business.',
-    },
-    {
-      question: 'How do I know my books will be accurate?',
-      answer:
-        'Accuracy is at the heart of what we do. Every transaction is reviewed and matched against your bank and credit card statements. This ensures that your records and reports reflect the real numbers in your business.',
-    },
-    {
-      question: 'Do you work with businesses outside of Pittsburgh?',
-      answer:
-        'Yes. Because we use QuickBooks Online, we can work with small businesses anywhere in the U.S. Whether you’re local or across the country, our process is the same — reliable, timely, and professional.',
-    },
-  ]}
-/> -->
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get a free quote',
-        href: '#contact',
-        // target: '_blank',
-        // icon: 'tabler:download',
-      },
-    ]}
-  >
-    <!-- <Fragment slot="tagline"> We got you. </Fragment> -->
-
-    <Fragment slot="title">
-      Focus on growth, not bookkeeping.
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      We keep your QuickBooks clean, accurate, and up-to-date so you can spend more time running your business.
-    </Fragment>
-  </CallToAction>
-
-  <!-- Stats Widget ****************** -->
-
-  <!-- <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  /> -->
 </Layout>

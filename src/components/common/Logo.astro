@@ -1,0 +1,17 @@
+---
+export interface Props {
+  class?: string
+  id?: string
+}
+
+const { class: cls = '', id = '' } = Astro.props
+---
+
+<a
+  id={id}
+  href="/"
+  aria-label="Brand"
+  class={`flex-none font-semibold text-xl leading-none text-black ${cls}`}
+>
+  Brand
+</a>

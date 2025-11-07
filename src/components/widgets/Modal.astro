@@ -1,0 +1,403 @@
+<div
+  id="contact-modal"
+  class="fixed inset-0 z-90 hidden bg-black/50 backdrop-blur-sm md:backdrop-blur transition-opacity duration-300 flex flex-col"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="contact-modal-label"
+  aria-describedby="contact-modal-desc"
+  tabindex="-1"
+>
+  <!-- Backdrop + Responsive Centering -->
+  <div data-backdrop class="flex w-full justify-center p-4 pt-8 md:min-h-screen md:items-center">
+    <!-- Modal Card — Natural height, scroll only if needed -->
+    <div
+      data-modal-card
+      class="w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl sm:p-8 md:overflow-y-auto md:max-h-[85vh] md:mt-[-4vh] animate-[rbFadeDown_0.32s_ease-out_forwards]"
+    >
+      <!-- Close Button -->
+      <button
+        type="button"
+        class="absolute top-4 right-4 rounded-full p-2 text-gray-500 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        aria-label="Close modal"
+        data-close-modal
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Header -->
+      <div class="mb-6 text-center sm:text-left">
+        <h2 id="contact-modal-label" class="mb-1 font-heading text-2xl font-semibold text-gray-800">
+          Get Your Clean Books Plan
+        </h2>
+        <p id="contact-modal-desc" class="text-sm text-gray-500">
+          A simple 15-minute call to see if your books are clean and tax-ready.
+        </p>
+      </div>
+
+      <!-- Form -->
+      <form
+        id="contact-form"
+        name="clean-books-plan"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        novalidate
+        class="space-y-4"
+      >
+        <input type="hidden" name="form-name" value="clean-books-plan" />
+        <p class="hidden">
+          <label>
+            Don't fill this out if you're human:
+            <input name="bot-field" />
+          </label>
+        </p>
+
+        <!-- Name Fields -->
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label for="firstName" class="sr-only">First Name</label>
+            <input
+              id="firstName"
+              name="firstName"
+              type="text"
+              autocomplete="given-name"
+              required
+              placeholder="First name"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
+            />
+          </div>
+          <div>
+            <label for="lastName" class="sr-only">Last Name</label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              autocomplete="family-name"
+              required
+              placeholder="Last name"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
+            />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="sr-only">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            inputmode="email"
+            required
+            placeholder="you@business.com"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
+          />
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label for="phone" class="sr-only">Phone Number</label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            required
+            placeholder="412-555-1234"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
+          />
+          <p class="text-sm text-gray-500 mt-1">🔒 We'll never share your number.</p>
+        </div>
+
+        <!-- Details (optional) -->
+        <div>
+          <label for="details" class="sr-only">Details</label>
+          <textarea
+            id="details"
+            name="details"
+            rows="3"
+            placeholder="Details (optional)"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1"
+          ></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button
+          id="contact-submit"
+          type="submit"
+          class="w-full rounded-xl bg-blue-600 py-3 text-sm font-medium text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50"
+        >
+          Get My Clean Books Plan
+        </button>
+
+        <!-- Trust -->
+        <p class="mt-2 text-center text-sm text-gray-500">
+          🔒 100% private and secure.
+          <br />
+          ⚡️ Lightning-fast reply.
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* Force flex when open */
+  #contact-modal:not(.hidden) {
+    display: flex !important;
+  }
+
+  @keyframes rbFadeDown {
+    from {
+      opacity: 0;
+      transform: translateY(-28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Error messages */
+  @reference "tailwindcss";
+  .rb-error {
+    @apply mt-1 text-sm leading-tight text-red-600 font-medium;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    [data-modal-card] {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const modal = document.getElementById('contact-modal');
+    const card = modal?.querySelector('[data-modal-card]');
+    const form = document.getElementById('contact-form');
+    const submit = document.getElementById('contact-submit');
+    if (!modal || !card || !form) return;
+
+    // Toggle: inline success UI + AJAX to Netlify (true) vs classic POST (false)
+    const INLINE_SUCCESS = true;
+
+    let lastTrigger = null;
+    let submitting = false;
+    let interacted = false; // for analytics
+
+    // Open / Close
+    const open = (trigger) => {
+      lastTrigger = trigger || document.activeElement;
+      modal.classList.remove('hidden');
+      document.documentElement.classList.add('overflow-hidden');
+      modal.focus();
+      // Analytics: modal opened
+      window.gtag?.('event', 'lead_form_opened', { form_id: 'clean-books-plan', source: 'hero_cta' });
+    };
+
+    const close = () => {
+      modal.classList.add('hidden');
+      document.documentElement.classList.remove('overflow-hidden');
+      lastTrigger?.focus();
+    };
+
+    // Open: any [data-open-modal]
+    document.querySelectorAll('[data-open-modal]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        open(btn);
+      });
+    });
+
+    // Close: X
+    modal.querySelector('[data-close-modal]')?.addEventListener('click', close);
+
+    // Close: backdrop
+    modal.addEventListener('click', (e) => {
+      if (e.target.hasAttribute('data-backdrop')) close();
+    });
+
+    // Close: ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
+    });
+
+    // Focus trap
+    modal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      const focusables = modal.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    // === FORM VALIDATION ===
+    const inputs = {
+      first: form.querySelector('#firstName'),
+      last: form.querySelector('#lastName'),
+      email: form.querySelector('#email'),
+      phone: form.querySelector('#phone'),
+    };
+
+    const normalizePhone = (v) => (v || '').replace(/\D/g, '');
+
+    const setError = (input, msg = '') => {
+      let el = input.nextElementSibling;
+      if (!el?.classList.contains('rb-error')) {
+        el = document.createElement('p');
+        el.className = 'rb-error';
+        el.setAttribute('aria-live', 'polite'); // announce
+        el.setAttribute('role', 'alert');
+        input.after(el);
+      }
+      el.textContent = msg;
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    };
+
+    const validate = (input) => {
+      const val = input.value.trim();
+      if ([inputs.first, inputs.last, inputs.email, inputs.phone].includes(input) && !val) {
+        setError(input, 'This field is required.');
+        return false;
+      }
+      if (input === inputs.email && !/\S+@\S+\.\S+/.test(val)) {
+        setError(input, 'Enter a valid email.');
+        return false;
+      }
+      if (input === inputs.phone && normalizePhone(val).length < 10) {
+        setError(input, 'Enter a valid phone number.');
+        return false;
+      }
+      setError(input);
+      return true;
+    };
+
+    Object.values(inputs).forEach((el) => {
+      el.addEventListener(
+        'focus',
+        () => {
+          if (!interacted) {
+            interacted = true;
+            // Analytics: user interacted
+            window.gtag?.('event', 'lead_form_interacted', { form_id: 'clean-books-plan' });
+          }
+        },
+        { once: true }
+      );
+      el.addEventListener('blur', () => validate(el));
+    });
+
+    // Helpers for Netlify AJAX
+    function encodeFormData(formEl) {
+      const data = new FormData(formEl);
+      // Netlify needs "form-name" in payload for AJAX
+      if (!data.get('form-name')) {
+        const formName = formEl.getAttribute('name') || 'clean-books-plan';
+        data.append('form-name', formName);
+      }
+      return new URLSearchParams(data).toString();
+    }
+
+    function showInlineSuccess() {
+      card.innerHTML = `
+        <div class="text-center p-2">
+          <h3 class="text-xl font-semibold text-gray-700">✅ You're all set!</h3>
+          <p class="mt-2 text-gray-600">
+            We're excited to help you clear the chaos and enjoy calm books again. 
+            We'll reach out within 1 business day.
+          </p>
+          <button 
+            type="button"
+            class="mt-6 inline-flex items-center justify-center rounded-xl bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            data-close-modal
+          >
+            Back to site
+          </button>
+        </div>`;
+      // wire up the new Close button
+      card.querySelector('[data-close-modal]')?.addEventListener('click', close);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      const valid = Object.values(inputs).every(validate);
+      if (!valid) {
+        e.preventDefault();
+        const firstBad = form.querySelector('[aria-invalid="true"]');
+        firstBad?.focus();
+        // Analytics: validation error
+        window.gtag?.('event', 'lead_form_error', { form_id: 'clean-books-plan' });
+        return;
+      }
+
+      // lock UI
+      if (submitting) {
+        e.preventDefault();
+        return;
+      }
+      submitting = true;
+      submit.disabled = true;
+      form.setAttribute('aria-busy', 'true');
+      submit.textContent = 'Sending...';
+
+      if (!INLINE_SUCCESS) {
+        // Classic Netlify form POST (no JS). Let the browser submit/redirect.
+        return;
+      }
+
+      // AJAX submit to Netlify, show inline success, then optional redirect
+      e.preventDefault();
+      try {
+        const body = encodeFormData(form);
+        await fetch(form.getAttribute('action') || '/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body,
+        });
+
+        // Analytics: submitted
+        window.gtag?.('event', 'lead_form_submitted', { form_id: 'clean-books-plan' });
+
+        showInlineSuccess();
+
+        // Optional redirect if form has action attr
+        const redirectTo = form.getAttribute('action');
+        if (redirectTo) {
+          setTimeout(() => {
+            window.location.href = redirectTo;
+          }, 1200);
+        }
+      } catch (err) {
+        submit.disabled = false;
+        submitting = false;
+        form.removeAttribute('aria-busy');
+        submit.textContent = 'Send Message';
+        // Show a soft error
+        const alert = document.createElement('p');
+        alert.className = 'rb-error';
+        alert.setAttribute('role', 'alert');
+        alert.setAttribute('aria-live', 'polite');
+        alert.textContent = 'Something went wrong. Please try again.';
+        form.appendChild(alert);
+        window.gtag?.('event', 'lead_form_submit_failed', { form_id: 'clean-books-plan' });
+      }
+    });
+
+    // Optional external trigger
+    window.openContactModal = open;
+  })();
+</script>
