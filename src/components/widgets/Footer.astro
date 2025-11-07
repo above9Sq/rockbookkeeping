@@ -68,8 +68,8 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
     }
 
     <!-- Copyright / Made with ❤️ -->
-    <div class="text-sm text-gray-400 mt-1 leading-relaxed">
-      {footNote ? <Fragment set:html={footNote} /> : null}
+    <div class="text-xs text-gray-400 mt-1 leading-relaxed">
+      <Fragment set:html={footNote} />
     </div>
   </div>
 </footer>
