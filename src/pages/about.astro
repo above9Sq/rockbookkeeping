@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import FeatureItem from '~/components/widgets/FeatureItem.astro';
 import Layout from '~/layouts/PageLayout.astro';
 import Container from '~/components/widgets/Container.astro';
 import H2 from '~/components/widgets/H2.astro';
@@ -26,10 +27,10 @@ const bgColor = '#f8f8f8'; // was '#F5F5F5';
             <p class="text-xl font-medium text-gray-600 mb-6 italic">Owner, Bookkeeper</p>
 
             <div class="flex flex-col gap-4 text-gray-800 text-lg">
-              <p>Josh is a husband, father, and the founder of Rock Bookkeeping.</p>
+              <p>Josh is a husband, father, former web developer, and the founder of Rock Bookkeeping.</p>
 
               <p>
-                He earned his Accounting degree from Biola University, a Christian university in California, and gained
+                He earned his Accounting degree from Biola University, a Christian university in Southern California, and gained
                 valuable experience working in public accounting before starting his own firm.
               </p>
 
@@ -45,23 +46,11 @@ const bgColor = '#f8f8f8'; // was '#F5F5F5';
               </p>
 
               <!-- Credentials -->
-              <ul class="space-y-3">
-                <li class="flex items-center items-start gap-3">
-                  <p>✅</p>
-                  <p>Accounting degree</p>
-                </li>
-                <li class="flex items-center items-start gap-3">
-                  <p>✅</p>
-                  <p>Public accounting experience</p>
-                </li>
-                <li class="flex items-center items-start gap-3">
-                  <p>✅</p>
-                  <p>Certified QuickBooks ProAdvisor</p>
-                </li>
-                <li class="flex items-center items-start gap-3">
-                  <p>✅</p>
-                  <p>Certified Intuit Bookkeeper</p>
-                </li>
+              <ul class="space-y-3 lg:pl-4">
+                <FeatureItem large feature="Accounting degree" />
+                <FeatureItem large feature="Public accounting experience" />
+                <FeatureItem large feature="Certified QuickBooks ProAdvisor" />
+                <FeatureItem large feature="Certified Intuit Bookkeeper" />
               </ul>
             </div>
           </div>

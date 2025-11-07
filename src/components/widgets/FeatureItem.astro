@@ -1,0 +1,14 @@
+---
+export interface Props {
+  feature: string;
+  large?: boolean;
+}
+
+const { feature, large = false } = Astro.props;
+const textSize = large ? 'text-lg' : 'text-base';
+---
+
+<li class="flex items-start gap-3">
+  <p class={textSize}>✅</p>
+  <p class={`text-gray-800 ${textSize}`}>{feature}</p>
+</li>

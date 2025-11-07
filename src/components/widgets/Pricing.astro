@@ -2,6 +2,7 @@
 import H2 from '~/components/widgets/H2.astro';
 import Container from '~/components/widgets/Container.astro';
 import CtaBanner from '~/components/widgets/CtaBanner.astro';
+import FeatureItem from '~/components/widgets/FeatureItem.astro';
 
 interface Tier {
   name: string;
@@ -106,10 +107,7 @@ const priceStyling = 'flex flex-col gap-1 mt-2 text-3xl leading-tight lg:text-4x
 
               <ul class="space-y-3 flex-grow mb-4 sm:mb-10" aria-label={`Features included in the ${tier.name} plan`}>
                 {tier.features.map((feature) => (
-                  <li class="flex items-start gap-3">
-                    <span class="inline-block w-4 h-4 mt-[2px]">✅</span>
-                    <p>{feature}</p>
-                  </li>
+                  <FeatureItem feature={feature} />
                 ))}
               </ul>
               <p class="text-base text-gray-500">{tier.outroText}</p>
@@ -151,10 +149,7 @@ const priceStyling = 'flex flex-col gap-1 mt-2 text-3xl leading-tight lg:text-4x
         >
           {
             cleanupTier.features.map((feature) => (
-              <li class="flex items-start gap-3">
-                <span class="inline-block w-4 h-4 mt-[2px]">✅</span>
-                <p>{feature}</p>
-              </li>
+              <FeatureItem feature={feature} />
             ))
           }
         </ul>

@@ -3,6 +3,7 @@
 import H2 from '~/components/widgets/H2.astro';
 import Container from '~/components/widgets/Container.astro';
 import CtaButton from '~/components/widgets/CtaButton.astro';
+import FeatureItem from '~/components/widgets/FeatureItem.astro';
 
 interface Props {
   bgColor?: string;
@@ -61,10 +62,7 @@ const services: Service[] = [
               <p class="text-gray-800 mb-6 flex-grow">{service.subtitle}</p>
               <ul class="space-y-3">
                 {service.features.map((feature) => (
-                  <li class="flex items-center items-start gap-3">
-                    <p>✅</p>
-                    <p class="text-gray-800">{feature}</p>
-                  </li>
+                  <FeatureItem feature={feature} />
                 ))}
               </ul>
             </div>
