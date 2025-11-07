@@ -27,5 +27,5 @@ export const footerData = {
     { text: 'Disclaimer', href: getPermalink('/disclaimer') },
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
   ],
-  footNote: `&copy; ${new Date().getFullYear()} Rock Bookkeeping. Made with <span class="text-red-400">💛</span> in Pittsburgh.<br class="sm:hidden"> All&nbsp;rights&nbsp;reserved.`,
+  footNote: `&copy; ${new Date().getFullYear()} Rock Bookkeeping. All&nbsp;rights&nbsp;reserved. <br> Made with 💛 in Pittsburgh.`,
 };
