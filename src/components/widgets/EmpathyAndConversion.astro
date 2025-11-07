@@ -20,10 +20,11 @@ const { bgColor = '#f4f7ff' } = Astro.props;
           <Image
             src={painGraphic}
             alt="Why Most Businesses Dread Their Books - Pain vs. Fix"
-            width={1430}
-            height={1434}
+            widths={[320, 640, 960, 1280, 1600]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
             class="w-full h-auto border border-gray-800 rounded-lg object-contain"
-            loading="eager"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <div class="flex flex-col gap-8 text-base md:text-lg text-gray-900 w-full">
