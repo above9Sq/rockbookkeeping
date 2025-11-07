@@ -4,26 +4,29 @@ interface FaqItem {
   answer: string;
 }
 
-// Pass your FAQ items as: [{ question: '...', answer: '...' }, ...]
 const { faqs = [] as FaqItem[] } = Astro.props;
 
-// Strip HTML tags and compress whitespace
-const toText = (s: string) => s.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+if (!faqs.length) {
+  // Don’t emit any schema if there’s nothing to show
+  return;
+}
+
+const toText = (s: string) =>
+  s
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 
 const data = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((f) => ({
-    "@type": "Question",
-    "name": toText(f.question),
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": toText(f.answer),
-    },
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: toText(f.question),
+    acceptedAnswer: { '@type': 'Answer', text: toText(f.answer) },
   })),
 };
 
-// Stringify the data in the frontmatter
 const jsonLd = JSON.stringify(data, null, 2);
 ---
 
