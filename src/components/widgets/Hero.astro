@@ -5,7 +5,7 @@ import bookkeeperCertImage from '~/assets/images/cert-bookkeeper.png';
 import level1CertImage from '~/assets/images/cert-level1.png';
 import FiveStars from './FiveStars.astro';
 import CtaButton from './CtaButton.astro';
-import CalButton from './CalButton.astro'
+import CalButton from './CalButton.astro';
 
 // const headline = "Your books are a mess. We'll fix them — fast.";
 // const headline = "We'll clean up your QuickBooks — fast, accurate, and stress-free.";
@@ -74,14 +74,18 @@ const subheadline = 'We organize every transaction, reconcile every account, and
     <!-- End Col -->
 
     <div class="w-full flex justify-center xl:justify-start xl:ms-0">
-      <Image
-        class="mx-auto lg:mx-0 rounded-lg max-w-[800px] w-full sm:max-w-[600px] md:max-w-[700px] aspect-[16/9] object-cover"
-        src={heroImage}
-        alt="Laptop and documents hero image"
-        loading="eager"
-        width={665}
-        height={374}
-      />
+      <div class="w-full max-w-[665px] mx-auto">
+        <Image
+          src={heroImage}
+          alt="Laptop and documents hero image"
+          width={2503}
+          height={1408}
+          layout="constrained"
+          class="w-full rounded-lg aspect-[16/9] object-cover"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
     </div>
     <!-- End Col -->
   </div>

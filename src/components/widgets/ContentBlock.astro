@@ -14,8 +14,6 @@ export interface Props {
   headline: string;
   image: ImageMetadata;
   imageAlt: string;
-  imageHeight: number;
-  imageWidth: number;
   quotes: Quote[];
   bottomText: string;
   reverse?: boolean;
@@ -26,8 +24,6 @@ const {
   headline,
   image,
   imageAlt,
-  imageHeight,
-  imageWidth,
   quotes,
   bottomText,
   reverse = false,
@@ -50,8 +46,8 @@ const contentOrder = reverse ? 'xl:order-1' : 'xl:order-2';
           <Image
             src={image}
             alt={imageAlt}
-            width={imageWidth}
-            height={imageHeight}
+            widths={[320, 640, 960, 1280, 1600]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
             class="w-full h-auto border border-gray-800 rounded-lg object-contain"
             loading="lazy"
           />
