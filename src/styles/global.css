@@ -10,6 +10,7 @@
 
 /* ── Tailwind plugins ──────────────────────────────────── */
 @plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
 
 /* Preline UI */
 @source "../../node_modules/preline/dist/*.js";
@@ -207,10 +208,10 @@ html.rb-menu-open #rb-hamburger {
 
 /* ── SCROLL-OFFSET FOR FIXED NAVBAR (mobile vs desktop) ── */
 html {
-  scroll-padding-top: 5rem;               /* mobile – 5rem */
+  scroll-padding-top: 5rem; /* mobile – 5rem */
 }
 @media (min-width: 768px) {
   html {
-    scroll-padding-top: 3rem;             /* desktop – 3rem */
+    scroll-padding-top: 3rem; /* desktop – 3rem */
   }
 }

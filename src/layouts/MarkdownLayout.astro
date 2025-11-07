@@ -1,12 +1,9 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
 import type { MetaData } from '~/types';
 
 export interface Props {
-  frontmatter: {
-    title?: string;
-  };
+  frontmatter: { title?: string };
 }
 
 const { frontmatter } = Astro.props;
@@ -17,10 +14,24 @@ const metadata: MetaData = {
 ---
 
 <Layout metadata={metadata}>
-  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter">{frontmatter.title}</h1>
+  <section id="legal-doc" class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <!-- Title -->
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+      {frontmatter.title}
+    </h1>
+
+    <!-- Markdown content -->
     <div
-      class="mx-auto prose prose-lg max-w-4xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8"
+      class="mt-8 max-w-none
+        prose prose-slate md:prose-lg
+        prose-headings:font-semibold prose-headings:tracking-tight
+        prose-h2:mt-10 prose-h3:mt-8
+        prose-a:text-blue-700 hover:prose-a:underline
+        prose-strong:text-gray-900
+        prose-li:marker:text-gray-500
+        prose-hr:my-8
+        prose-img:rounded-md prose-img:shadow
+        break-words"
     >
       <slot />
     </div>
