@@ -40,7 +40,7 @@ const schemaFaqs = faqData.map((f) => ({
               <details class="group border-b border-gray-300 py-5 first:pt-0 last:border-b-0">
                 <summary class="flex items-center items-start gap-4 cursor-pointer list-none select-none">
                   <svg
-                    class="w-6 h-6 mt-0.5 text-gray-900 transition-transform duration-300 group-open:rotate-45"
+                    class="w-6 h-6 mt-0.5 text-gray-900 transition-transform duration-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -50,8 +50,8 @@ const schemaFaqs = faqData.map((f) => ({
                   <span class="flex-1 text-lg font-bold text-gray-900">{faq.question}</span>
                 </summary>
 
-                <div class="answer mt-4 pl-10 pb-2 overflow-hidden">
-                  <div class="space-y-4">
+                <div class="answer overflow-hidden">
+                  <div class="answer-inner mt-4 pl-10 pb-2 space-y-4">
                     {faq.paragraphs.map((paragraph) => (
                       <p class="text-lg text-gray-800 leading-relaxed">{paragraph}</p>
                     ))}
@@ -86,9 +86,11 @@ const schemaFaqs = faqData.map((f) => ({
 <script>
   document.querySelectorAll('details').forEach((details) => {
     const answer = details.querySelector('.answer');
-    if (!answer) return;
+    const icon = details.querySelector('summary svg');
+    if (!answer || !icon) return;
 
-    if (details.open) answer.style.height = 'auto';
+    // If rendered open, ensure icon matches
+    if (details.open) icon.classList.add('rotate-45');
 
     details.addEventListener('click', (e) => {
       const summary = details.querySelector('summary');
@@ -98,18 +100,23 @@ const schemaFaqs = faqData.map((f) => ({
       const shouldOpen = !details.open;
 
       if (shouldOpen) {
+        // start both in parallel
+        icon.classList.add('rotate-45');
         details.open = true;
-        const targetHeight = answer.scrollHeight;
+        const target = answer.scrollHeight;
         answer.style.height = '0px';
-        requestAnimationFrame(() => (answer.style.height = `${targetHeight}px`));
+        requestAnimationFrame(() => (answer.style.height = `${target}px`));
         const onEnd = () => {
+          if (e.propertyName !== 'height') return;
           answer.style.height = 'auto';
           answer.removeEventListener('transitionend', onEnd);
         };
         answer.addEventListener('transitionend', onEnd);
       } else {
-        const startHeight = answer.scrollHeight;
-        answer.style.height = `${startHeight}px`;
+        // start both in parallel
+        icon.classList.remove('rotate-45');
+        const start = answer.scrollHeight;
+        answer.style.height = `${start}px`;
         requestAnimationFrame(() => (answer.style.height = '0px'));
         const onEnd = () => {
           details.open = false;
