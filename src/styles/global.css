@@ -12,10 +12,6 @@
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 
-/* Preline UI */
-@source "../../node_modules/preline/dist/*.js";
-@import '../../node_modules/preline/variants.css';
-
 /* ── Tailwind theme tokens (fonts + colors) ─────────────── */
 @theme {
   /* Fonts */
@@ -81,21 +77,6 @@ html.rb-menu-open #rb-hamburger {
 ::selection {
   background-color: var(--color-accent);
   color: white;
-}
-
-/* ── Preline modal backdrop customization ───────────── */
-.hs-overlay-backdrop {
-  background-color: rgb(0 0 0 / 0.8); /* default ~55% black overlay */
-}
-
-/* optional: lighter version */
-.hs-overlay-backdrop.light {
-  background-color: rgb(0 0 0 / 0.3);
-}
-
-/* optional: darker version */
-.hs-overlay-backdrop.dark {
-  background-color: rgb(0 0 0 / 0.75);
 }
 
 /* ── Custom utilities (v4 syntax) ───────────────────────── */

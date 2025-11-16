@@ -1,7 +1,5 @@
 ---
 import { UI } from 'astrowind:config';
-
-import prelineScript from '../../utils/preline-init.ts?url';
 ---
 
 <!-- === PREVENT FOUC === -->
@@ -289,8 +287,6 @@ import prelineScript from '../../utils/preline-init.ts?url';
     Observer.start();
   });
 </script>
-
-<script is:inline type="module" src={prelineScript}></script>
 
 <script>
   // Smooth scroll with offset for mobile menu links
