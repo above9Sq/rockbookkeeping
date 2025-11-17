@@ -26,7 +26,10 @@ export default defineConfig({
   output: 'static',
 
   build: {
-    inlineStylesheets: 'auto',
+    // 'auto': Inline small CSS (<4KB), link large (default)
+    // 'always': Inline everything (like Fix #1)
+    // 'never': Always external (avoids inline bloat)
+    // inlineStylesheets: 'never',
   },
 
   integrations: [
@@ -81,6 +84,19 @@ export default defineConfig({
   },
 
   vite: {
+    css: {
+      devSourcemap: true,
+      // One shared CSS file
+    },
+    build: {
+      // Inline CSS up to 50KB (covers your 34KB file)
+      assetsInlineLimit: 50000, // bytes (default: 4096)
+      rollupOptions: {
+        output: {
+          manualChunks: undefined, // No splitting
+        },
+      },
+    },
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
