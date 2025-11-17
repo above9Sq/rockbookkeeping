@@ -1,4 +1,5 @@
-import { getPermalink } from './utils/permalinks';
+import { getPermalink, getBlogPermalink } from './utils/permalinks';
+import { APP_BLOG } from 'astrowind:config';
 
 export const headerData = {
   links: [
@@ -6,6 +7,7 @@ export const headerData = {
     { text: 'Services', href: '/#services' },
     { text: 'Pricing', href: '/#pricing' },
     { text: 'About', href: getPermalink('/about') },
+    ...(APP_BLOG?.isEnabled ? [{ text: 'Blog', href: getBlogPermalink() }] : []),
     { text: 'FAQ', href: '/#faq' },
   ],
   ctaLabel: 'Fix My Books Now',
