@@ -64,7 +64,6 @@ export default defineConfig({
     astrowind({
       config: './src/config.yaml',
     }),
-    partytown(),
   ],
 
   image: {
@@ -82,7 +81,10 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
-
+    build: {
+      cssCodeSplit: true, // ← Ensures per-page CSS
+      minify: 'esbuild', // ← Fast + small
+    },
     plugins: [tailwindcss()],
   },
 });
