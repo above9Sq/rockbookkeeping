@@ -12,6 +12,7 @@ export const headerData = {
   ],
   ctaLabel: 'Fix My Books Now',
   ctaModal: '#contact-modal',
+  phoneNumber: '412-256-8411', // display phone number for header + future CTAs
 };
 
 export const footerData = {

@@ -1,75 +1,47 @@
 ---
-import { Image } from 'astro:assets';
-// import logoImage from '/src/assets/images/logo.svg';
-import logoGraphImage from '/src/assets/images/logo-graph.svg';
+import LogoGraph from '/src/assets/images/rb-logo-horizontal-compact-light.svg';
+import PhoneIcon from '/src/assets/images/phone-no-fill.svg';
 import MobileMenu from './MobileMenu.astro';
 import { headerData } from '~/navigation';
 
-const { links, ctaLabel } = headerData;
+const { links, phoneNumber } = headerData;
+const phoneHref = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
 ---
 
 <header class="sticky top-0 z-[80] w-full bg-white transition-[height] duration-300 ease-out">
   <nav
-    class="relative w-full flex flex-wrap lg:grid lg:grid-cols-12 items-center px-8 xl:px-[120px] mx-auto py-2 lg:py-3 lg:border-b lg:border-gray-200"
+    class="relative w-full flex items-center px-8 xl:px-[120px] mx-auto py-2 lg:py-3 lg:grid lg:grid-cols-12 lg:border-b lg:border-gray-200"
   >
-    <!-- Logo -->
-    <div class="lg:col-span-3 flex items-center">
+    <!-- Logo (left) -->
+    <div class="flex items-center lg:col-span-3">
       <a href="/" class="flex items-center gap-x-1 md:gap-x-2" aria-label="Rock Bookkeeping">
-        <Image
-          src={logoGraphImage}
-          alt="Rock Bookkeeping logo"
-          width={50}
-          height={50}
-          loading="eager"
-          class="shrink-0 h-10"
-        />
-        <span class="font-heading text-lg md:text-2xl font-semibold text-gray-700">Rock&nbsp;Bookkeeping</span>
+        <LogoGraph class="h-10 w-auto shrink-0" />
       </a>
     </div>
 
-    <div class="flex items-center gap-x-1 lg:gap-x-6 ms-auto lg:ps-6 lg:order-3 lg:col-span-9">
-      <!-- Desktop nav -->
-      <div class="hidden lg:flex lg:items-center lg:gap-x-7">
-        {
-          links.map((item) => (
-            <a
-              class="text-gray-800 hover:text-gray-600 font-semibold text-sm uppercase tracking-wide transition-colors"
-              href={item.href}
-            >
-              {item.text}
-            </a>
-          ))
-        }
-      </div>
-
-      <!-- Desktop CTA -->
-      <button
-        type="button"
-        data-hs-overlay="#contact-modal"
-        data-open-modal
-        aria-haspopup="dialog"
-        aria-controls="contact-modal"
-        aria-expanded="false"
-        id="desktop-cta"
-        class="hidden lg:inline-flex justify-center items-center gap-x-2 py-2.5 pl-6 pr-5 text-sm uppercase font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none transition-colors
-               data-[state=hero]:bg-transparent data-[state=hero]:text-blue-600 data-[state=hero]:border-blue-600 data-[state=hero]:hover:bg-blue-50"
-      >
-        {ctaLabel}
-        <svg
-          class="shrink-0 size-4"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+    <!-- Center nav (desktop) -->
+    <div class="hidden lg:flex lg:col-span-6 items-center justify-center lg:gap-x-7">
+      {links.map((item) => (
+        <a
+          class="text-gray-800 hover:text-gray-600 font-semibold text-sm uppercase tracking-wide transition-colors"
+          href={item.href}
         >
-          <path d="m9 18 6-6-6-6"></path>
-        </svg>
-      </button>
+          {item.text}
+        </a>
+      ))}
+    </div>
+
+    <!-- Right side: phone CTA (desktop) + mobile toggle -->
+    <div class="flex items-center justify-end ml-auto lg:ml-0 lg:col-span-3 lg:justify-end">
+      <!-- Desktop phone CTA -->
+      <a
+        href={phoneHref}
+        class="hidden lg:inline-flex items-center gap-x-2 text-gray-800 hover:text-gray-600 font-semibold text-sm transition-colors"
+        aria-label={`Call Rock Bookkeeping at ${phoneNumber}`}
+      >
+        <PhoneIcon class="w-4 h-4 shrink-0" />
+        <span>{phoneNumber}</span>
+      </a>
 
       <!-- Mobile toggle -->
       <div class="lg:hidden">
@@ -104,91 +76,6 @@ const { links, ctaLabel } = headerData;
     </div>
   </nav>
 
-  <!-- Pass `links` directly (MobileMenu will use `text` → `label`) -->
-  <MobileMenu navItems={links} ctaLabel={ctaLabel} />
+  <!-- Mobile menu (no sticky CTA anymore) -->
+  <MobileMenu navItems={links} />
 </header>
-
-<!-- Your existing script (unchanged) -->
-<script is:inline>
-  // === SCROLL + MOBILE CTA LOGIC ===
-  const runHeaderScript = () => {
-    if (window.innerWidth >= 1024) return;
-
-    const header = document.querySelector('header');
-    const wrapper = document.getElementById('mobile-wrapper');
-    const cta = document.getElementById('rb-cta');
-    const hero = document.querySelector('[data-hero]');
-
-    if (!header || !wrapper || !cta || !hero) return;
-
-    let shouldShowCTA = false;
-    header.style.height = '64px';
-    wrapper.style.opacity = '0';
-    wrapper.style.visibility = 'hidden';
-
-    const showCTA = () => {
-      if (shouldShowCTA) return;
-      shouldShowCTA = true;
-      const h = cta.offsetHeight;
-      header.style.height = `${64 + h}px`;
-      wrapper.style.opacity = '1';
-      wrapper.style.visibility = 'visible';
-      cta.classList.remove('opacity-0', 'translate-y-2');
-      cta.classList.add('opacity-100', 'translate-y-0');
-    };
-
-    const hideCTA = () => {
-      if (!shouldShowCTA) return;
-      shouldShowCTA = false;
-      header.style.height = '64px';
-      if (wrapper.dataset.state !== 'open') {
-        wrapper.style.opacity = '0';
-        wrapper.style.visibility = 'hidden';
-      }
-      cta.classList.remove('opacity-100', 'translate-y-0');
-      cta.classList.add('opacity-0', 'translate-y-2');
-    };
-
-    const obs = new IntersectionObserver(([e]) => (e.isIntersecting ? hideCTA() : showCTA()), { threshold: 0.1 });
-    obs.observe(hero);
-
-    const menuObs = new MutationObserver(() => {
-      if (wrapper.dataset.state === 'open') {
-        wrapper.style.opacity = '1';
-        wrapper.style.visibility = 'visible';
-        cta.classList.remove('opacity-0', 'translate-y-2');
-        cta.classList.add('opacity-100', 'translate-y-0');
-      } else if (!shouldShowCTA) {
-        wrapper.style.opacity = '0';
-        wrapper.style.visibility = 'hidden';
-        cta.classList.remove('opacity-100', 'translate-y-0');
-        cta.classList.add('opacity-0', 'translate-y-2');
-      }
-    });
-    menuObs.observe(wrapper, { attributes: true, attributeFilter: ['data-state'] });
-  };
-
-  // === DESKTOP CTA STATE ON SCROLL ===
-  const runDesktopCTA = () => {
-    const cta = document.getElementById('desktop-cta');
-    const hero = document.querySelector('[data-hero]');
-    if (!cta || !hero) return;
-
-    const observer = new IntersectionObserver(
-      ([e]) => {
-        cta.dataset.state = e.isIntersecting ? 'hero' : 'scrolled';
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(hero);
-  };
-
-  document.addEventListener('DOMContentLoaded', () => {
-    runHeaderScript();
-    runDesktopCTA();
-  });
-  window.addEventListener('astro:page-load', () => {
-    runHeaderScript();
-    runDesktopCTA();
-  });
-</script>
