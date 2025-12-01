@@ -8,6 +8,7 @@ import Favicons from '~/components/Favicons.astro';
 import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
+import BottomStickyPhoneButton from '~/components/widgets/BottomStickyPhoneButton.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 
@@ -38,6 +39,7 @@ const { language, textDirection } = I18N;
     <a class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2" href="#main"> Skip to content </a>
     <slot />
 
+    <BottomStickyPhoneButton />
     <BasicScripts />
   </body>
 </html>

@@ -1,0 +1,23 @@
+---
+import PhoneFillIcon from '/src/assets/images/phone-fill.svg';
+import { headerData } from '~/navigation';
+
+const { phoneNumber } = headerData;
+const phoneHref = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
+---
+
+<!-- Mobile-only bottom sticky phone CTA -->
+<div
+  class="fixed inset-x-0 bottom-0 z-[75] lg:hidden pointer-events-none bg-white shadow-[0_-2px_4px_rgba(0,0,0,0.05)] px-4 pt-4"
+  style="padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);"
+  aria-hidden="false"
+>
+  <a
+    href={phoneHref}
+    aria-label={`Call Rock Bookkeeping at ${phoneNumber}`}
+    class="btn-pop pointer-events-auto uppercase min-w-0 py-2.5 px-6 w-full inline-flex justify-center items-center gap-x-2 text-xl font-bold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap shadow-md"
+  >
+    <PhoneFillIcon class="w-5 h-5 shrink-0" />
+    <span>{phoneNumber}</span>
+  </a>
+</div>
