@@ -1,94 +1,62 @@
 ---
 import Image from '~/components/common/Image.astro';
-import heroImage from '~/assets/images/accounting-hero-wide.png';
-import bookkeeperCertImage from '~/assets/images/cert-bookkeeper.png';
-import level1CertImage from '~/assets/images/cert-level1.png';
-import FiveStars from './FiveStars.astro';
-import CtaButton from './CtaButton.astro';
+
+import heroHeadshot from '~/assets/images/hero-headshot-square.png';
+import JoshSignature from '/src/assets/images/josh-signature.svg';
 import CalButton from './CalButton.astro';
+import CtaButton from './CtaButton.astro';
 
-// const headline = "Your books are a mess. We'll fix them — fast.";
-// const headline = "We'll clean up your QuickBooks — fast, accurate, and stress-free.";
-const headline = 'From Bookkeeping Chaos to Total Clarity — in 14 Days or Less.';
+const headline = "Messy books? We'll fix that.";
 
-// const subheadline = "Stop dreading tax season. We'll clean up your QuickBooks, organize everything, and give you total peace of mind.";
-// const subheadline = "Stop dreading tax season. Get organized books and peace of mind in days, not months.";
-const subheadline = 'We organize every transaction, reconcile every account, and hand you books your CPA will love.';
-
-// const ctaText = 'Get Your Clean Books Plan';
+const subheadline =
+  'Get financial clarity with fully managed QuickBooks. We will organize every transaction, reconcile every account, and give your monthly financial statements.';
 ---
 
-<section data-hero class="max-w-[1600px] mx-auto px-6 xl:px-[120px] pt-8 pb-12 md:pt-14 lg:pb-22">
-  <div
-    class="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-12 items-start justify-items-center xl:justify-items-stretch max-w-[85rem] mx-auto"
-  >
-    <div
-      class="flex flex-col gap-5 xl:gap-8 items-center xl:items-start justify-center text-center xl:text-left w-full max-w-[720px] xl:max-w-none"
-    >
-      <h1
-        class="mt-0 block text-[32px] leading-[1.0] sm:text-[38px] sm:leading-[1.2] md:text-[45px] md:leading-[49.5px] tracking-[0.45px] font-black text-gray-800 text-balance text-center xl:text-left"
+<section data-hero class="bg-[#324A78] text-white">
+<div class="max-w-[1600px] mx-auto px-6 xl:px-[120px] pt-10 pb-24 sm:pt-12 sm:pb-20 lg:pt-24 lg:pb-32">
+    <!-- Stacks by default, 2-col at xl+ -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 items-center gap-2 sm:gap-12 xl:gap-[108px]">
+      <!-- Left column: text + CTAs -->
+      <div
+        class="flex flex-col gap-7 xl:gap-8 max-w-[620px] mx-auto xl:mx-0 items-center xl:items-start text-center xl:text-left"
       >
-        {headline}
-      </h1>
-      <p
-        class="text-base sm:text-xl leading-6 md:leading-7 text-gray-800 text-center xl:text-left xl:-mt-1 max-w-[52ch]"
-      >
-        {subheadline}
-      </p>
+        <h1
+          class="mt-0 uppercase text-[32px] leading-[1.0] sm:text-[38px] sm:leading-[1.1] md:text-[45px] md:leading-[1.1] tracking-[0.45px] font-black text-balance"
+        >
+          {headline}
+        </h1>
 
-      <div class="max-[500px]:w-full flex flex-col gap-1.5">
-        <div class="flex flex-col sm:flex-row w-full justify-center xl:justify-start gap-2">
-          <CtaButton narrow />
-          <CalButton narrow label="Book a free call" />
-        </div>
-
-        <p class="text-sm">
-          <span><span class="text-accent">No spam.</span> We'll call you within one business day.</span>
+        <p class="text-base sm:text-lg leading-relaxed text-[#E4ECFF]">
+          {subheadline}
         </p>
-      </div>
 
-      <!-- Certs -->
-      <div class="flex w-full items-center justify-center xl:justify-start gap-x-4">
-        <Image
-          class="scale-80 md:scale-100 w-auto object-contain"
-          src={bookkeeperCertImage}
-          alt="Certified QuickBooks Bookkeeper certification"
-          width={100}
-          height={100}
-          loading="eager"
-        />
-        <Image
-          class="scale-80 md:scale-100 w-auto object-contain"
-          src={level1CertImage}
-          alt="QuickBooks ProAdvisor Level 1 certification"
-          width={100}
-          height={100}
-          loading="eager"
-        />
-        <div class="pl-3 pb-4 md:pl-0">
-          <!-- <FiveStars /> -->
-          <div class="flex items-center"><p class="text-2xl">⭐️⭐️⭐️⭐️⭐️</p></div>
+        <!-- CTAs: full width on mobile, content width at sm+ -->
+        <div class="flex flex-col gap-3 w-full sm:max-w-[320px] mx-auto xl:mx-0">
+          <CalButton narrow hero label="Book a call with Josh" />
+          <CtaButton narrow hero label="Send Josh a quick note" />
         </div>
       </div>
-      <!-- End Certs -->
-    </div>
-    <!-- End Col -->
 
-    <div class="w-full flex justify-center xl:justify-start xl:ms-0">
-      <div class="w-full max-w-[665px] mx-auto">
-        <Image
-          src={heroImage}
-          alt="Laptop and documents hero image"
-          width={2503}
-          height={1408}
-          layout="constrained"
-          class="w-full rounded-lg aspect-[16/9] object-cover"
-          loading="eager"
-          decoding="async"
-        />
+      <!-- Right column: headshot + signature -->
+      <div class="flex justify-center xl:justify-start mt-12 xl:mt-0">
+        <!-- Force full width on mobile, clamp to 385px at md+ -->
+        <div class="relative w-[385px] mx-auto xl:mx-0">
+          <Image
+            src={heroHeadshot}
+            alt="Josh Cesana, Rock Bookkeeping"
+            width={385}
+            height={341}
+            loading="eager"
+            decoding="async"
+            class="w-full rounded-[24px] object-cover"
+          />
+
+          <!-- Center the signature under the image so it doesn't look left-anchored on mobile -->
+          <JoshSignature
+            class="absolute -bottom-14 sm:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[170px] sm:w-[210px] lg:w-[248px] h-auto"
+          />
+        </div>
       </div>
     </div>
-    <!-- End Col -->
   </div>
-  <!-- End Grid -->
 </section>
