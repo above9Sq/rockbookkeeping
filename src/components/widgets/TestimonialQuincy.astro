@@ -1,0 +1,63 @@
+---
+// src/components/TestimonialQuincy.astro
+
+import Image from '~/components/common/Image.astro';
+import StarIcon from '/src/assets/images/star.svg';
+import QuincyHeadshot from '/src/assets/images/quincy-headshot.png';
+
+const quote =
+  'Josh has been AMAZING to have on the team. What a massive help to run the books for multiple businesses that I work with. I recommend his ability to communicate with clients, and get the job done!';
+
+const name = 'Quincy Chapman';
+const title = 'Founder of DewQ Enterprises';
+---
+
+<section id="testimonials" data-testimonial-quincy class="bg-white">
+  <div class="max-w-[1600px] mx-auto px-6 xl:px-[120px] py-12 sm:py-14 lg:py-16">
+    <div class="max-w-2xl mx-auto">
+      {/* Overline / label */}
+      <p class="text-[13px] font-semibold tracking-[0.18em] uppercase text-blue-800 mb-3 text-center sm:text-left">
+        Client testimonial
+      </p>
+
+      {/* Stars */}
+      <div class="flex items-center gap-1 mb-5 justify-center sm:justify-start">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <StarIcon
+            class="w-4 h-4 sm:w-5 sm:h-5 text-[#2563EB] fill-current"
+            aria-hidden="true"
+            data-index={index}
+          />
+        ))}
+        <span class="sr-only">5 out of 5 stars</span>
+      </div>
+
+      {/* Quote */}
+      <blockquote class="text-lg sm:text-xl leading-relaxed text-gray-900 my-3 sm:my-4">
+        <p class="font-medium">
+          “{quote}”
+        </p>
+      </blockquote>
+
+      {/* Author row */}
+      <div class="mt-6 flex items-center gap-3">
+        <div class="shrink-0">
+          <Image
+            src={QuincyHeadshot}
+            alt="Quincy Chapman"
+            width={48}
+            height={48}
+            loading="lazy"
+            decoding="async"
+            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
+          />
+        </div>
+
+        <div>
+          <p class="text-sm font-semibold text-gray-900">{name}</p>
+          <p class="text-xs sm:text-sm text-gray-500">{title}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

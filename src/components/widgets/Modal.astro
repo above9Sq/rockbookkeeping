@@ -7,14 +7,14 @@
   aria-describedby="contact-modal-desc"
   tabindex="-1"
 >
-  <!-- Backdrop + Responsive Centering -->
+  <!-- Backdrop + center -->
   <div data-backdrop class="flex w-full justify-center p-4 pt-8 md:min-h-screen md:items-center">
-    <!-- Modal Card — Natural height, scroll only if needed -->
+    <!-- Modal card -->
     <div
       data-modal-card
-      class="w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl sm:p-8 md:overflow-y-auto md:max-h-[85vh] md:mt-[-4vh] animate-[rbFadeDown_0.32s_ease-out_forwards]"
+      class="relative w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl sm:p-8 md:overflow-y-auto md:max-h-[85vh] md:mt-[-4vh] animate-[rbFadeDown_0.32s_ease-out_forwards]"
     >
-      <!-- Close Button -->
+      <!-- Close button -->
       <button
         type="button"
         class="absolute top-4 right-4 rounded-full p-2 text-gray-500 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
@@ -26,120 +26,106 @@
         </svg>
       </button>
 
-      <!-- Header -->
-      <div class="mb-6 text-center sm:text-left">
+      <!-- Header (always left-aligned now) -->
+      <div class="mb-6 text-left">
         <h2 id="contact-modal-label" class="mb-1 font-heading text-2xl font-semibold text-gray-800">
-          Get Your Clean Books Plan
+          Send Josh a Quick Note
         </h2>
         <p id="contact-modal-desc" class="text-sm text-gray-500">
-          A simple 15-minute call to see if your books are clean and tax-ready.
+          Tell me what is going on with your books and I will reply personally, usually within one business day.
         </p>
       </div>
 
       <!-- Form -->
       <form
         id="contact-form"
-        name="clean-books-plan"
+        name="quick-note"
         method="POST"
         data-netlify="true"
         netlify-honeypot="bot-field"
-        novalidate
         class="space-y-4"
       >
-        <input type="hidden" name="form-name" value="clean-books-plan" />
+        <input type="hidden" name="form-name" value="quick-note" />
         <p class="hidden">
           <label>
-            Don't fill this out if you're human:
+            Don’t fill this out if you're human:
             <input name="bot-field" />
           </label>
         </p>
 
-        <!-- Name Fields -->
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <label for="firstName" class="sr-only">First Name</label>
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              autocomplete="given-name"
-              required
-              placeholder="First name"
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
-            />
-          </div>
-          <div>
-            <label for="lastName" class="sr-only">Last Name</label>
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              autocomplete="family-name"
-              required
-              placeholder="Last name"
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
-            />
-          </div>
+        <!-- Name (required) -->
+        <div>
+          <label for="name" class="sr-only">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autocomplete="name"
+            placeholder="Name"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500
+                   focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
+          />
         </div>
 
-        <!-- Email -->
+        <!-- Email (required) -->
         <div>
           <label for="email" class="sr-only">Email</label>
           <input
             id="email"
             name="email"
             type="email"
+            required
             autocomplete="email"
             inputmode="email"
-            required
             placeholder="you@business.com"
-            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500
+                   focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
           />
         </div>
 
-        <!-- Phone -->
+        <!-- Phone (optional) -->
         <div>
-          <label for="phone" class="sr-only">Phone Number</label>
+          <label for="phone" class="sr-only">Phone number (optional)</label>
           <input
             id="phone"
             name="phone"
             type="tel"
-            inputmode="tel"
             autocomplete="tel"
-            required
-            placeholder="412-555-1234"
-            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
+            inputmode="tel"
+            placeholder="Phone number (optional)"
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500
+                   focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:opacity-50"
           />
-          <p class="text-sm text-gray-500 mt-1">🔒 We'll never share your number.</p>
         </div>
 
-        <!-- Details (optional) -->
+        <!-- Message (required) -->
         <div>
-          <label for="details" class="sr-only">Details</label>
+          <label for="message" class="sr-only">Message</label>
           <textarea
-            id="details"
-            name="details"
-            rows="3"
-            placeholder="Details (optional)"
-            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1"
+            id="message"
+            name="message"
+            rows="4"
+            required
+            placeholder="Tell me a bit about your business, your books, and what you would like help with."
+            class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500
+                   focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1"
           ></textarea>
         </div>
 
-        <!-- Submit -->
+        <!-- Submit (rounded-lg, all caps) -->
         <button
           id="contact-submit"
           type="submit"
-          class="w-full rounded-xl bg-blue-600 py-3 text-sm font-medium text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50"
+          class="w-full rounded-lg bg-blue-600 py-3 text-sm font-bold uppercase text-white hover:bg-blue-700
+                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
+                 disabled:opacity-50"
         >
-          Get My Clean Books Plan
+          SEND MESSAGE
         </button>
 
-        <!-- Trust -->
-        <p class="mt-2 text-center text-sm text-gray-500">
-          🔒 100% private and secure.
-          <br />
-          ⚡️ Lightning-fast reply.
-        </p>
+        <!-- Trust text -->
+        <p class="mt-2 text-center text-sm text-gray-500">🔒 100% private and secure. No spam.</p>
       </form>
     </div>
   </div>
@@ -161,44 +147,21 @@
       transform: translateY(0);
     }
   }
-
-  /* Error messages */
-  @reference "tailwindcss";
-  .rb-error {
-    @apply mt-1 text-sm leading-tight text-red-600 font-medium;
-  }
-
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    [data-modal-card] {
-      animation: none !important;
-    }
-  }
 </style>
 
 <script>
   (() => {
     const modal = document.getElementById('contact-modal');
     const card = modal?.querySelector('[data-modal-card]');
-    const form = document.getElementById('contact-form');
-    const submit = document.getElementById('contact-submit');
-    if (!modal || !card || !form) return;
-
-    // Toggle: inline success UI + AJAX to Netlify (true) vs classic POST (false)
-    const INLINE_SUCCESS = true;
+    if (!modal || !card) return;
 
     let lastTrigger = null;
-    let submitting = false;
-    let interacted = false; // for analytics
 
-    // Open / Close
     const open = (trigger) => {
       lastTrigger = trigger || document.activeElement;
       modal.classList.remove('hidden');
       document.documentElement.classList.add('overflow-hidden');
       modal.focus();
-      // Analytics: modal opened
-      window.gtag?.('event', 'lead_form_opened', { form_id: 'clean-books-plan', source: 'hero_cta' });
     };
 
     const close = () => {
@@ -207,7 +170,7 @@
       lastTrigger?.focus();
     };
 
-    // Open: any [data-open-modal]
+    // Open modal triggers
     document.querySelectorAll('[data-open-modal]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -215,28 +178,30 @@
       });
     });
 
-    // Close: X
+    // Close via X
     modal.querySelector('[data-close-modal]')?.addEventListener('click', close);
 
-    // Close: backdrop
+    // Close on backdrop click
     modal.addEventListener('click', (e) => {
       if (e.target.hasAttribute('data-backdrop')) close();
     });
 
-    // Close: ESC
+    // Close ESC
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
     });
 
-    // Focus trap
+    // Simple focus trap
     modal.addEventListener('keydown', (e) => {
       if (e.key !== 'Tab') return;
       const focusables = modal.querySelectorAll(
         'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
       );
-      if (focusables.length === 0) return;
+      if (!focusables.length) return;
+
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
+
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();
@@ -246,158 +211,66 @@
       }
     });
 
-    // === FORM VALIDATION ===
-    const inputs = {
-      first: form.querySelector('#firstName'),
-      last: form.querySelector('#lastName'),
-      email: form.querySelector('#email'),
-      phone: form.querySelector('#phone'),
-    };
+    // === SIMPLE INLINE VALIDATION FOR REQUIRED FIELDS ===
+    const requiredFields = [
+      { el: document.getElementById('name'), msg: 'Name is required.' },
+      { el: document.getElementById('email'), msg: 'Email is required.' },
+      { el: document.getElementById('message'), msg: 'Message is required.' },
+    ];
 
-    const normalizePhone = (v) => (v || '').replace(/\D/g, '');
+    // Create or update small red error text under field
+    function showError(input, message) {
+      let error = input.nextElementSibling;
 
-    const setError = (input, msg = '') => {
-      let el = input.nextElementSibling;
-      if (!el?.classList.contains('rb-error')) {
-        el = document.createElement('p');
-        el.className = 'rb-error';
-        el.setAttribute('aria-live', 'polite'); // announce
-        el.setAttribute('role', 'alert');
-        input.after(el);
+      if (!error || !error.dataset.rbError) {
+        error = document.createElement('p');
+        error.dataset.rbError = 'true';
+        // Tailwind utility classes directly here
+        error.className = 'mt-1 text-sm leading-tight text-red-600 font-medium';
+        input.insertAdjacentElement('afterend', error);
       }
-      el.textContent = msg;
-      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-    };
 
-    const validate = (input) => {
-      const val = input.value.trim();
-      if ([inputs.first, inputs.last, inputs.email, inputs.phone].includes(input) && !val) {
-        setError(input, 'This field is required.');
+      error.textContent = message;
+      input.setAttribute('aria-invalid', 'true');
+    }
+
+    function clearError(input) {
+      const error = input.nextElementSibling;
+      if (error && error.dataset.rbError) {
+        error.remove();
+      }
+      input.removeAttribute('aria-invalid');
+    }
+
+    // Validate a single field
+    function validateField(fieldObj) {
+      const value = fieldObj.el.value.trim();
+      if (!value) {
+        showError(fieldObj.el, fieldObj.msg);
         return false;
       }
-      if (input === inputs.email && !/\S+@\S+\.\S+/.test(val)) {
-        setError(input, 'Enter a valid email.');
-        return false;
-      }
-      if (input === inputs.phone && normalizePhone(val).length < 10) {
-        setError(input, 'Enter a valid phone number.');
-        return false;
-      }
-      setError(input);
+      clearError(fieldObj.el);
       return true;
-    };
+    }
 
-    Object.values(inputs).forEach((el) => {
-      el.addEventListener(
-        'focus',
-        () => {
-          if (!interacted) {
-            interacted = true;
-            // Analytics: user interacted
-            window.gtag?.('event', 'lead_form_interacted', { form_id: 'clean-books-plan' });
-          }
-        },
-        { once: true }
-      );
-      el.addEventListener('blur', () => validate(el));
+    // Add blur event to each required field
+    requiredFields.forEach((f) => {
+      f.el.addEventListener('blur', () => validateField(f));
     });
 
-    // Helpers for Netlify AJAX
-    function encodeFormData(formEl) {
-      const data = new FormData(formEl);
-      // Netlify needs "form-name" in payload for AJAX
-      if (!data.get('form-name')) {
-        const formName = formEl.getAttribute('name') || 'clean-books-plan';
-        data.append('form-name', formName);
-      }
-      return new URLSearchParams(data).toString();
-    }
-
-    function showInlineSuccess() {
-      card.innerHTML = `
-        <div class="text-center p-2">
-          <h3 class="text-xl font-semibold text-gray-700">✅ You're all set!</h3>
-          <p class="mt-2 text-gray-600">
-            We're excited to help you clear the chaos and enjoy calm books again. 
-            We'll reach out within 1 business day.
-          </p>
-          <button 
-            type="button"
-            class="mt-6 inline-flex items-center justify-center rounded-xl bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-            data-close-modal
-          >
-            Back to site
-          </button>
-        </div>`;
-      // wire up the new Close button
-      card.querySelector('[data-close-modal]')?.addEventListener('click', close);
-    }
-
-    form.addEventListener('submit', async (e) => {
-      const valid = Object.values(inputs).every(validate);
-      if (!valid) {
+    // Validate all before submit
+    form.addEventListener('submit', (e) => {
+      let allValid = true;
+      requiredFields.forEach((f) => {
+        if (!validateField(f)) allValid = false;
+      });
+      if (!allValid) {
         e.preventDefault();
-        const firstBad = form.querySelector('[aria-invalid="true"]');
-        firstBad?.focus();
-        // Analytics: validation error
-        window.gtag?.('event', 'lead_form_error', { form_id: 'clean-books-plan' });
-        return;
-      }
-
-      // lock UI
-      if (submitting) {
-        e.preventDefault();
-        return;
-      }
-      submitting = true;
-      submit.disabled = true;
-      form.setAttribute('aria-busy', 'true');
-      submit.textContent = 'Sending...';
-
-      if (!INLINE_SUCCESS) {
-        // Classic Netlify form POST (no JS). Let the browser submit/redirect.
-        return;
-      }
-
-      // AJAX submit to Netlify, show inline success, then optional redirect
-      e.preventDefault();
-      try {
-        const body = encodeFormData(form);
-        await fetch(form.getAttribute('action') || '/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body,
-        });
-
-        // Analytics: submitted
-        window.gtag?.('event', 'lead_form_submitted', { form_id: 'clean-books-plan' });
-
-        showInlineSuccess();
-
-        // Optional redirect if form has action attr
-        const redirectTo = form.getAttribute('action');
-        if (redirectTo) {
-          setTimeout(() => {
-            window.location.href = redirectTo;
-          }, 1200);
-        }
-      } catch (err) {
-        submit.disabled = false;
-        submitting = false;
-        form.removeAttribute('aria-busy');
-        submit.textContent = 'Send Message';
-        // Show a soft error
-        const alert = document.createElement('p');
-        alert.className = 'rb-error';
-        alert.setAttribute('role', 'alert');
-        alert.setAttribute('aria-live', 'polite');
-        alert.textContent = 'Something went wrong. Please try again.';
-        form.appendChild(alert);
-        window.gtag?.('event', 'lead_form_submit_failed', { form_id: 'clean-books-plan' });
+        const firstInvalid = form.querySelector('[aria-invalid="true"]');
+        firstInvalid?.focus();
       }
     });
 
-    // Optional external trigger
     window.openContactModal = open;
   })();
 </script>

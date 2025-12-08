@@ -1,12 +1,22 @@
 ---
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
+import { Image } from 'astro:assets';
+
+// SVGs as components
+import Logo from '/src/assets/images/rb-logo-stacked-compact-dark.svg';
+import PhoneIcon from '/src/assets/images/phone-fill.svg';
+import MailIcon from '/src/assets/images/mail.svg';
+import LocationIcon from '/src/assets/images/location-pin.svg';
+
+// PNGs via Astro Image
+import CertBookkeeper from '/src/assets/images/cert-bookkeeper.png';
+import CertLevel1 from '/src/assets/images/cert-level1.png';
 
 interface Link {
   text?: string;
   href?: string;
   ariaLabel?: string;
-  icon?: string;
 }
 
 interface LinksGroup {
@@ -17,59 +27,139 @@ interface LinksGroup {
 export interface Props {
   links: Array<LinksGroup>;
   secondaryLinks: Array<Link>;
-  socialLinks: Array<Link>;
+  socialLinks?: Array<Link>;
   footNote?: string;
   theme?: string;
 }
 
-const { secondaryLinks = [], links = [], footNote = '' } = Astro.props;
+const { links = [], secondaryLinks = [], footNote = '' } = Astro.props;
 
-// flatten all groups into a single list
 const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filter(Boolean);
-
-// If you prefer a default copyright, uncomment below:
-// const year = new Date().getFullYear();
-// const defaultFoot = `© ${year} Rock Bookkeeping. Made with <span class="text-red-400">❤️</span> in Pittsburgh.`;
 ---
 
-<footer class="relative border-t border-gray-700 bg-[#0d1b2a] not-prose">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-12 flex flex-col items-center text-center gap-6">
-    <!-- Brand -->
-    <div>
-      <a class="inline-block font-bold text-xl text-white tracking-tight" href={getHomePermalink()}>
-        {SITE?.name}
-      </a>
+<footer class="relative border-t border-white/10 bg-[#243447] not-prose">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-24 md:pt-12 md:pb-12 flex flex-col">
+    <!-- ROW 1: 4-column horizontal layout -->
+    <div class="flex flex-col gap-10 lg:flex-row lg:flex-nowrap items-center lg:gap-10">
+      <!-- ITEM 1: Logo block -->
+      <div class="lg:flex-1">
+        <a href={getHomePermalink()} class="inline-block" aria-label={SITE?.name || 'Rock Bookkeeping'}>
+          <Logo class="w-[228px] h-auto" />
+        </a>
+      </div>
+
+      <!-- ITEM 2: Contact block (more breathing room) -->
+      <div class="flex flex-col lg:flex-1 text-base text-gray-100 leading-relaxed gap-4.5">
+        <div class="flex items-center gap-4">
+          <PhoneIcon class="h-4 w-4" aria-hidden="true" />
+          <a href="tel:14122568411" class="font-semibold hover:text-white transition-colors"> 412-256-8411 </a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <MailIcon class="h-4 w-4" aria-hidden="true" />
+          <a href="mailto:josh@rockbookkeeping.com" class="font-semibold hover:text-white transition-colors">
+            josh@rockbookkeeping.com
+          </a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <LocationIcon class="h-4 w-4" aria-hidden="true" />
+          <span class="font-semibold">Pittsburgh, PA</span>
+        </div>
+
+        <span class="italic mt-1.5"> Serving clients locally and nationwide. </span>
+      </div>
+
+      <!-- ITEM 3: Badges + trust copy -->
+      <div class="flex flex-col items-center lg:flex-1 lg:items-start text-white xl:pr-5 gap-1.5">
+        <div class="flex gap-4 mb-2">
+          <Image src={CertBookkeeper} alt="" aria-hidden="true" loading="lazy" class="w-28 h-auto object-contain" />
+          <Image src={CertLevel1} alt="" aria-hidden="true" loading="lazy" class="w-28 h-auto object-contain" />
+        </div>
+
+        <p class="text-center lg:text-left text-sm font-semibold">Certified QuickBooks Online ProAdvisor.</p>
+
+        <p class="text-center lg:text-left text-sm text-gray-100 mt-1 leading-relaxed">
+          Trained and certified by Intuit in bookkeeping and software-specific best practices for QuickBooks Online.
+        </p>
+
+        <!-- CTA: desktop/tablet only -->
+        <button
+          type="button"
+          data-hs-overlay="#contact-modal"
+          data-open-modal
+          aria-haspopup="dialog"
+          aria-controls="contact-modal"
+          aria-expanded="false"
+          class="hidden lg:inline-flex mt-3 px-3 py-1.5 rounded-full
+                 text-sm font-semibold text-white bg-blue-600/20
+                 hover:bg-blue-600/30 transition"
+        >
+          Fix my books now
+        </button>
+
+        <!-- OPTIONAL: mobile fallback link (super minimal) -->
+        <a
+          href="javascript:void(0)"
+          data-hs-overlay="#contact-modal"
+          data-open-modal
+          aria-haspopup="dialog"
+          aria-controls="contact-modal"
+          aria-expanded="false"
+          class="mt-2 lg:hidden inline text-sm font-semibold underline underline-offset-4 text-gray-200 hover:text-white transition"
+        >
+          Fix my books now
+        </a>
+      </div>
+
+      <!-- ITEM 4: Nav block -->
+      {
+        flatLinks.length > 0 && (
+          <nav class="lg:flex-1 text-center lg:text-left lg:ml-auto">
+            <ul
+              class="flex flex-col
+                     lg:flex-col
+                     lg:pl-8
+                     xl:flex-row xl:pl-0 xl:gap-8
+                     gap-4.5 text-base font-semibold uppercase tracking-wide text-white"
+            >
+              {flatLinks.map(({ text, href, ariaLabel }) => (
+                <li>
+                  <a href={href} aria-label={ariaLabel} class="hover:text-gray-200 transition-colors">
+                    <Fragment set:html={text} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
     </div>
 
-    <!-- Main Links -->
-    {
-      flatLinks.length > 0 && (
-        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base text-gray-300">
-          {flatLinks.map(({ text, href, ariaLabel }) => (
-            <li>
-              <a class="hover:text-white transition-colors duration-150" href={href} aria-label={ariaLabel}>
-                <Fragment set:html={text} />
-              </a>
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    <!-- ROW 2: Divider with ~30px vertical padding -->
+    <div class="py-8">
+      <div class="h-px bg-white/10"></div>
+    </div>
 
-    <!-- Legal Links -->
-    {
-      secondaryLinks?.length > 0 && (
-        <div class="text-sm text-gray-400 flex flex-wrap justify-center gap-x-4 gap-y-1 mt-1" aria-label="Legal">
-          {secondaryLinks.map(({ text, href }) => (
-            <a class="hover:text-gray-200 transition-colors duration-150" href={href} set:html={text} />
-          ))}
-        </div>
-      )
-    }
+    <!-- ROW 3: Legal + copyright (a touch more gap) -->
+    <div class="flex flex-col items-center gap-8 text-xs text-gray-300">
+      {
+        secondaryLinks.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {secondaryLinks.map(({ text, href }) => (
+              <a href={href} class="hover:text-gray-100 transition-colors" set:html={text} />
+            ))}
+          </div>
+        )
+      }
 
-    <!-- Copyright / Made with ❤️ -->
-    <div class="text-xs font-semibold text-gray-400 mt-1 leading-relaxed uppercase">
-      <Fragment set:html={footNote} />
+      {
+        footNote && (
+          <div class="text-[0.7rem] uppercase tracking-wide text-center">
+            <Fragment set:html={footNote} />
+          </div>
+        )
+      }
     </div>
   </div>
 </footer>

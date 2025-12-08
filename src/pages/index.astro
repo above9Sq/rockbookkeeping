@@ -3,11 +3,13 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Testimonial from '~/components/widgets/Testimonial.astro';
+import TestimonialQuincy from '~/components/widgets/TestimonialQuincy.astro';
 import EmpathyAndConversion from '~/components/widgets/EmpathyAndConversion.astro';
 import ContentBlock from '~/components/widgets/ContentBlock.astro';
 import Services from '~/components/widgets/Services.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
 import FAQ from '~/components/widgets/FAQ.astro';
+import ContactSection from '~/components/widgets/ContactSection.astro';
 
 import step1Image from '~/assets/images/step1.png';
 import step2Image from '~/assets/images/step2.png';
@@ -21,61 +23,9 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <Hero />
-  <EmpathyAndConversion bgColor="#f4f7ff" />
-
-  {/* BLOCK 1: Step 1 – Free Audit */}
-  <ContentBlock
-    headline="Step 1: Call or Submit — We Audit Free"
-    image={step1Image}
-    imageAlt="Phone icon and magnifying glass over bank statements"
-    quotes={[
-      { emoji: '📞', text: 'Call 412-256-8411 or submit request' },
-      { emoji: '🔍', text: "We'll evaluate your acccounts and spot gaps" },
-      { emoji: '💰', text: 'Exact quote in 24 hrs' },
-    ]}
-    bottomText="No obligation. Just clarity."
-    reverse={true}
-    whiteBg={true}
-  />
-
-  {/* BLOCK 2: Step 2 – Your Path (REVERSED) */}
-  <ContentBlock
-    headline="Step 2: Assess & Choose"
-    image={step2Image}
-    imageAlt="Split road showing current vs. behind paths"
-    quotes={[
-      { emoji: '✅', text: 'Already current? Jump to monthly' },
-      { emoji: '🧹', text: 'Behind? 14-day cleanup first' },
-      { emoji: '🔄', text: 'We set up QuickBooks if needed' },
-    ]}
-    bottomText="Upfront timeline. You decide."
-    reverse={false}
-    whiteBg={true}
-  />
-
-  {/* BLOCK 3: Step 3 – We Work Together */}
-  <ContentBlock
-    headline="Step 3: Clean Books. No Stress."
-    image={step3Image}
-    imageAlt="Handshake and green profit & loss report"
-    quotes={[
-      { emoji: '📊', text: 'Categorized, reconciled, reports delivered' },
-      { emoji: '📅', text: 'No more tax deadline dread' },
-      { emoji: '💪', text: 'You run your business' },
-    ]}
-    bottomText="Starts at $200/mo. Guaranteed quality."
-    reverse={true}
-    whiteBg={true}
-    testimonial={{
-      quote:
-        'Josh has been AMAZING to have on the team. What a massive help to run the books for multiple businesses that I work with. I recommend his ability to communicate with clients, and get the job done!',
-      author: 'Quincy Chapman',
-      role: 'Founder of DewQ Enterprises',
-    }}
-  />
-
-  <!-- <Testimonial bgColor="#fefbf8" /> -->
-  <Services bgColor="white" />
+  <TestimonialQuincy />
+  <Services bgColor="#FBFCFC" />
   <Pricing bgColor="#f7f9ff" />
   <FAQ bgColor="#f9fafb" />
+  <ContactSection />
 </Layout>

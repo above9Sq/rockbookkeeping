@@ -3,16 +3,17 @@ import { APP_BLOG } from 'astrowind:config';
 
 export const headerData = {
   links: [
-    { text: 'Home', href: getPermalink('/') },
     { text: 'Services', href: '/#services' },
     { text: 'Pricing', href: '/#pricing' },
+    { text: 'FAQ', href: '/#faq' },
     { text: 'About', href: getPermalink('/about') },
     ...(APP_BLOG?.isEnabled ? [{ text: 'Blog', href: getBlogPermalink() }] : []),
-    { text: 'FAQ', href: '/#faq' },
+    { text: 'Contact', href: getPermalink('/#contact') },
   ],
   ctaLabel: 'Fix My Books Now',
   ctaModal: '#contact-modal',
-  phoneNumber: '412-256-8411', // display phone number for header + future CTAs
+  phoneNumber: '412-256-8411',
+  useTextJoshInHeader: true,
 };
 
 export const footerData = {
@@ -21,8 +22,9 @@ export const footerData = {
       links: [
         { text: 'Services', href: '/#services' },
         { text: 'Pricing', href: '/#pricing' },
-        { text: 'About', href: getPermalink('/about') },
         { text: 'FAQ', href: '/#faq' },
+        { text: 'About', href: getPermalink('/about') },
+        { text: 'Contact', href: getPermalink('/#contact') },
       ],
     },
   ],

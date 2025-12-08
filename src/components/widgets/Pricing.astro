@@ -11,18 +11,21 @@ interface Tier {
   features: string[];
   outroText: string;
   popular?: boolean;
+  badgeLabel: string;
+  billingLabel: string;
 }
 
 interface Props {
   bgColor?: string;
 }
 
-const { bgColor = '#f3fff8' } = Astro.props;
+const { bgColor = '#F7F9FF' } = Astro.props;
 
 const monthlyTiers: Tier[] = [
   {
     name: 'Essential',
-    introText: 'Stress-free monthly bookkeeping that keeps your accounts accurate and your mind at ease.',
+    introText:
+      'Stress-free monthly bookkeeping that keeps your accounts accurate and your mind at ease.',
     price: '200',
     features: [
       'Reconcile all accounts',
@@ -30,14 +33,20 @@ const monthlyTiers: Tier[] = [
       'Monthly P&L and Balance Sheet statements',
     ],
     outroText: 'Best for business owners who just need clean, reliable books every month.',
+    badgeLabel: 'Monthly',
+    billingLabel: 'per month',
   },
   {
     name: 'Professional',
-    introText: 'Proactive bookkeeping for growing businesses that need clear cash flow and financial confidence.',
+    introText:
+      'Proactive bookkeeping for growing businesses that need clear cash flow and financial confidence.',
     price: '1000',
     features: ['All Essential', 'Full A/R & A/P', 'Cash flow tracking and insight'],
-    outroText: 'Best for growing businesses that want deeper visibility and full A/R & A/P management.',
-    popular: true,
+    outroText:
+      'Best for growing businesses that want deeper visibility and full A/R & A/P management.',
+    popular: false,
+    badgeLabel: 'Monthly',
+    billingLabel: 'per month',
   },
 ];
 
@@ -53,114 +62,155 @@ const cleanupTier: Tier = {
     'Provide clean reports for tax or CPA use',
     'Jump to monthly for maintenance',
   ],
-  outroText: 'After cleanup, continue with monthly service or hand off a balanced file to your accountant.',
+  outroText:
+    'After cleanup, continue with monthly service or hand off a balanced file to your accountant.',
+  badgeLabel: 'One-time project',
+  billingLabel: 'one-time project',
 };
 
-const tierStyling = 'text-xl lg:text-2xl font-semibold text-gray-900 uppercase';
-const priceStyling = 'flex flex-col gap-1 mt-2 text-3xl leading-tight lg:text-4xl font-black text-gray-900';
+const tierHeadingClasses =
+  'text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 uppercase';
+const priceClasses =
+  'flex flex-col gap-1 mt-2 text-3xl leading-tight lg:text-4xl font-black text-gray-900';
+const badgeClasses = `
+  inline-flex self-start items-center rounded-full border border-blue-100 bg-blue-50
+  px-2.5 py-0.5 text-[0.6rem] sm:px-3 sm:py-1 sm:text-[0.65rem]
+  font-semibold uppercase tracking-[0.14em] text-blue-700 whitespace-nowrap
+`;
 ---
 
-<section id="pricing" class={`py-12 lg:py-22`} style={`background-color: ${bgColor}`}>
+<section
+  id="pricing"
+  class="py-16 sm:py-20 lg:py-24"
+  style={`background-color: ${bgColor}`}
+>
   <Container narrow maxWidth="max-w-[93rem]">
-    <!-- Top-level stack: slightly tighter on mobile, roomy on desktop -->
     <div class="flex flex-col gap-10 lg:gap-14 xl:gap-24">
       <!-- Header -->
-      <div class="w-auto">
+      <div class="w-full max-w-2xl">
         <H2 align="left">Pricing</H2>
-        <p class="mt-4 text-lg text-gray-700 text-left max-w-2xl text-balance">
-          Transparent, contract-free pricing with a first-month guarantee. Most owners save over $10k per year and 15
-          hours a month - buying back their time and peace of mind.
+        <p class="mt-4 text-base sm:text-lg text-gray-700 text-left text-balance">
+          Transparent, contract-free pricing with a first-month guarantee. Most owners save
+          over $10k per year and 15 hours a month - buying back their time and peace of mind.
         </p>
       </div>
 
-      <!-- Monthly Tiers (2-column on lg) -->
-      <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 xl:gap-24 items-stretch">
+      <!-- Monthly tiers -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 w-full">
         {
           monthlyTiers.map((tier) => (
-            <div
-              class="relative flex-1 bg-white border border-gray-800 rounded-lg p-8 lg:p-10 flex flex-col gap-6 sm:gap-8 min-w-0
-                     transition-all duration-200
-                     shadow-[0_4px_10px_rgba(16,24,40,.05)] lg:shadow-none
-                     hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(16,24,40,.10)]"
+            <article
+              class="relative flex flex-col bg-white rounded-xl p-8 lg:p-10
+                     shadow-[0_2px_12px_rgba(0,0,0,0.06)]
+                     transition-transform duration-150 hover:-translate-y-0.5"
             >
               {tier.popular && (
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                <div class="absolute -top-3 right-6">
                   <span
-                    class="inline-flex items-center gap-1 bg-[#cff2dc] text-[#265A2D] border border-[#265A2D]
-                                 text-xs lg:text-sm font-bold px-3 py-1 lg:px-4 lg:py-1.5 rounded-md uppercase"
+                    class="inline-flex items-center rounded-full bg-[#23335A] text-white
+                           text-[0.65rem] font-semibold tracking-[0.12em] uppercase
+                           px-3 py-1 shadow-sm"
                   >
-                    <span class="text-orange-300">🔥</span> Most popular
+                    Most popular
                   </span>
                 </div>
               )}
 
-              <div class="flex flex-col gap-1 text-left">
-                <h3 class={tierStyling}>{tier.name}</h3>
-                <p class="text-base text-gray-500">{tier.introText}</p>
-                <div class="mt-2 mb-2">
-                  <span class="block text-sm uppercase tracking-wide text-gray-500 font-semibold">From</span>
-                  <span class="sr-only">Starting at</span>
-                  <p class={priceStyling}>${tier.price}</p>
-                  <span class="block text-base lg:text-lg font-normal text-gray-600">per month</span>
-                </div>
+              <div
+                class="flex flex-col sm:flex-row sm:items-start sm:justify-between
+                       gap-2 sm:gap-4 mb-5"
+              >
+                <h3 class={tierHeadingClasses}>{tier.name}</h3>
+
+                <span class={badgeClasses}>
+                  {tier.badgeLabel}
+                </span>
               </div>
 
-              <ul class="space-y-3 flex-grow mb-4 sm:mb-10" aria-label={`Features included in the ${tier.name} plan`}>
+              <p class="text-sm sm:text-base text-gray-700 mb-4 sm:mb-5">
+                {tier.introText}
+              </p>
+
+              <div class="mb-5">
+                <span class="block text-sm uppercase tracking-wide text-gray-500 font-semibold">
+                  From
+                </span>
+                <span class="sr-only">Starting at</span>
+                <p class={priceClasses}>${tier.price}</p>
+                <span class="block text-base text-gray-600">
+                  {tier.billingLabel}
+                </span>
+              </div>
+
+              <ul
+                class="space-y-3 flex-grow mb-4 sm:mb-6"
+                aria-label={`Features included in the ${tier.name} plan`}
+              >
                 {tier.features.map((feature) => (
                   <FeatureItem feature={feature} />
                 ))}
               </ul>
-              <p class="text-base text-gray-500">{tier.outroText}</p>
-            </div>
+
+              <p class="text-sm sm:text-base text-gray-600">
+                {tier.outroText}
+              </p>
+            </article>
           ))
         }
       </div>
 
-      <!-- One-Time Cleanup -->
-      <div
-        class="bg-[#f9fbff] border border-gray-800 rounded-lg p-8 lg:p-10 flex flex-col items-start text-left
-               transition-all duration-200
-               shadow-[0_4px_10px_rgba(16,24,40,.05)] lg:shadow-none
-               hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(16,24,40,.10)]"
+      <!-- One-time cleanup -->
+      <article
+        class="bg-white rounded-xl p-8 lg:p-10
+               shadow-[0_2px_12px_rgba(0,0,0,0.06)]
+               flex flex-col items-start text-left"
       >
         <div class="w-full">
-          <div class="flex items-center gap-2 mb-2">
-            <h3 class={tierStyling}>Cleanup</h3>
-            <span
-              class="inline-flex items-center bg-gray-100 text-gray-700 border border-gray-200
-                         text-[11px] lg:text-xs font-bold px-2 py-0.5 lg:px-3 lg:py-1 rounded-md uppercase leading-tight"
-            >
-              One-time project
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between
+                   gap-2 sm:gap-4 mb-3"
+          >
+            <h3 class={tierHeadingClasses}>{cleanupTier.name}</h3>
+            <span class={badgeClasses}>
+              {cleanupTier.badgeLabel}
             </span>
           </div>
 
-          <p class="text-base text-gray-600 mt-1 mb-4">{cleanupTier.introText}</p>
+          <p class="text-sm sm:text-base text-gray-700 mb-4">
+            {cleanupTier.introText}
+          </p>
 
-          <div class="mt-1 mb-5">
-            <span class="block text-sm uppercase tracking-wide text-gray-500 font-semibold">From</span>
+          <div class="mb-5">
+            <span class="block text-sm uppercase tracking-wide text-gray-500 font-semibold">
+              From
+            </span>
             <span class="sr-only">Starting at</span>
-            <p class={priceStyling}>${cleanupTier.price}</p>
+            <p class={priceClasses}>${cleanupTier.price}</p>
+            <span class="block text-base text-gray-600">
+              {cleanupTier.billingLabel}
+            </span>
           </div>
         </div>
 
-        <ul 
-          class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 w-full max-w-[42rem] mt-3 mb-6 pt-1"
-          aria-label={`Features included in the ${cleanupTier.name} plan`}  
+        <ul
+          class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 w-full max-w-[42rem] mt-2 mb-6 pt-1"
+          aria-label={`Features included in the ${cleanupTier.name} plan`}
         >
-          {
-            cleanupTier.features.map((feature) => (
-              <FeatureItem feature={feature} />
-            ))
-          }
+          {cleanupTier.features.map((feature) => (
+            <FeatureItem feature={feature} />
+          ))}
         </ul>
 
-        <p class="text-base text-gray-500">{cleanupTier.outroText}</p>
-      </div>
+        <p class="text-sm sm:text-base text-gray-600">
+          {cleanupTier.outroText}
+        </p>
+      </article>
 
+      <!-- CTA banner -->
       <CtaBanner
-        header="Ready For Your Free Audit?"
-        subheader="No pressure, no commitment — just a clear view of what's working (and what's not) in your books."
-        bgColor="#e3edff"
+        header="Ready for your free audit?"
+        subheader="No pressure, no commitment - just a clear view of what's working (and what's not) in your books."
+        bgColor="#E3EDFF"
       />
     </div>
   </Container>

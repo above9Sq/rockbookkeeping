@@ -1,5 +1,7 @@
 ---
-import PhoneIcon from '/src/assets/images/phone-no-fill.svg';
+// MobileMenu.astro
+
+import SmsIcon from '/src/assets/images/sms.svg';
 import { headerData } from '~/navigation';
 
 interface Props {
@@ -8,7 +10,9 @@ interface Props {
 
 const { navItems } = Astro.props;
 const { phoneNumber } = headerData;
-const phoneHref = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
+
+const numericPhone = phoneNumber.replace(/[^0-9]/g, '');
+const smsHref = `sms:${numericPhone}`;
 ---
 
 <div
@@ -19,7 +23,7 @@ const phoneHref = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
 >
   <div
     id="rb-menu"
-    class="overflow-hidden max-h-0 transition-[max-height] duration-150 ease-out bg-white shadow-sm pointer-events-auto"
+    class="overflow-y-auto max-h-0 transition-[max-height] duration-150 ease-out bg-white shadow-sm pointer-events-auto"
   >
     <nav class="px-4 pb-5">
       <ul>
@@ -36,16 +40,22 @@ const phoneHref = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
           ))
         }
 
-        <!-- Phone row as the last item -->
+        <!-- Contact row at the bottom: Text -->
         <li class="pt-4">
-          <a
-            href={phoneHref}
-            class="flex items-center gap-x-2 py-3 text-xl font-bold text-gray-800 hover:text-gray-600 transition-colors"
-            aria-label={`Call Rock Bookkeeping at ${phoneNumber}`}
-          >
-            <PhoneIcon class="w-6 h-6 shrink-0" />
-            <span>{phoneNumber}</span>
-          </a>
+          <div class="flex flex-col gap-2">
+            <a
+              href={smsHref}
+              class="flex items-center justify-center gap-x-4 py-3 px-3
+                     text-lg font-semibold text-white
+                     bg-[#23335A] rounded-lg
+                     hover:bg-[#1d2a4c]
+                     transition-colors"
+              aria-label={`Text Rock Bookkeeping at ${phoneNumber}`}
+            >
+              <SmsIcon class="w-6 h-6 shrink-0 text-white" />
+              <span>TEXT JOSH: {phoneNumber}</span>
+            </a>
+          </div>
         </li>
       </ul>
     </nav>
@@ -67,12 +77,19 @@ const phoneHref = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
       wrapper.style.top = navBar.offsetHeight + 'px';
     };
 
+    const getMaxHeight = () => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const navHeight = navBar.offsetHeight || 0;
+      // space available below the nav bar
+      return viewportHeight - navHeight;
+    };
+
     const open = () => {
       toggle.setAttribute('aria-expanded', 'true');
       iconMenu.classList.add('hidden');
       iconClose.classList.remove('hidden');
 
-      menu.style.maxHeight = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7)) + 'px';
+      menu.style.maxHeight = getMaxHeight() + 'px';
 
       wrapper.dataset.state = 'open';
       wrapper.style.visibility = 'visible';
@@ -95,7 +112,7 @@ const phoneHref = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
     window.addEventListener('resize', () => {
       setTop();
       if (toggle.getAttribute('aria-expanded') === 'true') {
-        menu.style.maxHeight = Math.min(menu.scrollHeight, Math.round(innerHeight * 0.7)) + 'px';
+        menu.style.maxHeight = getMaxHeight() + 'px';
       }
     });
 

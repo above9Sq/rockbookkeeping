@@ -26,6 +26,9 @@ export default defineConfig({
   experimental: {
     svgo: true,
   },
+  devToolbar: {
+    enabled: false  // Disable the entire toolbar (including the pill handle)
+  },
   output: 'static',
 
   integrations: [
