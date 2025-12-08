@@ -27,7 +27,7 @@
       </button>
 
       <!-- Header (always left-aligned now) -->
-      <div class="mb-6 text-left">
+      <div id="contact-header" class="mb-6 text-left">
         <h2 id="contact-modal-label" class="mb-1 font-heading text-2xl font-semibold text-gray-800">
           Send Josh a Quick Note
         </h2>
@@ -127,6 +127,22 @@
         <!-- Trust text -->
         <p class="mt-2 text-center text-sm text-gray-500">🔒 100% private and secure. No spam.</p>
       </form>
+
+      <!-- Success state (hidden by default) -->
+      <div id="contact-success" class="hidden text-center py-6">
+        <p class="mb-2 text-base font-semibold text-gray-800">Thanks! I received your message.</p>
+        <p class="mb-6 text-sm text-gray-500">I will reply personally, usually within one business day.</p>
+
+        <button
+          type="button"
+          class="inline-flex items-center justify-center rounded-lg bg-[#23335A] px-6 py-2.5
+                   text-sm font-semibold uppercase tracking-wide text-white hover:bg-[#1b2746]
+                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#23335A]/70"
+          data-close-modal
+        >
+          Close
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -155,14 +171,24 @@
     const card = modal?.querySelector('[data-modal-card]');
     if (!modal || !card) return;
 
-    // 👇 NEW: grab the form inside the modal
     const form = document.getElementById('contact-form');
-    if (!form) return;
+    const headerBlock = document.getElementById('contact-header');
+    const successBlock = document.getElementById('contact-success');
+
+    if (!form || !headerBlock || !successBlock) return;
 
     let lastTrigger = null;
 
+    const resetView = () => {
+      // Show header + form, hide success
+      headerBlock.classList.remove('hidden');
+      form.classList.remove('hidden');
+      successBlock.classList.add('hidden');
+    };
+
     const open = (trigger) => {
       lastTrigger = trigger || document.activeElement;
+      resetView();
       modal.classList.remove('hidden');
       document.documentElement.classList.add('overflow-hidden');
       modal.focus();
@@ -182,8 +208,10 @@
       });
     });
 
-    // Close via X
-    modal.querySelector('[data-close-modal]')?.addEventListener('click', close);
+    // Close via any element with data-close-modal (X + success button)
+    modal.querySelectorAll('[data-close-modal]').forEach((btn) => {
+      btn.addEventListener('click', close);
+    });
 
     // Close on backdrop click
     modal.addEventListener('click', (e) => {
@@ -258,19 +286,53 @@
       f.el.addEventListener('blur', () => validateField(f));
     });
 
-    // Validate all before submit (now using the local `form`)
-    form.addEventListener('submit', (e) => {
+    // Helper to URL-encode form data for Netlify
+    const encode = (formElement) => {
+      const formData = new FormData(formElement);
+      // Ensure form-name is present
+      if (!formData.get('form-name')) {
+        formData.set('form-name', 'quick-note');
+      }
+      return new URLSearchParams(formData).toString();
+    };
+
+    // Validate + send to Netlify via fetch, then show success view
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
       let allValid = true;
       requiredFields.forEach((f) => {
         if (!validateField(f)) allValid = false;
       });
+
       if (!allValid) {
-        e.preventDefault();
         const firstInvalid = form.querySelector('[aria-invalid="true"]');
         firstInvalid?.focus();
+        return;
+      }
+
+      try {
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encode(form),
+        });
+
+        // If we get here, Netlify has received the submission
+        form.reset();
+        requiredFields.forEach((f) => clearError(f.el));
+
+        headerBlock.classList.add('hidden');
+        form.classList.add('hidden');
+        successBlock.classList.remove('hidden');
+      } catch (err) {
+        console.error('Netlify form submission failed', err);
+        // Optional fallback: let the browser do a normal POST
+        form.submit();
       }
     });
 
+    // Expose open on window (if you need to call it manually)
     window.openContactModal = open;
   })();
 </script>
