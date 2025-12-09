@@ -49,16 +49,14 @@ const { bgColor = '#ffffff' } = Astro.props;
       </div>
 
       <div class="mt-6">
-        <div class="shrink-0 w-12 h-12 rounded-full overflow-hidden">
-          <Image
-            src={quincyImage}
-            alt="Quincy Chapman"
-            width={48}
-            height={48}
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
+        <Image
+          src={quincyImage}
+          alt="Quincy Chapman"
+          width={44}
+          height={44}
+          loading="lazy"
+          class="inline-block w-[44px] h-[44px] rounded-full object-cover align-middle"
+        />
 
         <div class="font-semibold text-gray-800">Quincy Chapman</div>
         <div class="text-sm text-gray-500">Owner | DewQ Enterprises</div>
