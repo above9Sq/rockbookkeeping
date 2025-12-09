@@ -22,13 +22,11 @@ const title = 'Founder of DewQ Enterprises';
 
       {/* Stars */}
       <div class="flex items-center gap-1 mb-5 justify-center sm:justify-start">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <StarIcon
-            class="w-4 h-4 sm:w-5 sm:h-5 text-[#2563EB] fill-current"
-            aria-hidden="true"
-            data-index={index}
-          />
-        ))}
+        {
+          Array.from({ length: 5 }).map((_, index) => (
+            <StarIcon class="w-4 h-4 sm:w-5 sm:h-5 text-[#2563EB] fill-current" aria-hidden="true" data-index={index} />
+          ))
+        }
         <span class="sr-only">5 out of 5 stars</span>
       </div>
 
@@ -49,7 +47,7 @@ const title = 'Founder of DewQ Enterprises';
             height={48}
             loading="lazy"
             decoding="async"
-            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
+            class="w-10 h-10 sm:w-12 sm:h-12 object-contain bg-transparent"
           />
         </div>
 
