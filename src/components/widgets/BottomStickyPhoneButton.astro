@@ -7,61 +7,58 @@ const { phoneNumber } = headerData;
 const smsHref = `sms:${phoneNumber.replace(/[^0-9]/g, '')}`;
 ---
 
-<!-- Mobile-only bottom sticky text CTA -->
 <div
   id="mobile-phone-cta"
+  aria-hidden="true"
   class="fixed inset-x-0 bottom-0 z-[75] lg:hidden bg-white shadow-[0_-2px_4px_rgba(0,0,0,0.05)] px-4 pt-4
          pointer-events-none opacity-0 translate-y-full transition-all duration-200 ease-out"
   style="padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);"
-  aria-hidden="true"
 >
   <a
     href={smsHref}
     aria-label={`Text Rock Bookkeeping at ${phoneNumber}`}
-    class={`${btnSolidDarkShell} pointer-events-auto w-full px-6 text-lg gap-x-3 shadow-md`}
+    class={`${btnSolidDarkShell} pointer-events-auto w-full px-6 py-4 text-lg gap-x-3 shadow-md flex items-center justify-center`}
   >
-    <SmsIcon class="w-5 h-5 shrink-0" />
-    <span>Text Josh: {phoneNumber}</span>
+    <SmsIcon class="w-6 h-6 shrink-0" />
+    <span class="font-semibold">Text Josh: {phoneNumber}</span>
   </a>
 </div>
 
 <script is:inline>
   const runMobilePhoneCTA = () => {
-    // Only care about mobile
+    // Desktop → do nothing
     if (window.innerWidth >= 1024) return;
 
-    const hero = document.querySelector('[data-hero]');
     const wrapper = document.getElementById('mobile-phone-cta');
+    if (!wrapper) return;
 
-    if (!hero || !wrapper) return;
+    const hero = document.querySelector('[data-hero]');
 
     const show = () => {
       wrapper.classList.remove('opacity-0', 'translate-y-full', 'pointer-events-none');
-      wrapper.classList.add('opacity-100', 'translate-y-0');
-      wrapper.setAttribute('aria-hidden', 'false');
+      wrapper.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      wrapper.setAttribute('aria-hidden', 'false'); // ← now accessible!
     };
 
     const hide = () => {
       wrapper.classList.add('opacity-0', 'translate-y-full', 'pointer-events-none');
-      wrapper.classList.remove('opacity-100', 'translate-y-0');
-      wrapper.setAttribute('aria-hidden', 'true');
+      wrapper.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      wrapper.setAttribute('aria-hidden', 'true'); // ← correctly hidden from screen readers
     };
 
-    // Start hidden while hero is in view
+    // Start hidden
     hide();
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          hide();
-        } else {
-          show();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(hero);
+    // Only create observer if hero exists
+    if (hero) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          entry.isIntersecting ? hide() : show();
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(hero);
+    }
   };
 
   document.addEventListener('DOMContentLoaded', runMobilePhoneCTA);
