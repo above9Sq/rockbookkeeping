@@ -83,33 +83,24 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
           Trained and certified by Intuit in bookkeeping and software-specific best practices for QuickBooks Online.
         </p>
 
-        <!-- CTA: desktop/tablet only -->
         <button
           type="button"
           data-hs-overlay="#contact-modal"
-          data-open-modal
           aria-haspopup="dialog"
           aria-controls="contact-modal"
           aria-expanded="false"
-          class="hidden lg:inline-flex mt-3 px-3 py-1.5 rounded-full
-                 text-sm font-semibold text-white bg-blue-600/20
-                 hover:bg-blue-600/30 transition"
+          class="mt-3
+    inline-flex items-center justify-center
+    rounded-full
+    text-sm font-semibold text-white
+    bg-blue-600/20 hover:bg-blue-600/30 transition
+    /* mobile padding */
+    px-4 py-2
+    /* desktop/tablet override */
+    lg:px-3 lg:py-1.5"
         >
           Fix my books now
         </button>
-
-        <!-- OPTIONAL: mobile fallback link (super minimal) -->
-        <a
-          href="javascript:void(0)"
-          data-hs-overlay="#contact-modal"
-          data-open-modal
-          aria-haspopup="dialog"
-          aria-controls="contact-modal"
-          aria-expanded="false"
-          class="mt-2 lg:hidden inline text-sm font-semibold underline underline-offset-4 text-gray-200 hover:text-white transition"
-        >
-          Fix my books now
-        </a>
       </div>
 
       <!-- ITEM 4: Nav block -->
