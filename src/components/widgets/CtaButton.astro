@@ -18,8 +18,15 @@ const {
   outline = false,
 } = Astro.props;
 
+// HERO: always full width; parent sets max-width (e.g. 340px in hero)
+// OTHER: original behavior
+const heroWidthClass = 'w-full';
+const widthClass =
+  hero ? heroWidthClass
+  : narrow ? 'w-full sm:w-fit'
+  : 'w-full lg:w-fit';
+
 const paddingX = narrow ? 'px-6 sm:px-8' : 'pl-12 pr-10 sm:pl-16 sm:pr-11';
-const widthClass = narrow ? 'w-full sm:w-fit' : 'w-full lg:w-fit';
 
 const baseSolid = `${btnSolidDarkShell} ${paddingX} ${widthClass}`;
 const baseOutline = `${btnOutlineDarkShell} ${paddingX} ${widthClass}`;

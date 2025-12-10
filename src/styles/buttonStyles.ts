@@ -1,6 +1,13 @@
 // src/styles/buttonStyles.ts
 
-// Shared hero button base (used in the hero + any big primary CTA)
+// Shared motion (modern micro-zoom)
+const btnMotion = `
+  transition-transform duration-150 ease-out
+  hover:scale-[1.02]
+  active:scale-[0.98]
+`;
+
+// Shared hero button base (used in hero + any big primary CTA)
 const btnHeroBase = `
   uppercase
   inline-flex items-center justify-center gap-x-3
@@ -10,6 +17,7 @@ const btnHeroBase = `
   whitespace-nowrap
   disabled:opacity-50 disabled:pointer-events-none
   focus:outline-hidden focus-visible:ring-2
+  ${btnMotion}
 `;
 
 // Primary hero button - white on dark background
@@ -30,7 +38,7 @@ export const btnHeroSecondary = `
   focus-visible:ring-white/70
 `;
 
-// Base for non-hero buttons (section CTAs, etc.)
+// Base shell for non-hero CTAs
 const btnBaseShell = `
   uppercase
   inline-flex items-center justify-center gap-x-2
@@ -39,9 +47,10 @@ const btnBaseShell = `
   whitespace-nowrap
   disabled:opacity-50 disabled:pointer-events-none
   focus-visible:ring-2
+  ${btnMotion}
 `;
 
-// Solid dark button shell (used by both Cal + CTA when "solid")
+// Solid dark button shell
 export const btnSolidDarkShell = `
   ${btnBaseShell}
   border border-transparent
@@ -50,7 +59,7 @@ export const btnSolidDarkShell = `
   focus-visible:ring-[#23335A]/60
 `;
 
-// Outline dark button shell (used by both Cal + CTA when "outline")
+// Outline dark button shell
 export const btnOutlineDarkShell = `
   ${btnBaseShell}
   border border-[#23335A]

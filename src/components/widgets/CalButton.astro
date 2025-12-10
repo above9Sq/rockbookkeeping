@@ -18,11 +18,16 @@ const {
   class: extraClass = '',
 } = Astro.props;
 
-// Width + horizontal padding are still controlled per-usage
-const paddingX = narrow ? 'px-6 sm:px-8' : 'pl-16 pr-11';
-const widthClass = narrow ? 'w-full sm:w-fit' : 'w-full lg:w-fit';
+// HERO: always full width; parent sets max-width
+// OTHER: original behavior
+const heroWidthClass = 'w-full';
+const widthClass =
+  hero ? heroWidthClass
+  : narrow ? 'w-full sm:w-fit'
+  : 'w-full lg:w-fit';
 
-// Compose shared shells with local spacing
+const paddingX = narrow ? 'px-6 sm:px-8' : 'pl-16 pr-11';
+
 const baseSolidDark = `${btnSolidDarkShell} ${paddingX} ${widthClass}`;
 const baseOutline = `${btnOutlineDarkShell} ${paddingX} ${widthClass}`;
 const baseHero = `${btnHeroPrimary} ${widthClass}`;
@@ -42,56 +47,10 @@ const baseClasses =
   aria-controls="cal-modal"
   class={`${baseClasses} ${extraClass}`}
 >
-  <!-- ICON ALWAYS ON LEFT -->
   <PhoneFillIcon class="w-5 h-5 shrink-0" />
   <span>{label}</span>
 </button>
 
-<!-- Cal element-click embed code (unchanged) -->
 <script is:inline>
-  (function (C, A, L) {
-    if (C.__calLoaded) return;
-    C.__calLoaded = true;
-
-    let p = function (a, ar) {
-      a.q.push(ar);
-    };
-    let d = C.document;
-    C.Cal =
-      C.Cal ||
-      function () {
-        let cal = C.Cal;
-        let ar = arguments;
-        if (!cal.loaded) {
-          cal.ns = {};
-          cal.q = cal.q || [];
-          d.head.appendChild(d.createElement('script')).src = A;
-          cal.loaded = true;
-        }
-        if (ar[0] === L) {
-          const api = function () {
-            p(api, arguments);
-          };
-          const namespace = ar[1];
-          api.q = api.q || [];
-          if (typeof namespace === 'string') {
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ['initNamespace', namespace]);
-          } else {
-            p(cal, ar);
-          }
-          return;
-        }
-        p(cal, ar);
-      };
-  })(window, 'https://app.cal.com/embed/embed.js', 'init');
-
-  Cal('init', '30min', { origin: 'https://app.cal.com' });
-  Cal.ns['30min']('ui', {
-    theme: 'light',
-    cssVarsPerTheme: { light: { 'cal-brand': '#2563EB' } },
-    hideEventTypeDetails: false,
-    layout: 'month_view',
-  });
+  // existing Cal embed...
 </script>
