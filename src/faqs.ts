@@ -4,146 +4,132 @@ export type FAQItem = {
 };
 
 export const faqs: FAQItem[] = [
+  // 1) Remove shame immediately — biggest conversion driver
+  {
+    question: "I'm behind on my bookkeeping. Can you still help me?",
+    paragraphs: [
+      'Absolutely. Most clients come to me months behind — sometimes a year or more.',
+      'Catch-up and cleanup work is completely normal. I bring everything up to date, reconcile every account, and deliver clean financials you can finally trust.',
+    ],
+  },
+
+  // 2) Normalize embarrassment — psychologically critical
+  {
+    question: 'My books are a mess and I feel embarrassed. Is that normal?',
+    paragraphs: [
+      'Very normal — almost every new client feels this way before reaching out.',
+      "You're busy running the business. My job is to quietly fix the books so you can have clarity, confidence, and zero stress about your numbers.",
+    ],
+  },
+
+  // 3) Address fees early — reduces anxiety & builds trust
   {
     question: 'What are the fees?',
     paragraphs: [
-      'We use a flat monthly fee.',
-      "We'll talk through your specific business needs and design a plan that serves you best.",
-      'Most owners save $10k/yr and 15 hrs/mo. Buy back your time and peace of mind.',
+      'We use flat monthly pricing.',
+      "We'll talk through your business needs and recommend the right plan.",
+      'Most owners save $10k/year and 15 hours/month. Buy back your time and peace of mind.',
     ],
   },
-  {
-    question: 'What if my books are behind schedule or need a clean-up?',
-    paragraphs: [
-      "That's no problem.",
-      'We have experience cleaning up past records and bringing books up to date.',
-      "We'll review your situation in detail and put everything back in order.",
-    ],
-  },
-  {
-    question: 'Is my financial information secure?',
-    paragraphs: [
-      'Yes — all bookkeeping is done directly inside QuickBooks Online, which uses bank-level encryption and secure cloud storage.',
-      "We don't download or store your data locally. Documents are shared by email or through a secure Google Drive or Dropbox link if you prefer extra protection.",
-    ],
-  },
-  {
-    question: 'What type of bookkeeping services do you offer?',
-    paragraphs: [
-      'We offer two core services:',
-      '• Monthly Bookkeeping – Full reconciliation, categorization, and financial reporting',
-      '• One-Time Cleanup – Fix messy or outdated books fast',
-      'All work is fully remote using secure, simple tools.',
-    ],
-  },
+
+  // 4) Explain how the service works — clarity builds confidence
   {
     question: 'How does monthly bookkeeping work?',
     paragraphs: [
       'Each month we:',
-      '1. Pull in your bank/credit card transactions (automatically or via secure upload)',
-      '2. Categorize every transaction with smart rules',
+      '1. Pull in your bank and credit card transactions',
+      '2. Categorize everything with smart rules + manual review',
       '3. Reconcile all accounts to the penny',
       '4. Deliver clean Profit & Loss, Balance Sheet, and Cash Flow reports',
-      'You get full clarity — no guesswork.',
+      'You get financial clarity without lifting a finger.',
     ],
   },
+
+  // 5) Onboarding & speed — momentum builder
   {
-    question: 'When do you deliver my monthly financial reports?',
+    question: 'How fast can we start and what does onboarding look like?',
     paragraphs: [
-      'Your reports are delivered by the 10th of each month.',
-      'This gives you time to review performance, spot trends, and plan with confidence.',
+      'Onboarding is simple and usually completed in a day.',
+      'We connect your bank feeds, review your chart of accounts, and clean up anything that’s out of place.',
+      "If you're behind, cleanup begins immediately so you can get accurate numbers fast.",
     ],
   },
+
+  // 6) Security reassurance — mandatory for financial services
   {
-    question: 'When and how do I send my documents to you?',
+    question: 'Is my financial information secure?',
     paragraphs: [
-      "You don't have to chase statements.",
-      'We connect directly to your bank feeds in QuickBooks Online for automatic import.',
-      "Or, upload PDFs securely — we'll handle the rest.",
+      'Yes — all work is done inside QuickBooks Online using bank-level encryption.',
+      'We never store your data locally. Statements are uploaded securely or synced directly through QBO.',
     ],
   },
-  {
-    question: 'How soon can we get started?',
-    paragraphs: [
-      'We can get started right away.',
-      "Once we connect your QuickBooks Online account and bank feeds, we'll begin reviewing your books and catching up any past months if needed.",
-    ],
-  },
-  {
-    question: 'What does onboarding look like?',
-    paragraphs: [
-      'Onboarding is simple and usually takes less than a day.',
-      "We'll connect your bank and credit card accounts, confirm your chart of accounts, and set up or clean up your QuickBooks file so everything runs smoothly moving forward.",
-    ],
-  },
-  {
-    question: 'Do you only work with QuickBooks Online?',
-    paragraphs: [
-      'Yes — we are QuickBooks Online Certified ProAdvisors and use QBO exclusively.',
-      "This lets us deliver faster, more accurate results. If you're on Xero, Wave, or spreadsheets, we'll migrate you to QBO for free during onboarding — most clients are live in under a week.",
-    ],
-  },
+
+  // 7) Boundaries around tax prep — avoids misaligned expectations
   {
     question: 'What if I need tax preparation?',
     paragraphs: [
-      "We don't prepare or file taxes.",
-      "But we do make your CPA's job easy: clean, organized, audit-ready books delivered on time.",
-      "We'll even connect directly with your tax pro to answer questions.",
+      'We don’t file taxes, but we make your CPA’s job easy.',
+      'You’ll receive clean, organized, audit-ready books delivered on time.',
+      'We can also work directly with your tax pro to answer questions.',
     ],
   },
+
+  // 8) Sales tax question — small % of visitors, but important to clarify
   {
     question: 'Do you handle sales tax?',
     paragraphs: [
-      'No — we do not file or manage sales tax.',
-      'We track and categorize all sales tax collected and paid so your CPA can file accurately and on time. Clean books = zero tax headaches.',
+      'We don’t file sales tax returns.',
+      'But we track and categorize all sales tax collected and paid so your CPA can file accurately and on time.',
     ],
   },
+
+  // 9) Accuracy assurance — major trust builder
   {
     question: 'How do I know my books will be accurate?',
     paragraphs: [
       'Accuracy is non-negotiable.',
-      'Every transaction is manually reviewed and matched to your statements. We use bank rules + human oversight — no automation-only errors.',
-      "You'll see proof in reconciled accounts and real-time reports.",
+      'Every transaction is reviewed and matched to your statements. We use automation where it helps, but human oversight where it matters.',
+      'The result: fully reconciled accounts and reports you can trust.',
     ],
   },
+
+  // 10) QBO exclusivity — prevents mismatched leads + positions expertise
+  {
+    question: 'Do you only work with QuickBooks Online?',
+    paragraphs: [
+      'Yes — we specialize in QuickBooks Online for speed and accuracy.',
+      "If you're using Xero, Wave, or spreadsheets, we can migrate you to QBO quickly so everything runs smoothly going forward.",
+    ],
+  },
+
+  // 11) No contract — reduces lingering friction
   {
     question: 'Is there a contract or commitment?',
     paragraphs: [
-      'No contracts — you can pause or cancel service at any time.',
+      'No contracts — you can pause or cancel anytime.',
       "We want you to stay because you're happy with the work, not because you're locked in.",
     ],
   },
-  {
-    question: 'How do payments work?',
-    paragraphs: [
-      'Monthly payments are set up automatically by ACH for convenience.',
-      'Credit card payments are also accepted, with a 3% processing fee to cover merchant costs.',
-    ],
-  },
-  {
-    question: 'Do you handle payroll or invoicing?',
-    paragraphs: [
-      "Payroll isn't included in standard bookkeeping plans. We recommend ADP or Gusto for payroll and can help manage setup or ongoing support for an additional fee.",
-      "We can also assist with invoicing (accounts receivable) if you'd like help sending and tracking customer payments.",
-    ],
-  },
+
+  // 12) Why choose you — social proof + differentiation
   {
     question: 'Why should I choose Rock Bookkeeping?',
     paragraphs: [
-      'You get more than a bookkeeper — you get a business partner.',
-      '• Certified QuickBooks ProAdvisors',
+      '• Certified QuickBooks Online ProAdvisors',
       '• Real-world small business experience',
-      '• Flat monthly pricing (no surprises)',
-      '• 48–72 hour cleanup turnaround',
-      '• Direct access via email or phone',
-      'We help you understand your numbers, not just record them.',
+      '• Flat monthly pricing',
+      '• Fast cleanup turnaround',
+      '• Direct access to your bookkeeper (no corporate runaround)',
+      'You get more than bookkeeping — you get clarity, confidence, and support.',
     ],
   },
+
+  // 13) Nationwide reassurance — last, because it's low-friction
   {
     question: 'Do you work with businesses outside of Pittsburgh?',
     paragraphs: [
       'Yes — 100% remote, nationwide.',
-      "Because we use QuickBooks Online, location doesn't matter. From California to Florida, our process is the same: secure, fast, and professional.",
+      "Whether you're across town or across the country, our process is fast, secure, and seamless.",
     ],
   },
 ];
