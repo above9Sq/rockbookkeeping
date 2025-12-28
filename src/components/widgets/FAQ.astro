@@ -3,31 +3,42 @@ import H2 from '~/components/widgets/H2.astro';
 import Container from '~/components/widgets/Container.astro';
 import CalButton from '~/components/widgets/CalButton.astro';
 import FAQSchema from '~/components/seo/FAQSchema.astro';
-import { faqs as faqData } from '~/faqs';
+
+import type { FAQItem } from '~/faqs';
 
 interface Props {
   bgColor?: string;
+  items: FAQItem[];
+  eyebrow?: string;
+  heading?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  sectionId?: string; // so service pages can use different ids if needed
 }
 
-// Match the softer blue used in Pricing
-const { bgColor = '#F7F9FF' } = Astro.props;
+const {
+  bgColor = '#F7F9FF',
+  items,
+  eyebrow = 'Frequently Asked Questions',
+  heading = 'Everything You Were About to Ask Us',
+  ctaLabel = 'Book a call with Josh',
+  ctaHref = '/contact',
+  sectionId = 'faq',
+} = Astro.props;
 
-// Build schema payload directly from rendered content
-const schemaFaqs = faqData.map((f) => ({
+const schemaFaqs = items.map((f) => ({
   question: f.question,
-  // Join paragraphs for the schema answer text
   answer: f.paragraphs.join(' '),
 }));
 ---
 
-<section id="faq" class="py-16 sm:py-20 lg:py-24" style={`background-color: ${bgColor}`}>
+<section id={sectionId} class="py-16 sm:py-20 lg:py-24" style={`background-color: ${bgColor}`}>
   <Container>
     <div class="flex flex-col xl:flex-row gap-14 xl:gap-24 items-start max-w-none">
-      <!-- Left column - heading and CTA -->
       <div class="w-full xl:w-1/2 xl:sticky xl:top-24">
-        <p class="text-xs font-semibold tracking-[0.18em] uppercase text-gray-600 mb-2">Frequently Asked Questions</p>
+        <p class="text-xs font-semibold tracking-[0.18em] uppercase text-gray-600 mb-2">{eyebrow}</p>
 
-        <H2 align="left">Everything You Were About to Ask Us</H2>
+        <H2 align="left">{heading}</H2>
 
         <div class="flex flex-col gap-3 mt-3">
           <p class="text-base sm:text-lg text-gray-700">Still got a question?</p>
@@ -35,16 +46,15 @@ const schemaFaqs = faqData.map((f) => ({
           <p class="text-base sm:text-lg text-gray-700">Submit a question or book a call.</p>
 
           <div class="mt-3">
-            <CalButton narrow label="Book a call with Josh" class="w-full sm:w-auto" />
+            <CalButton narrow label={ctaLabel} href={ctaHref} class="w-full sm:w-auto" />
           </div>
         </div>
       </div>
 
-      <!-- Right column - accordion -->
       <div class="w-full xl:w-1/2">
         <div class="bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] p-6 lg:p-8">
           {
-            faqData.map((faq) => (
+            items.map((faq) => (
               <details class="group border-b border-gray-200 py-4 first:pt-0 last:border-b-0">
                 <summary class="flex items-start gap-4 cursor-pointer list-none select-none">
                   <svg
@@ -99,7 +109,6 @@ const schemaFaqs = faqData.map((f) => ({
     const icon = details.querySelector('summary svg');
     if (!answer || !icon) return;
 
-    // If rendered open, ensure icon matches
     if (details.open) icon.classList.add('rotate-45');
 
     details.addEventListener('click', (e) => {
