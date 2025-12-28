@@ -1,72 +1,77 @@
 ---
 import Image from '~/components/common/Image.astro';
-
-import heroHeadshot from '~/assets/images/hero-headshot-square.png';
 import JoshSignature from '/src/assets/images/josh-signature.svg';
 import CalButton from './CalButton.astro';
 import CtaButton from './CtaButton.astro';
 
-const headline = "Behind on your books? We'll fix that.";
+/** @type {import('~/types/hero').HeroProps} */
+const props = Astro.props;
 
-const subheadline = 'Fast, judgment-free cleanup and accurate books every month.';
+const { headline, subheadline, primaryCta, secondaryCta, image, showSignature = true, bgColor = '#3A4975' } = props;
+
+const primarySize = primaryCta?.size ?? 'md';
+
+// md: keeps your original feel
+// lg: gives the button room (dominant CTA)
+const ctaWrapClass =
+  primarySize === 'lg' ?
+    'mt-2 flex flex-col gap-4 w-full sm:max-w-[520px] mx-auto lg:mx-0'
+  : 'mt-2 flex flex-col gap-4 w-full sm:max-w-[340px] mx-auto lg:mx-0';
 ---
 
-<section data-hero class="bg-[#3A4975] text-white">
+<section data-hero class="text-white" style={`background-color: ${bgColor};`}>
   <div class="max-w-[1600px] mx-auto px-6 xl:pl-[120px] xl:pr-[132px] pt-10 pb-24 sm:pt-16 sm:pb-20 lg:pt-24 lg:pb-32">
-    <!-- Stacks by default, 2-col flex at lg+ -->
     <div class="flex flex-col lg:flex-row items-center lg:items-center gap-12 lg:gap-14 xl:gap-16">
-      <!-- Left column -->
       <div
-        class={`
-          flex flex-col gap-8 xl:gap-9 mx-auto lg:mx-0
-          items-center lg:items-start text-center lg:text-left
-          max-w-[600px] lg:pl-6 xl:pl-10
-        `}
+        class="flex flex-col gap-8 xl:gap-9 mx-auto lg:mx-0 items-center lg:items-start text-center lg:text-left max-w-[600px] lg:pl-6 xl:pl-10"
       >
         <h1
-          class={`
-            mt-0 uppercase text-[32px] leading-[1.0]
-            sm:text-[38px] sm:leading-[1.1]
-            md:text-[45px] md:leading-[1.1]
-            tracking-[-0.02em] md:tracking-[-0.02em]
-            font-bold text-balance
-          `}
+          class="mt-0 uppercase text-[32px] leading-[1.0] sm:text-[38px] sm:leading-[1.1] md:text-[45px] md:leading-[1.1] tracking-[-0.02em] md:tracking-[-0.02em] font-bold text-balance"
         >
           {headline}
         </h1>
 
-        <p class="text-base sm:text-lg leading-relaxed tracking-[0.01em] text-gray-200">
-          {subheadline}
-        </p>
+        {
+          subheadline ?
+            <p class="text-base sm:text-lg leading-relaxed tracking-[0.01em] text-gray-200">{subheadline}</p>
+          : null
+        }
 
-        <!-- CTAs -->
-        <div class="mt-2 flex flex-col gap-4 w-full sm:max-w-[340px] mx-auto lg:mx-0">
-          <CalButton narrow hero class="btn-pop" label="Book a call with Josh" />
-          <CtaButton narrow hero label="Send Josh a quick note" />
+        <div class={ctaWrapClass}>
+          {
+            primaryCta.kind === 'cal' ?
+              <CalButton narrow hero class={primaryCta.class ?? ''} label={primaryCta.label} />
+            : <CtaButton narrow hero class={primaryCta.class ?? ''} label={primaryCta.label} />
+          }
+
+          {
+            secondaryCta ?
+              secondaryCta.kind === 'cal' ?
+                <CalButton narrow hero class={secondaryCta.class ?? ''} label={secondaryCta.label} />
+              : <CtaButton narrow hero class={secondaryCta.class ?? ''} label={secondaryCta.label} />
+            : null
+          }
         </div>
       </div>
 
-      <!-- Right column -->
       <div class="flex justify-center mt-6 lg:mt-0 lg:flex-1">
         <div class="relative w-full max-w-[300px] sm:max-w-[340px] lg:max-w-[385px] mx-auto lg:mx-0">
           <Image
-            src={heroHeadshot}
-            alt="Josh Cesana, Rock Bookkeeping"
-            width={385}
-            height={341}
-            loading="eager"
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            loading={image.loading ?? 'lazy'}
             decoding="async"
-            fetchpriority="high"
+            fetchpriority={image.fetchpriority ?? 'auto'}
             class="w-full rounded-[20px] object-cover"
           />
 
-          <JoshSignature
-            class={`
-              absolute -bottom-8 sm:-bottom-12 lg:-bottom-14
-              left-[68%] -translate-x-1/2
-              w-[150px] sm:w-[190px] lg:w-[210px] h-auto
-            `}
-          />
+          {
+            showSignature ?
+              <JoshSignature class="absolute -bottom-8 sm:-bottom-12 lg:-bottom-14 left-[68%] -translate-x-1/2 w-[150px] sm:w-[190px] lg:w-[210px] h-auto" />
+            : null
+          }
         </div>
       </div>
     </div>
