@@ -1,19 +1,14 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Testimonial from '~/components/widgets/Testimonial.astro';
+// import Hero from '~/components/widgets/Hero.astro';
+import HomeHero from '~/components/widgets/HomeHero.astro';
 import TestimonialQuincy from '~/components/widgets/TestimonialQuincy.astro';
-import EmpathyAndConversion from '~/components/widgets/EmpathyAndConversion.astro';
-import ContentBlock from '~/components/widgets/ContentBlock.astro';
 import Services from '~/components/widgets/Services.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
-import FAQ from '~/components/widgets/FAQ.astro';
+// import FAQ from '~/components/widgets/FAQ.astro';
+import HomeFAQ from '~/components/widgets/HomeFAQ.astro';
 import ContactSection from '~/components/widgets/ContactSection.astro';
-
-import step1Image from '~/assets/images/step1.png';
-import step2Image from '~/assets/images/step2.png';
-import step3Image from '~/assets/images/step3.png';
 
 const metadata = {
   title: 'Rock Bookkeeping - We handle your bookkeeping. You handle your business.',
@@ -22,10 +17,11 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <Hero />
+  <HomeHero />
   <TestimonialQuincy />
   <Services bgColor="#FBFCFC" />
   <Pricing bgColor="#f7f9ff" />
-  <FAQ bgColor="#f9fafb" />
+  <!-- <FAQ bgColor="#f9fafb" /> -->
+  <HomeFAQ bgColor="#f9fafb" />
   <ContactSection />
 </Layout>
