@@ -1,0 +1,12 @@
+---
+import FAQ from '~/components/widgets/FAQ.astro';
+import { faqs } from '~/faqs';
+
+interface Props {
+  bgColor?: string;
+}
+
+const { bgColor } = Astro.props;
+---
+
+<FAQ bgColor={bgColor} items={faqs} sectionId="faq" />

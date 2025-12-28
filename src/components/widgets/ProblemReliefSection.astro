@@ -1,0 +1,58 @@
+---
+import H2 from '~/components/widgets/H2.astro';
+import Container from '~/components/widgets/Container.astro';
+
+export interface ProblemReliefItem {
+  problem: string;
+  relief: string;
+}
+
+export interface Props {
+  id?: string;
+  header: string;
+  intro?: string[];
+  items: ProblemReliefItem[];
+  callout?: string;
+  bgColor?: string;
+}
+
+const { id = 'problem-relief', header, intro = [], items, callout, bgColor = '#F7F9FF' } = Astro.props;
+
+const safeItems = Array.isArray(items) ? items : [];
+---
+
+<section id={id} class="py-14 sm:py-16 lg:py-20" style={`background-color: ${bgColor}`}>
+  <Container narrow maxWidth="max-w-[93rem]">
+    <div class="flex flex-col gap-8 lg:gap-10">
+      <!-- Header -->
+      <div class="w-full max-w-2xl">
+        <H2 align="left">{header}</H2>
+
+        {
+          intro.length > 0 && (
+            <div class="mt-4 space-y-3">
+              {intro.map((paragraph) => (
+                <p class="text-base sm:text-lg text-gray-700 text-left">{paragraph}</p>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Problem -> Relief list -->
+      <ul class="flex flex-col gap-5 sm:gap-6 max-w-3xl">
+        {
+          safeItems.map((item) => (
+            <li class="rounded-lg bg-white p-4 sm:p-5 shadow-[0_2px_10px_rgba(0,0,0,0.05)]">
+              <p class="text-base sm:text-lg font-semibold text-gray-900">{item.problem}</p>
+              <p class="mt-1.5 text-sm sm:text-base leading-relaxed text-gray-700">{item.relief}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Callout -->
+      {callout && <p class="text-base sm:text-lg font-semibold text-gray-900 max-w-3xl">{callout}</p>}
+    </div>
+  </Container>
+</section>

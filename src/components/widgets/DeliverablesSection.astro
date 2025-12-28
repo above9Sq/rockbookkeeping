@@ -1,0 +1,63 @@
+---
+import H2 from '~/components/widgets/H2.astro';
+import Container from '~/components/widgets/Container.astro';
+
+export interface DeliverableItem {
+  title: string;
+  description: string;
+}
+
+export interface Props {
+  id?: string;
+  header: string;
+  intro?: string | string[];
+  items: DeliverableItem[];
+  callout?: string;
+  bgColor?: string;
+}
+
+const { id = 'deliverables', header, intro, items, callout, bgColor = '#FFFFFF' } = Astro.props;
+
+const introParagraphs =
+  Array.isArray(intro) ? intro
+  : typeof intro === 'string' && intro.trim().length > 0 ? [intro]
+  : [];
+
+const safeItems = Array.isArray(items) ? items : [];
+---
+
+<section id={id} class="py-14 sm:py-16 lg:py-20" style={`background-color: ${bgColor}`}>
+  <Container narrow maxWidth="max-w-[93rem]">
+    <div class="flex flex-col gap-8 lg:gap-10">
+      <!-- Header -->
+      <div class="w-full max-w-2xl">
+        <H2 align="left">{header}</H2>
+
+        {
+          introParagraphs.length > 0 && (
+            <div class="mt-4 space-y-3">
+              {introParagraphs.map((paragraph) => (
+                <p class="text-base sm:text-lg text-gray-700 text-left">{paragraph}</p>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Deliverables list -->
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 max-w-4xl">
+        {
+          safeItems.map((item) => (
+            <li class="rounded-lg bg-white p-5 sm:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.05)]">
+              <p class="text-base sm:text-lg font-semibold text-gray-900">{item.title}</p>
+              <p class="mt-1.5 text-sm sm:text-base leading-relaxed text-gray-700">{item.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Callout -->
+      {callout && <p class="text-base sm:text-lg font-semibold text-gray-900 max-w-3xl">{callout}</p>}
+    </div>
+  </Container>
+</section>

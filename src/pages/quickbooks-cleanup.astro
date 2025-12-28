@@ -1,0 +1,133 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import TestimonialQuincy from '~/components/widgets/TestimonialQuincy.astro';
+import ReassuranceSection from '~/components/widgets/ReassuranceSection.astro';
+import ProblemReliefSection from '~/components/widgets/ProblemReliefSection.astro';
+import ProcessSection from '~/components/widgets/ProcessSection.astro';
+import DeliverablesSection from '~/components/widgets/DeliverablesSection.astro';
+import FAQ from '~/components/widgets/FAQ.astro';
+import ContactSection from '~/components/widgets/ContactSection.astro';
+
+import { quickbooksCleanupFaqs } from '~/content/servicePages/quickbooksCleanupFaqs';
+
+import type { HeroProps } from '~/types/hero';
+import heroHeadshot from '~/assets/images/hero-headshot-square.png';
+
+const heroProps = {
+  headline: 'QuickBooks cleanup, done fast.',
+  subheadline:
+    "If your books are behind, we'll catch them up in QuickBooks Online and make your reports accurate again. No stress, no judgment.",
+  primaryCta: { kind: 'cal', label: 'Book a call with Josh' },
+  secondaryCta: { kind: 'modal', label: 'Send Josh a quick note' },
+  image: {
+    src: heroHeadshot,
+    alt: 'Josh Cesana, Rock Bookkeeping',
+    width: 385,
+    height: 341,
+    loading: 'eager',
+    fetchpriority: 'high',
+  },
+  showSignature: false,
+  bgColor: '#3A4975',
+} satisfies HeroProps;
+
+const metadata = {
+  title: 'QuickBooks Cleanup - Rock Bookkeeping',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero {...heroProps} />
+
+  <ReassuranceSection
+    header="Behind on your books doesn't mean you failed"
+    paragraphs={[
+      "Most business owners don't keep up with bookkeeping every month. Life gets busy, tax season ends, and the books fall behind.",
+      "Catching up comes next. It's fixable, and you don't have to do it yourself.",
+    ]}
+    bgColor="#E3EDFF"
+  />
+
+  <TestimonialQuincy />
+
+  <ProblemReliefSection
+    header="What we fix during a cleanup"
+    intro={[
+      "We go back as far as needed to get your books accurate. Whether that's catching up a few months or sorting out a full year.",
+    ]}
+    items={[
+      {
+        problem: 'Transactions are uncategorized or inconsistent',
+        relief: 'We review and categorize everything so your income and expenses land in the right places.',
+      },
+      {
+        problem: "Bank and credit card balances don't match your statements",
+        relief: 'We reconcile everything so QuickBooks lines up with reality, not just what got entered.',
+      },
+      {
+        problem: 'Duplicates, missing entries, or messy transfers',
+        relief: 'We fix transactions that were entered twice, left out, miscategorized, or tangled up.',
+      },
+      {
+        problem: 'Undeposited funds and uncategorized amounts sitting in suspense',
+        relief: 'We clear out anything stuck in holding and get your money categorized correctly.',
+      },
+    ]}
+    callout="Your P&L, Balance Sheet, and reports will be clean and reliable, so you can actually trust them."
+    bgColor="#F7F9FF"
+  />
+
+  <ProcessSection
+    header="How a cleanup works"
+    intro="Simple. We handle everything directly in your QuickBooks Online."
+    steps={[
+      {
+        title: 'Free cleanup review',
+        body: 'We look at your books and outline exactly what needs to be fixed.',
+      },
+      {
+        title: 'Assess and kickoff',
+        body: 'We give you a flat quote, you approve it, and we get started.',
+      },
+      {
+        title: 'Cleanup and reconcile',
+        body: 'We fix everything, reconcile your accounts, and clean up your reports.',
+      },
+      {
+        title: 'Close project and walk through',
+        body: "We go over what we did and answer anything you're wondering about.",
+      },
+    ]}
+  />
+
+  <DeliverablesSection
+    header="What you'll get when it's done"
+    intro="Your books will be fully caught up. Your financial reports will be accurate and ready to use."
+    items={[
+      {
+        title: 'Accurate reconciliations and clean records',
+        description: 'All your transactions matched and reconciled correctly, with clean supporting records.',
+      },
+      {
+        title: 'Clean P&L and Balance Sheet reports',
+        description: "Your Profit & Loss and Balance Sheet will actually show you what's happening in your business.",
+      },
+      {
+        title: 'Confidence in your numbers (and peace of mind)',
+        description:
+          "You'll know your books are reliable so you can file taxes, apply for loans, or just know where you stand.",
+      },
+      {
+        title: 'Clear, usable reports you can actually understand',
+        description: 'No more guessing. Your reports will show you real numbers in plain terms you can act on.',
+      },
+    ]}
+    callout="If you want, we can transition into monthly bookkeeping to keep everything clean."
+    bgColor="#FFFFFF"
+  />
+
+  <FAQ bgColor="#f9fafb" items={quickbooksCleanupFaqs} />
+  <ContactSection />
+</Layout>

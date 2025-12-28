@@ -1,0 +1,19 @@
+---
+import Container from '~/components/widgets/Container.astro';
+import ReassuranceBanner from '~/components/widgets/ReassuranceBanner.astro';
+
+export interface Props {
+  id?: string;
+  header: string;
+  paragraphs: string[];
+  bgColor?: string;
+}
+
+const { id = 'reassurance', header, paragraphs, bgColor = '#E3EDFF' } = Astro.props;
+---
+
+<section id={id} class="pt-10 sm:pt-12 lg:pt-14 pb-8 sm:pb-10 lg:pb-12">
+  <Container narrow maxWidth="max-w-[93rem]">
+    <ReassuranceBanner header={header} paragraphs={paragraphs} bgColor={bgColor} />
+  </Container>
+</section>

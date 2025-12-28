@@ -1,0 +1,23 @@
+---
+import Hero from './Hero.astro';
+import heroHeadshot from '~/assets/images/hero-headshot-square.png';
+
+const hero = {
+  headline: "Behind on your books? We'll fix that.",
+  subheadline: 'Fast, judgment-free cleanup and accurate books every month.',
+  primaryCta: { kind: 'cal', label: 'Book a call with Josh', class: 'btn-pop' },
+  secondaryCta: { kind: 'modal', label: 'Send Josh a quick note' },
+  image: {
+    src: heroHeadshot,
+    alt: 'Josh Cesana, Rock Bookkeeping',
+    width: 385,
+    height: 341,
+    loading: 'eager',
+    fetchpriority: 'high',
+  },
+  showSignature: true,
+  bgColor: '#3A4975',
+};
+---
+
+<Hero {...hero} />

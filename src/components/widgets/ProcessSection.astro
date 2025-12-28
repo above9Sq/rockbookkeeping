@@ -1,0 +1,76 @@
+---
+import H2 from '~/components/widgets/H2.astro';
+import Container from '~/components/widgets/Container.astro';
+
+export interface ProcessStep {
+  title: string;
+  body: string;
+}
+
+export interface Props {
+  id?: string;
+  header: string;
+  intro?: string | string[];
+  steps: ProcessStep[];
+  callout?: string;
+  bgColor?: string;
+}
+
+const { id = 'process', header, intro, steps, callout, bgColor = '#FFFFFF' } = Astro.props;
+
+const introParagraphs =
+  Array.isArray(intro) ? intro
+  : typeof intro === 'string' && intro.trim().length > 0 ? [intro]
+  : [];
+
+const safeSteps = Array.isArray(steps) ? steps : [];
+---
+
+<section id={id} class="py-14 sm:py-16 lg:py-20" style={`background-color: ${bgColor}`}>
+  <Container narrow maxWidth="max-w-[93rem]">
+    <div class="flex flex-col gap-8 lg:gap-10">
+      <!-- Header -->
+      <div class="w-full max-w-2xl">
+        <H2 align="left">{header}</H2>
+
+        {
+          introParagraphs.length > 0 && (
+            <div class="mt-4 space-y-3">
+              {introParagraphs.map((paragraph) => (
+                <p class="text-base sm:text-lg text-gray-700 text-left">{paragraph}</p>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Steps -->
+      <ol class="grid grid-cols-1 gap-5 sm:gap-6 max-w-3xl">
+        {
+          safeSteps.map((step, index) => (
+            <li class="rounded-lg bg-white p-5 sm:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.05)]">
+              <div class="flex items-start gap-3">
+                <span
+                  class="inline-flex items-center justify-center shrink-0
+                         w-9 h-9 rounded-full bg-[#E3EDFF] text-[#23335A]
+                         text-sm font-black"
+                  aria-hidden="true"
+                >
+                  {index + 1}
+                </span>
+
+                <div>
+                  <p class="text-base sm:text-lg font-semibold text-gray-900">{step.title}</p>
+                  <p class="mt-1.5 text-sm sm:text-base leading-relaxed text-gray-700">{step.body}</p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <!-- Callout -->
+      {callout && <p class="text-base sm:text-lg font-semibold text-gray-900 max-w-3xl">{callout}</p>}
+    </div>
+  </Container>
+</section>
