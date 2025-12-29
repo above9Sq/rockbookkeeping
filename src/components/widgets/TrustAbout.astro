@@ -1,0 +1,62 @@
+---
+// src/components/widgets/TrustAbout.astro
+import { Image } from 'astro:assets';
+import Container from '~/components/widgets/Container.astro';
+import H2 from './H2.astro';
+
+export interface Props {
+  id?: string;
+  header: string;
+  paragraphs: string[];
+  bgColor?: string;
+
+  // Optional photo (recommended)
+  imageSrc?: any;
+  imageAlt?: string;
+}
+
+const {
+  id = 'about-josh',
+  header,
+  paragraphs = [],
+  bgColor = 'bg-[#F7F9FF]',
+  imageSrc,
+  imageAlt = 'Josh Cesana - Owner & Bookkeeper',
+} = Astro.props;
+
+const safeParagraphs = Array.isArray(paragraphs) ? paragraphs : [];
+---
+
+<section id={id} class={`pt-10 sm:pt-12 lg:pt-14 pb-10 sm:pb-12 lg:pb-14 ${bgColor}`}>
+  <Container narrow maxWidth="max-w-[93rem]">
+    <div class="flex flex-col gap-10 lg:gap-12">
+      <H2 align="left">{header}</H2>
+
+      <div class="flex flex-col lg:flex-row items-start gap-10 lg:gap-12 xl:gap-16">
+        <!-- Text -->
+        <div class="flex-1 max-w-3xl">
+          <div class="space-y-4 sm:space-y-5 text-base sm:text-lg leading-relaxed text-[#334155]">
+            {safeParagraphs.map((text) => <p>{text}</p>)}
+          </div>
+        </div>
+
+        {
+          imageSrc && (
+            <div class="flex-1 w-full lg:max-w-[360px]">
+              <div class="flex justify-center lg:justify-end">
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt}
+                  class="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] rounded-full object-cover border border-black/10 shadow-[0_8px_28px_rgba(0,0,0,0.08)]"
+                  loading="lazy"
+                  width={396}
+                  height={396}
+                />
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </Container>
+</section>

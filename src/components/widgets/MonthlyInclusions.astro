@@ -1,0 +1,75 @@
+---
+// src/components/widgets/MonthlyInclusions.astro
+import Container from '~/components/widgets/Container.astro';
+import H2 from './H2.astro';
+import CheckIcon from '/src/assets/images/checkmark.svg';
+
+export type InclusionItem = {
+  title: string;
+  description: string;
+};
+
+export interface Props {
+  id?: string;
+  header: string;
+  intro?: string;
+  items: InclusionItem[];
+}
+
+const { id = 'monthly-inclusions', header, intro = '', items = [] } = Astro.props;
+const safeItems = Array.isArray(items) ? items : [];
+---
+
+<section id={id} class="py-16 sm:py-24 bg-white">
+  <Container narrow>
+    <div class="text-center mb-16">
+      <H2 align="center">{header}</H2>
+      {intro && <p class="mt-4 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto italic">{intro}</p>}
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      {
+        /* Grounded Service List: 
+        Uses soft depth instead of harsh table borders 
+      */
+      }
+      <div class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden border border-slate-50">
+        {/* Subtle, Sophisticated Header Row */}
+        <div class="grid grid-cols-[1fr_100px] px-8 py-5 border-b border-slate-100 bg-slate-50/50">
+          <span class="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-400">
+            Professional Monthly Service
+          </span>
+          <span class="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-400 text-center"> Included </span>
+        </div>
+
+        <div>
+          {
+            safeItems.map((item, idx) => (
+              <div
+                class={`grid grid-cols-[1fr_100px] px-8 py-7 sm:py-8 transition-colors hover:bg-slate-50/30 ${
+                  idx !== safeItems.length - 1 ? 'border-b border-slate-100' : ''
+                }`}
+              >
+                <div class="pr-6">
+                  <h3 class="text-lg font-bold text-[#012D79] leading-tight">{item.title}</h3>
+                  <p class="mt-2 text-base text-slate-600 leading-relaxed font-normal">{item.description}</p>
+                </div>
+
+                <div class="flex items-center justify-center">
+                  <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
+                    <CheckIcon class="w-5 h-5 text-[#0075DD]" aria-hidden="true" />
+                  </div>
+                  <span class="sr-only">Included</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="mt-8 text-center text-sm text-slate-400">
+        Everything needed to keep your books reconciled and tax-ready every month.
+      </p>
+    </div>
+  </Container>
+</section>

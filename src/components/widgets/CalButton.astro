@@ -1,11 +1,13 @@
 ---
 import PhoneFillIcon from '/src/assets/images/phone-fill.svg';
-import { btnHeroPrimary, btnSolidDarkShell, btnOutlineDarkShell } from '~/styles/buttonStyles';
+import { buttonClasses, type ButtonVariant } from '~/styles/buttonStyles';
 
 export interface Props {
   label?: string;
   narrow?: boolean;
   hero?: boolean;
+  variant?: ButtonVariant;
+  // Legacy: kept for compatibility; prefer `variant`
   solidDark?: boolean;
   class?: string;
 }
@@ -14,28 +16,24 @@ const {
   label = 'Book a free call',
   narrow = false,
   hero = false,
+  variant,
   solidDark = false,
   class: extraClass = '',
 } = Astro.props;
 
-// HERO: always full width; parent sets max-width
-// OTHER: original behavior
-const heroWidthClass = 'w-full';
-const widthClass =
-  hero ? heroWidthClass
-  : narrow ? 'w-full sm:w-fit'
-  : 'w-full lg:w-fit';
+const resolvedVariant: ButtonVariant =
+  variant ??
+  (hero ? 'light' : undefined) ??
+  (solidDark ? 'dark' : undefined) ??
+  'outline';
 
-const paddingX = narrow ? 'px-6 sm:px-8' : 'pl-16 pr-11';
-
-const baseSolidDark = `${btnSolidDarkShell} ${paddingX} ${widthClass}`;
-const baseOutline = `${btnOutlineDarkShell} ${paddingX} ${widthClass}`;
-const baseHero = `${btnHeroPrimary} ${widthClass}`;
-
-const baseClasses =
-  hero ? baseHero
-  : solidDark ? baseSolidDark
-  : baseOutline;
+const size = hero ? 'hero' : 'md';
+const baseClasses = buttonClasses({
+  variant: resolvedVariant,
+  size,
+  fullWidth: hero,
+  narrow,
+});
 ---
 
 <button

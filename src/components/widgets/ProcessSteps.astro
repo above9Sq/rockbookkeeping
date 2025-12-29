@@ -1,0 +1,70 @@
+---
+// src/components/widgets/Process.astro
+import Container from '~/components/widgets/Container.astro';
+import H2 from './H2.astro';
+
+export type StepItem = {
+  title: string;
+  description: string;
+};
+
+export interface Props {
+  id?: string;
+  header: string;
+  intro?: string;
+  steps: StepItem[];
+}
+
+const { id = 'process', header, intro = '', steps = [] } = Astro.props;
+const safeSteps = Array.isArray(steps) ? steps : [];
+
+// Professional Palette
+const navy = '#012D79';
+const softSpine = '#E2E8F0';
+---
+
+<section id={id} class="py-16 sm:py-24 bg-white">
+  <Container narrow>
+    <div class="text-center mb-16">
+      <H2 align="center">{header}</H2>
+      {intro && <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto italic">{intro}</p>}
+    </div>
+
+    <div class="max-w-2xl mx-auto relative">
+      {/* The Spine: Solid and grounded */}
+      {/* The Dynamic Spine: Stops exactly at the center of the last circle */}
+      <ol class="max-w-2xl mx-auto relative">
+        {
+          safeSteps.map((step, idx) => (
+            <li class="relative flex items-start gap-8 sm:gap-12 pb-12 sm:pb-16 last:pb-0">
+              {/* 1. The Connector Line (Only renders if NOT the last item) */}
+              {idx !== safeSteps.length - 1 && (
+                <div
+                  class="absolute left-[19px] sm:left-[23px] top-10 bottom-0 w-0.5"
+                  style={`background-color: ${softSpine}`}
+                  aria-hidden="true"
+                />
+              )}
+
+              {/* 2. Professional Number Circle */}
+              <div class="relative shrink-0 z-10">
+                <div
+                  class="h-10 w-10 sm:h-12 sm:w-12 rounded-full flex items-center justify-center font-bold text-lg sm:text-xl border-4 border-white"
+                  style={`background-color: ${navy}; color: #ffffff;`}
+                >
+                  {idx + 1}
+                </div>
+              </div>
+
+              {/* 3. Text Content */}
+              <div class="pt-1.5 sm:pt-2">
+                <h3 class="text-xl sm:text-2xl font-bold text-[#012D79] leading-tight">{step.title}</h3>
+                <p class="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed">{step.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Container>
+</section>

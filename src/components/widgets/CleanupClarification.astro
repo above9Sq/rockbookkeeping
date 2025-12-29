@@ -1,0 +1,53 @@
+---
+// src/components/widgets/CleanupClarification.astro
+import Container from '~/components/widgets/Container.astro';
+import H2 from './H2.astro';
+
+export type CleanupCard = {
+  title: string;
+  body: string;
+};
+
+export interface Props {
+  id?: string;
+  header: string;
+  intro?: string;
+  cards: CleanupCard[];
+}
+
+const { id = 'cleanup-clarification', header, intro = '', cards = [] } = Astro.props;
+const safeCards = Array.isArray(cards) ? cards.slice(0, 4) : [];
+---
+
+<section id={id} class="py-16 sm:py-24 bg-slate-50">
+  <Container narrow>
+    <div class="text-center mb-16">
+      <H2 align="center">{header}</H2>
+      {intro && <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto italic">{intro}</p>}
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {
+        safeCards.map((card) => (
+          <div class="h-full">
+            <article
+              class="
+                flex flex-col h-full
+                bg-white 
+                rounded-2xl 
+                p-8 sm:p-10
+                border border-slate-200/50
+                /* Standardizing our boutique shadow */
+                shadow-[0_8px_30px_rgb(0,0,0,0.04)]
+                transition-shadow duration-300 hover:shadow-[0_15px_45px_rgb(0,0,0,0.07)]
+              "
+            >
+              <h3 class="text-xl sm:text-2xl font-bold text-[#012D79] leading-tight mb-4">{card.title}</h3>
+              <p class="text-base sm:text-lg text-slate-600 leading-relaxed">{card.body}</p>
+            </article>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</section>

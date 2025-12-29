@@ -1,12 +1,14 @@
 ---
 import MailIcon from '/src/assets/images/mail.svg';
-import { btnHeroSecondary, btnSolidDarkShell, btnOutlineDarkShell } from '~/styles/buttonStyles';
+import { buttonClasses, type ButtonVariant } from '~/styles/buttonStyles';
 
 export interface Props {
   label?: string;
   narrow?: boolean;
   class?: string;
   hero?: boolean;
+  variant?: ButtonVariant;
+  // Legacy: kept for compatibility; prefer `variant`
   outline?: boolean;
 }
 
@@ -15,27 +17,23 @@ const {
   narrow = false,
   class: extraClass = '',
   hero = false,
+  variant,
   outline = false,
 } = Astro.props;
 
-// HERO: always full width; parent sets max-width (e.g. 340px in hero)
-// OTHER: original behavior
-const heroWidthClass = 'w-full';
-const widthClass =
-  hero ? heroWidthClass
-  : narrow ? 'w-full sm:w-fit'
-  : 'w-full lg:w-fit';
+const resolvedVariant: ButtonVariant =
+  variant ??
+  (hero ? 'outlineLight' : undefined) ??
+  (outline ? 'outline' : undefined) ??
+  'dark';
 
-const paddingX = narrow ? 'px-6 sm:px-8' : 'pl-12 pr-10 sm:pl-16 sm:pr-11';
-
-const baseSolid = `${btnSolidDarkShell} ${paddingX} ${widthClass}`;
-const baseOutline = `${btnOutlineDarkShell} ${paddingX} ${widthClass}`;
-const baseHero = `${btnHeroSecondary} ${widthClass}`;
-
-const baseClasses =
-  hero ? baseHero
-  : outline ? baseOutline
-  : baseSolid;
+const size = hero ? 'hero' : 'md';
+const baseClasses = buttonClasses({
+  variant: resolvedVariant,
+  size,
+  fullWidth: hero,
+  narrow,
+});
 ---
 
 <button

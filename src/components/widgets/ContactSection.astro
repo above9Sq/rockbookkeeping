@@ -12,7 +12,7 @@ interface Props {
   bgColor?: string;
 }
 
-const { bgColor = '#F7F9FF' } = Astro.props;
+const { bgColor = '#012D78' } = Astro.props;
 
 const { phoneNumber } = headerData;
 const strippedPhone = phoneNumber.replace(/[^0-9]/g, '');
@@ -26,17 +26,17 @@ const location = 'Pittsburgh, PA';
 <section id="contact" class="py-16 sm:py-20 lg:py-24" style={`background-color: ${bgColor}`}>
   <Container narrow maxWidth="max-w-[93rem]">
     <div class="max-w-3xl">
-      <H2 align="left">Get in Touch</H2>
+      <H2 align="left" color="light" weight="black">Get in Touch</H2>
 
-      <p class="mt-4 text-base sm:text-lg text-gray-700">
+      <p class="mt-4 text-base sm:text-lg text-white">
         Have a question or want to see if we are a fit? I reply the same business day.
       </p>
 
       <!-- Contact info -->
-      <div class="mt-6 space-y-3 text-sm sm:text-base text-gray-800">
+      <div class="mt-6 space-y-3 text-sm sm:text-base text-white">
         <!-- Phone -->
         <div class="flex items-center gap-3">
-          <PhoneIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-gray-700" />
+          <PhoneIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
           <a href={phoneHref} class="hover:text-gray-900">
             {phoneNumber}
           </a>
@@ -44,7 +44,7 @@ const location = 'Pittsburgh, PA';
 
         <!-- Email -->
         <div class="flex items-center gap-3">
-          <MailIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-gray-700" />
+          <MailIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
           <a href={`mailto:${email}`} class="hover:text-gray-900">
             {email}
           </a>
@@ -52,30 +52,30 @@ const location = 'Pittsburgh, PA';
 
         <!-- Location -->
         <div class="flex items-center gap-3">
-          <LocationPinIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-gray-700" />
+          <LocationPinIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
           <span>{location}</span>
         </div>
       </div>
 
       <!-- Primary CTAs -->
       <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-        <CalButton narrow label="Book a call with Josh" solidDark />
+        <CalButton narrow variant="light" label="Book a call with Josh" solidDark />
 
-        <CtaButton narrow label="Send Josh a quick note" outline />
+        <CtaButton narrow variant="outlineLight" label="Send Josh a quick note" outline />
       </div>
 
       <!-- Reassurance + text CTA -->
-      <div class="mt-5 space-y-2 text-sm text-gray-600">
+      <div class="mt-5 space-y-2 text-sm text-gray-100">
         <div class="flex flex-wrap items-center gap-2">
           <span>Prefer texting?</span>
           <a
             href={smsHref}
-            class="inline-flex items-center rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs sm:text-[0.8rem] font-semibold text-blue-700 hover:bg-blue-100 hover:border-blue-200"
+            class="inline-flex items-center rounded-full border border-blue-100 bg-transparent px-3 py-1 text-xs sm:text-[0.8rem] font-semibold text-blue-50 hover:bg-blue-900/50 hover:border-blue-200"
           >
             Text Josh: {phoneNumber}
           </a>
         </div>
-        <p class="text-gray-500 text-xs sm:text-sm">No pressure or commitment - just a quick chat about your books.</p>
+        <p class="text-gray-100 text-xs sm:text-sm">No pressure or commitment - just a quick chat about your books.</p>
       </div>
     </div>
   </Container>

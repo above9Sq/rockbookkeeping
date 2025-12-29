@@ -1,0 +1,80 @@
+---
+// src/components/widgets/PricingExpectations.astro
+import Container from '~/components/widgets/Container.astro';
+import H2 from './H2.astro';
+import CheckIcon from '~/assets/images/checkmark.svg';
+
+export interface Props {
+  id?: string;
+  header: string;
+  paragraphs: string[];
+  bullets?: string[];
+  closing?: string;
+}
+
+const { id = 'pricing-expectations', header, paragraphs = [], bullets = [], closing = '' } = Astro.props;
+
+const safeParagraphs = Array.isArray(paragraphs) ? paragraphs : [];
+const safeBullets = Array.isArray(bullets) ? bullets : [];
+
+const heroParagraph = safeParagraphs[0];
+const remainingParagraphs = safeParagraphs.slice(1);
+---
+
+<section id={id} class="py-16 sm:py-24 bg-white border-t border-slate-100">
+  <Container narrow>
+    <div class="max-w-5xl mx-auto">
+      {/* 1. Centered Header & Direct Price Statement */}
+      <div class="text-center mb-16 lg:mb-20">
+        <H2 align="center">{header}</H2>
+
+        {
+          heroParagraph && (
+            <div class="mt-6">
+              <p class="text-2xl sm:text-3xl font-bold text-[#012D79] tracking-tight">{heroParagraph}</p>
+              <div class="w-16 h-1 bg-blue-600 mx-auto mt-6 rounded-full opacity-20" />
+            </div>
+          )
+        }
+      </div>
+
+      {/* 2. Side-by-Side Professional Layout */}
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        {/* Left Side: The Narrative (Empathy) */}
+        <div class="space-y-6">
+          <h3 class="text-2xl font-bold text-[#012D79] leading-tight">
+            Clear, predictable pricing <br class="hidden sm:block" /> with no surprises.
+          </h3>
+          <div class="space-y-5 text-slate-700 text-lg leading-relaxed">
+            {remainingParagraphs.map((text) => <p>{text}</p>)}
+          </div>
+
+          {
+            closing && (
+              <div class="pt-6 border-t border-slate-200">
+                <p class="text-base text-slate-500 italic leading-relaxed">{closing}</p>
+              </div>
+            )
+          }
+        </div>
+
+        {/* Right Side: The Details (Clarity) */}
+        <div class="bg-slate-50 rounded-2xl p-8 sm:p-10 border border-slate-100">
+          <p class="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-slate-400 mb-6">Complexity Factors</p>
+          <ul class="space-y-5">
+            {
+              safeBullets.map((item) => (
+                <li class="flex items-start gap-4">
+                  <div class="mt-1 flex-shrink-0">
+                    <CheckIcon class="w-5 h-5 text-blue-700" aria-hidden="true" />
+                  </div>
+                  <span class="text-slate-800 font-medium text-lg leading-snug">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

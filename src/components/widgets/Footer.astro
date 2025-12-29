@@ -4,7 +4,7 @@ import { getHomePermalink } from '~/utils/permalinks';
 import { Image } from 'astro:assets';
 
 // SVGs as components
-import Logo from '/src/assets/images/rb-logo-stacked-compact-dark.svg';
+import Logo from '/src/assets/images/rb-logo-stacked-compact-light-v2.svg';
 import PhoneIcon from '/src/assets/images/phone-fill.svg';
 import MailIcon from '/src/assets/images/mail.svg';
 import LocationIcon from '/src/assets/images/location-pin.svg';
@@ -37,41 +37,42 @@ const { links = [], secondaryLinks = [], footNote = '' } = Astro.props;
 const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filter(Boolean);
 ---
 
-<footer class="relative border-t border-white/10 bg-[#243447] not-prose">
+<footer class="relative border-t border-slate-200 bg-slate-50 not-prose">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-26 md:pt-12 md:pb-12 flex flex-col">
-    <!-- ROW 1: 4-column horizontal layout -->
     <div class="flex flex-col gap-10 lg:flex-row lg:flex-nowrap items-center lg:gap-10">
-      <!-- ITEM 1: Logo block -->
       <div class="lg:flex-1">
         <a href={getHomePermalink()} class="inline-block" aria-label={SITE?.name || 'Rock Bookkeeping'}>
           <Logo class="w-[228px] h-auto" />
         </a>
       </div>
 
-      <!-- ITEM 2: Contact block (more breathing room) -->
-      <div class="flex flex-col lg:flex-1 text-base text-gray-100 leading-relaxed gap-4.5">
+      <div class="flex flex-col lg:flex-1 text-base text-slate-600 leading-relaxed gap-4.5">
         <div class="flex items-center gap-4">
-          <PhoneIcon class="h-4 w-4" aria-hidden="true" />
-          <a href="tel:14122568411" class="font-semibold hover:text-white transition-colors"> 412-256-8411 </a>
+          <PhoneIcon class="h-4 w-4 text-[#012D79]" aria-hidden="true" />
+          <a href="tel:14122568411" class="font-semibold text-[#012D79] hover:text-[#0075DD] transition-colors">
+            412-256-8411
+          </a>
         </div>
 
         <div class="flex items-center gap-4">
-          <MailIcon class="h-4 w-4" aria-hidden="true" />
-          <a href="mailto:josh@rockbookkeeping.com" class="font-semibold hover:text-white transition-colors">
+          <MailIcon class="h-4 w-4 text-[#012D79]" aria-hidden="true" />
+          <a
+            href="mailto:josh@rockbookkeeping.com"
+            class="font-semibold text-[#012D79] hover:text-[#0075DD] transition-colors"
+          >
             josh@rockbookkeeping.com
           </a>
         </div>
 
         <div class="flex items-center gap-4">
-          <LocationIcon class="h-4 w-4" aria-hidden="true" />
-          <span class="font-semibold">Pittsburgh, PA</span>
+          <LocationIcon class="h-4 w-4 text-[#012D79]" aria-hidden="true" />
+          <span class="font-semibold text-[#012D79]">Pittsburgh, PA</span>
         </div>
 
-        <span class="italic mt-1.5"> Serving clients locally and nationwide. </span>
+        <span class="italic mt-1.5 text-slate-500"> Serving clients locally and nationwide. </span>
       </div>
 
-      <!-- ITEM 3: Badges + trust copy -->
-      <div class="flex flex-col items-center lg:flex-1 lg:items-start text-white xl:pr-5 gap-1.5">
+      <div class="flex flex-col items-center lg:flex-1 lg:items-start text-[#012D79] xl:pr-5 gap-1.5">
         <div class="flex gap-4 mb-2">
           <Image src={CertBookkeeper} alt="" aria-hidden="true" loading="lazy" class="w-28 h-auto object-contain" />
           <Image src={CertLevel1} alt="" aria-hidden="true" loading="lazy" class="w-28 h-auto object-contain" />
@@ -79,7 +80,7 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
 
         <p class="text-center lg:text-left text-sm font-semibold">Certified QuickBooks Online ProAdvisor.</p>
 
-        <p class="text-center lg:text-left text-sm text-gray-100 mt-1 leading-relaxed">
+        <p class="text-center lg:text-left text-sm text-slate-600 mt-1 leading-relaxed">
           Trained and certified by Intuit in bookkeeping and software-specific best practices for QuickBooks Online.
         </p>
 
@@ -94,17 +95,14 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
             inline-flex items-center justify-center
             rounded-full
             text-sm font-semibold text-white
-            bg-blue-600/20 hover:bg-blue-600/30 transition
-            /* mobile padding */
+            bg-[#012D79] hover:bg-[#0075DD] transition
             px-4 py-2
-            /* desktop/tablet override */
             lg:px-3 lg:py-1.5"
         >
           Fix my books now
         </button>
       </div>
 
-      <!-- ITEM 4: Nav block -->
       {
         flatLinks.length > 0 && (
           <nav class="lg:flex-1 text-center lg:text-left lg:ml-auto">
@@ -113,11 +111,11 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
                      lg:flex-col
                      lg:pl-8
                      xl:flex-row xl:pl-0 xl:gap-8
-                     gap-4.5 text-base font-semibold uppercase tracking-wide text-white"
+                     gap-4.5 text-base font-semibold uppercase tracking-wide text-[#012D79]"
             >
               {flatLinks.map(({ text, href, ariaLabel }) => (
                 <li>
-                  <a href={href} aria-label={ariaLabel} class="hover:text-gray-200 transition-colors">
+                  <a href={href} aria-label={ariaLabel} class="hover:text-[#0075DD] transition-colors">
                     <Fragment set:html={text} />
                   </a>
                 </li>
@@ -128,18 +126,16 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
       }
     </div>
 
-    <!-- ROW 2: Divider with ~30px vertical padding -->
     <div class="py-8">
-      <div class="h-px bg-white/10"></div>
+      <div class="h-px bg-slate-200"></div>
     </div>
 
-    <!-- ROW 3: Legal + copyright (a touch more gap) -->
-    <div class="flex flex-col items-center gap-8 text-xs text-gray-300">
+    <div class="flex flex-col items-center gap-8 text-xs text-slate-500">
       {
         secondaryLinks.length > 0 && (
           <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {secondaryLinks.map(({ text, href }) => (
-              <a href={href} class="hover:text-gray-100 transition-colors" set:html={text} />
+              <a href={href} class="hover:text-[#012D79] transition-colors" set:html={text} />
             ))}
           </div>
         )

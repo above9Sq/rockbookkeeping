@@ -1,14 +1,19 @@
 ---
 export interface Props {
   align?: 'left' | 'center';
+  color?: 'dark' | 'light';
+  weight?: 'bold' | 'black';
 }
 
-const { align = 'center' } = Astro.props;
+const { align = 'center', color = 'dark', weight = 'bold' } = Astro.props;
+
 const alignClass = align === 'left' ? 'text-left' : 'text-center';
+const colorClass = color === 'light' ? 'text-white' : 'text-gray-800';
+const weightClass = weight === 'black' ? 'font-black' : 'font-bold';
 ---
 
 <h2
-  class={`${alignClass} mt-0 block text-[32px] leading-[1.0] sm:text-[38px] sm:leading-[1.2] md:text-[45px] md:leading-[49.5px] tracking-[0.45px] font-bold text-gray-800 text-balance `}
+  class={`${alignClass} ${colorClass} ${weightClass} mt-0 block text-[32px] leading-[1.0] sm:text-[38px] sm:leading-[1.2] md:text-[45px] md:leading-[49.5px] tracking-[0.45px] text-balance`}
 >
   <slot />
 </h2>

@@ -1,7 +1,7 @@
 ---
 import SmsIcon from '/src/assets/images/sms.svg';
 import { headerData } from '~/navigation';
-import { btnSolidDarkShell } from '~/styles/buttonStyles';
+import { buttonClasses } from '~/styles/buttonStyles';
 
 const { phoneNumber } = headerData;
 const smsHref = `sms:${phoneNumber.replace(/[^0-9]/g, '')}`;
@@ -17,7 +17,7 @@ const smsHref = `sms:${phoneNumber.replace(/[^0-9]/g, '')}`;
   <a
     href={smsHref}
     aria-label={`Text Rock Bookkeeping at ${phoneNumber}`}
-    class={`${btnSolidDarkShell} pointer-events-auto w-full px-6 py-4 text-lg gap-x-3 shadow-md flex items-center justify-center`}
+    class={`${buttonClasses({ variant: 'dark', fullWidth: true, narrow: true })} pointer-events-auto px-6 py-4 text-lg gap-x-3 shadow-md`}
     tabindex="-1"
   >
     <SmsIcon class="w-6 h-6 shrink-0" />

@@ -1,0 +1,204 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import FitQualifiersSection from '~/components/widgets/FitQualifiersSection.astro';
+import TestimonialQuincy from '~/components/widgets/TestimonialQuincy.astro';
+import MonthlyInclusions from '~/components/widgets/MonthlyInclusions.astro';
+import ProcessSteps from '~/components/widgets/ProcessSteps.astro';
+import CleanupClarification from '~/components/widgets/CleanupClarification.astro';
+import PricingExpectations from '~/components/widgets/PricingExpectations.astro';
+import TrustAbout from '~/components/widgets/TrustAbout.astro';
+import joshImage from '/src/assets/images/josh-circle.png';
+
+import FAQ from '~/components/widgets/FAQ.astro';
+import ContactSection from '~/components/widgets/ContactSection.astro';
+// import FinalCTA from '~/components/widgets/FinalCTA.astro';
+
+import { monthlyBookkeepingFaqs } from '~/content/servicePages/monthlyBookkeepingFaqs';
+
+import type { HeroProps } from '~/types/hero';
+import heroHeadshot from '~/assets/images/hero-headshot-square.png';
+
+const heroProps = {
+  headline: 'Monthly Bookkeeping for QuickBooks Online',
+  subheadline:
+    'Your books handled every month. No catching up, no guessing, no stress. I categorize transactions, reconcile accounts, and send you reports you can actually use. You get consistent bookkeeping without hiring someone full-time.',
+  primaryCta: { kind: 'cal', label: 'Book a call with Josh' },
+  secondaryCta: { kind: 'modal', label: 'Send Josh a quick note' },
+  image: {
+    src: heroHeadshot,
+    alt: 'Josh Cesana, Rock Bookkeeping',
+    width: 385,
+    height: 341,
+    loading: 'eager',
+    fetchpriority: 'high',
+  },
+  showSignature: true,
+  bgColor: '#012D78',
+} satisfies HeroProps;
+
+const metadata = {
+  title: 'QuickBooks Cleanup - Rock Bookkeeping',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero {...heroProps} />
+
+  <FitQualifiersSection
+    header="Is This a Fit?"
+    subheader="Most businesses fall into the first two categories."
+    blocks={[
+      {
+        kind: 'list',
+        title: 'Yes, if you:',
+        items: [
+          'Already use QuickBooks Online with bank feeds connected',
+          'Have an active business with regular monthly activity',
+          'Want someone to maintain your books going forward',
+          'Need consistent reports for yourself or your CPA',
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'Likely, if:',
+        items: [
+          'Your books are a little messy or inconsistent',
+          "You've been doing it yourself and want to hand it off",
+          'You need a one-time cleanup before starting monthly service',
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'Probably not, if:',
+        items: [
+          'You need years of backlog fixed without cleanup first',
+          "You're only looking for payroll or tax filing",
+          "You don't use QuickBooks Online",
+        ],
+      },
+    ]}
+  />
+
+  <TestimonialQuincy />
+
+  <MonthlyInclusions
+    id="monthly-inclusions"
+    header="What's Included Each Month"
+    bgColor="bg-white"
+    items={[
+      {
+        title: 'Transaction categorization',
+        description: 'Every transaction gets reviewed and categorized correctly. No guessing, no generic labels.',
+      },
+      {
+        title: 'Bank and credit card reconciliations',
+        description: 'All connected accounts reconciled to statements. Discrepancies flagged and resolved.',
+      },
+      {
+        title: 'Monthly financial reports',
+        description: 'Profit & Loss and Balance Sheet delivered after books are closed each month.',
+      },
+      {
+        title: 'Issue resolution',
+        description: 'Duplicate transactions, uncategorized items, and oddities handled without you needing to ask.',
+      },
+      {
+        title: 'CPA coordination',
+        description: 'Clean books ready for your accountant at tax time. I answer their questions directly if needed.',
+      },
+      {
+        title: 'Direct communication with Josh',
+        description: 'Text or call anytime during the month. No tickets, no offshore team, no delays.',
+      },
+    ]}
+  />
+
+  <ProcessSteps
+    id="process"
+    header="How the Process Works"
+    intro="Simple, predictable, and handled with you."
+    bgColor="bg-white"
+    steps={[
+      {
+        title: 'Free books review',
+        description: "We look at your QuickBooks file together and talk about what's working and what isn't.",
+      },
+      {
+        title: 'Assess current state',
+        description:
+          "I'll let you know if your books can start monthly service right away, or if a cleanup is needed first.",
+      },
+      {
+        title: 'Cleanup (if needed)',
+        description:
+          "If there's a backlog or mess to fix, we handle that separately before monthly bookkeeping starts.",
+      },
+      {
+        title: 'Monthly service begins',
+        description: 'Books closed and reconciled by the 15th of each month. Reports sent. Repeat every month.',
+      },
+    ]}
+  />
+
+  <CleanupClarification
+    id="about-cleanup"
+    header="About Cleanup"
+    intro="Some businesses need a one-time cleanup before monthly bookkeeping can start."
+    bgColor="bg-white"
+    cards={[
+      {
+        title: 'Why cleanup happens',
+        body: 'Some businesses need a one-time cleanup before monthly bookkeeping can start.',
+      },
+      {
+        title: 'What triggers it',
+        body: 'This happens when there are months of unreconciled accounts, uncategorized transactions, or duplicate entries that need to be fixed first.',
+      },
+      {
+        title: "How it's priced",
+        body: 'Cleanup is priced separately and happens once. After that, monthly bookkeeping keeps everything current.',
+      },
+      {
+        title: "When you'll know",
+        body: "If your books need cleanup, I'll tell you during the review call. No surprises.",
+      },
+    ]}
+  />
+
+  <PricingExpectations
+    id="pricing"
+    header="Pricing Expectations"
+    paragraphs={[
+      'Monthly bookkeeping typically starts at $300/month.',
+      'Most businesses pay between $300 and $800/month depending on transaction volume and account complexity.',
+    ]}
+    bullets={[
+      'Number of connected bank and credit card accounts',
+      'Monthly transaction volume',
+      'Whether you use multiple entities or classes',
+      'Inventory tracking or job costing',
+    ]}
+    closing="Final pricing is determined after reviewing your books. You’ll know the exact monthly cost before committing."
+  />
+
+  <TrustAbout
+    id="about-josh"
+    header="About Josh"
+    bgColor="bg-[#F7F9FF]"
+    imageSrc={joshImage}
+    imageAlt="Josh Cesana - Owner & Bookkeeper"
+    paragraphs={[
+      "I'm a Certified QuickBooks ProAdvisor and Intuit Certified Bookkeeper. I have an accounting degree from Biola University and worked in public accounting before starting Rock Bookkeeping.",
+      "I run this business by myself. I only work in QuickBooks Online, and I don't outsource to a team or hand your books off to someone else.",
+      'When you work with me, you work with me.',
+    ]}
+  />
+
+  <FAQ bgColor="#f9fafb" items={monthlyBookkeepingFaqs} />
+
+  <ContactSection />
+
+  <!-- <ContactSection /> -->
+</Layout>

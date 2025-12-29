@@ -1,0 +1,68 @@
+---
+// src/components/widgets/FitQualifiers.astro
+import Container from '~/components/widgets/Container.astro';
+import H2 from './H2.astro';
+import CheckIcon from '~/assets/images/checkmark.svg';
+
+export interface Props {
+  id?: string;
+  header: string;
+  subheader: string;
+  blocks: any[];
+}
+
+const { id = 'fit-qualifiers', header, subheader, blocks = [] } = Astro.props;
+
+const safeBlocks = Array.isArray(blocks) ? blocks.slice(0, 3) : [];
+
+// Simple icon color mapping for categorization
+const cardIconStyles = [
+  'text-[#012D79]', // Yes
+  'text-[#0075DD]', // Likely
+  'text-slate-400', // Probably Not
+];
+---
+
+<section id={id} class="py-16 sm:py-24 bg-slate-50">
+  <Container narrow>
+    <div class="text-center mb-16">
+      <H2 align="center">{header}</H2>
+      <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto italic">
+        {subheader}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {
+        safeBlocks.map((block, index) => {
+          const iconColor = cardIconStyles[index] ?? cardIconStyles[1];
+
+          return (
+            <div
+              class="
+            bg-white rounded-2xl p-8 
+            /* Realistic Shadow: Soft, bottom-weighted, very low opacity */
+            shadow-[0_8px_30px_rgb(0,0,0,0.04)]
+            /* Subtle hover effect that feels premium, not SAASy */
+            transition-all duration-300 hover:shadow-[0_15px_45px_rgb(0,0,0,0.07)]
+          "
+            >
+              <h3 class="text-xl font-bold text-[#012D79] mb-8">{block.title || block.text}</h3>
+
+              {block.kind === 'list' && (
+                <ul class="space-y-5">
+                  {block.items.map((item) => (
+                    <li class="flex gap-3 items-start">
+                      <CheckIcon class={`w-4 h-4 mt-1 shrink-0 ${iconColor}`} aria-hidden="true" />
+                      <span class="text-slate-600 text-base leading-snug font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })
+      }
+    </div>
+  </Container>
+</section>
