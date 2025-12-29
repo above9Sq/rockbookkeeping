@@ -1,6 +1,6 @@
 ---
 import Image from '~/components/common/Image.astro';
-import JoshSignature from '/src/assets/images/josh-signature.svg';
+import JoshSignaturePng from '/src/assets/images/josh-signature.png';
 import CalButton from './CalButton.astro';
 import CtaButton from './CtaButton.astro';
 
@@ -69,7 +69,16 @@ const ctaWrapClass =
 
           {
             showSignature ?
-              <JoshSignature class="absolute -bottom-8 sm:-bottom-12 lg:-bottom-14 left-[68%] -translate-x-1/2 w-[150px] sm:w-[190px] lg:w-[210px] h-auto" />
+              <Image
+                src={JoshSignaturePng}
+                alt="Josh Cesana signature"
+            width={202}
+            height={44}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            class="absolute -bottom-13 sm:-bottom-12 lg:-bottom-14 left-[61%] sm:left-[68%] -translate-x-1/2 w-[150px] sm:w-[190px] lg:w-[210px] h-auto"
+          />
             : null
           }
         </div>
