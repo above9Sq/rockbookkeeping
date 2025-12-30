@@ -1,5 +1,6 @@
 import { getPermalink, getBlogPermalink } from './utils/permalinks';
 import { APP_BLOG } from 'astrowind:config';
+import { CONTACT_PHONE } from './config/contact';
 
 export const headerData = {
   links: [
@@ -12,7 +13,7 @@ export const headerData = {
   ],
   ctaLabel: 'Fix My Books Now',
   ctaModal: '#contact-modal',
-  phoneNumber: '412-256-8411',
+  phoneNumber: CONTACT_PHONE,
   useTextJoshInHeader: true,
 };
 

@@ -3,6 +3,8 @@ title: 'Disclaimer'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
+import { CONTACT_EMAIL } from '~/config/contact';
+
 _Last updated_: September 28, 2025
 
 ## Disclaimer
@@ -41,5 +43,5 @@ We make no guarantee that the website will be uninterrupted, error-free, or that
 
 If you have any questions about this Disclaimer, you can contact us:
 
-- By email: [josh@rockbookkeeping.com](mailto:josh@rockbookkeeping.com)  
+- By email: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
 - By visiting this website: [https://rockbookkeeping.com](https://rockbookkeeping.com)

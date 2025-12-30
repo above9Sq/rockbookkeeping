@@ -2,6 +2,7 @@
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
 import { Image } from 'astro:assets';
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL } from '~/config/contact';
 
 // SVGs as components
 import Logo from '/src/assets/images/rb-logo-stacked-compact-light-v2.svg';
@@ -49,18 +50,18 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
       <div class="flex flex-col lg:flex-1 text-base text-slate-600 leading-relaxed gap-4.5">
         <div class="flex items-center gap-4">
           <PhoneIcon class="h-4 w-4 text-[#012D79]" aria-hidden="true" />
-          <a href="tel:14122568411" class="font-semibold text-[#012D79] hover:text-[#0075DD] transition-colors">
-            412-256-8411
+          <a href={CONTACT_PHONE_TEL} class="font-semibold text-[#012D79] hover:text-[#0075DD] transition-colors">
+            {CONTACT_PHONE}
           </a>
         </div>
 
         <div class="flex items-center gap-4">
           <MailIcon class="h-4 w-4 text-[#012D79]" aria-hidden="true" />
           <a
-            href="mailto:josh@rockbookkeeping.com"
+            href={`mailto:${CONTACT_EMAIL}`}
             class="font-semibold text-[#012D79] hover:text-[#0075DD] transition-colors"
           >
-            josh@rockbookkeeping.com
+            {CONTACT_EMAIL}
           </a>
         </div>
 

@@ -3,6 +3,8 @@ title: 'Privacy Policy'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
+import { CONTACT_EMAIL } from '~/config/contact';
+
 _Last updated_: September 28, 2025
 
 ## Privacy Policy
@@ -68,5 +70,5 @@ We may update this Privacy Policy from time to time. The most recent version wil
 
 If you have any questions about this Privacy Policy, you can contact us:
 
-- By email: [josh@rockbookkeeping.com](mailto:josh@rockbookkeeping.com)
+- By email: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
 - By visiting this website: [https://rockbookkeeping.com](https://rockbookkeeping.com)

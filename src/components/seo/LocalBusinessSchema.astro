@@ -1,5 +1,6 @@
 ---
 import { SITE } from 'astrowind:config';
+import { CONTACT_EMAIL, CONTACT_PHONE_E164 } from '~/config/contact';
 
 const data = {
   "@context": "https://schema.org",
@@ -8,8 +9,8 @@ const data = {
   "url": SITE.site,
   "logo": "https://rockbookkeeping.com/icons/icon-512.png",
   "description": "QuickBooks Online bookkeeping for small businesses — reconciliations and monthly financials.",
-  "email": "josh@rockbookkeeping.com",
-  "telephone": "+1-412-256-8411",
+  "email": CONTACT_EMAIL,
+  "telephone": CONTACT_PHONE_E164,
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Pittsburgh",

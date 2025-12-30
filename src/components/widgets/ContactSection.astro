@@ -6,20 +6,18 @@ import CtaButton from '~/components/widgets/CtaButton.astro';
 import PhoneIcon from '/src/assets/images/phone-no-fill.svg';
 import MailIcon from '/src/assets/images/mail.svg';
 import LocationPinIcon from '/src/assets/images/location-pin.svg';
-import { headerData } from '~/navigation';
+import { theme } from '~/theme';
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_E164 } from '~/config/contact';
 
 interface Props {
   bgColor?: string;
 }
 
-const { bgColor = '#012D78' } = Astro.props;
+const { bgColor = theme.contactBg } = Astro.props;
 
-const { phoneNumber } = headerData;
-const strippedPhone = phoneNumber.replace(/[^0-9]/g, '');
-const phoneHref = `tel:${strippedPhone}`;
-const smsHref = `sms:${strippedPhone}`;
+const phoneHref = `tel:${CONTACT_PHONE_E164}`;
+const smsHref = `sms:${CONTACT_PHONE_E164}`;
 
-const email = 'josh@rockbookkeeping.com';
 const location = 'Pittsburgh, PA';
 ---
 
@@ -38,15 +36,15 @@ const location = 'Pittsburgh, PA';
         <div class="flex items-center gap-3">
           <PhoneIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
           <a href={phoneHref} class="hover:text-gray-100">
-            {phoneNumber}
+            {CONTACT_PHONE}
           </a>
         </div>
 
         <!-- Email -->
         <div class="flex items-center gap-3">
           <MailIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
-          <a href={`mailto:${email}`} class="hover:text-gray-100">
-            {email}
+          <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-gray-100">
+            {CONTACT_EMAIL}
           </a>
         </div>
 
@@ -72,7 +70,7 @@ const location = 'Pittsburgh, PA';
             href={smsHref}
             class="inline-flex items-center rounded-full border border-blue-100 bg-transparent px-3 py-1 text-xs sm:text-[0.8rem] font-semibold text-blue-50 hover:bg-blue-900/50 hover:border-blue-200"
           >
-            Text Josh: {phoneNumber}
+            Text Josh: {CONTACT_PHONE}
           </a>
         </div>
         <p class="text-gray-100 text-xs sm:text-sm">No pressure or commitment - just a quick chat about your books.</p>
