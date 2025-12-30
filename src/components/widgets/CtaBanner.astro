@@ -1,5 +1,6 @@
 ---
 import CtaButton from '~/components/widgets/CtaButton.astro';
+import { theme } from '~/theme';
 
 
 export interface Props {
@@ -8,7 +9,7 @@ export interface Props {
   bgColor?: string;
 }
 
-const { header, subheader, bgColor = '#012D78' } = Astro.props;
+const { header, subheader, bgColor = theme.ctaBannerBg } = Astro.props;
 ---
 
 <div

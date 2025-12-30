@@ -3,11 +3,12 @@ import Image from '~/components/common/Image.astro';
 import JoshSignaturePng from '/src/assets/images/josh-signature-large.png';
 import CalButton from './CalButton.astro';
 import CtaButton from './CtaButton.astro';
+import { theme } from '~/theme';
 
 /** @type {import('~/types/hero').HeroProps} */
 const props = Astro.props;
 
-const { headline, subheadline, primaryCta, secondaryCta, image, showSignature = true, bgColor = '#012D78' } = props;
+const { headline, subheadline, primaryCta, secondaryCta, image, showSignature = true, bgColor = theme.heroBg } = props;
 
 const primarySize = primaryCta?.size ?? 'md';
 

@@ -6,6 +6,7 @@ import Container from '~/components/widgets/Container.astro';
 import H2 from '~/components/widgets/H2.astro';
 import CtaBanner from '~/components/widgets/CtaBanner.astro';
 import joshImage from '/src/assets/images/josh-circle.png';
+import { theme } from '~/theme';
 
 const metadata = {
   title: 'About',
@@ -84,7 +85,7 @@ const bgColor = '#F7F9FF';
           </div>
         </div>
 
-        <CtaBanner header="Ready For Your Free Audit?" bgColor="#E3EDFF" />
+        <CtaBanner header="Ready For Your Free Audit?" bgColor={theme.ctaBannerAltBg} />
       </div>
     </Container>
   </section>

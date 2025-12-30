@@ -1,6 +1,7 @@
 ---
 import Hero from './Hero.astro';
 import heroHeadshot from '~/assets/images/hero-headshot-square.png';
+import { theme } from '~/theme';
 
 const hero = {
   headline: "Behind on your books? We'll fix that.",
@@ -16,7 +17,7 @@ const hero = {
     fetchpriority: 'high',
   },
   showSignature: true,
-  bgColor: '#012D78',
+  bgColor: theme.heroBg,
 };
 ---
 

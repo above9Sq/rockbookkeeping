@@ -3,6 +3,7 @@ import H2 from '~/components/widgets/H2.astro';
 import Container from '~/components/widgets/Container.astro';
 import CtaBanner from '~/components/widgets/CtaBanner.astro';
 import FeatureItem from '~/components/widgets/FeatureItem.astro';
+import { theme } from '~/theme';
 
 interface Tier {
   name: string;
@@ -210,7 +211,7 @@ const badgeClasses = `
       <CtaBanner
         header="Ready for your free audit?"
         subheader="No pressure, no commitment - just a clear view of what's working (and what's not) in your books."
-        bgColor="#012D78"
+        bgColor={theme.ctaBannerBg}
       />
     </div>
   </Container>
