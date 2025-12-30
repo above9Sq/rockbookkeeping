@@ -6,6 +6,9 @@ import ReassuranceSection from '~/components/widgets/ReassuranceSection.astro';
 import ProblemReliefSection from '~/components/widgets/ProblemReliefSection.astro';
 import ProcessSection from '~/components/widgets/ProcessSection.astro';
 import DeliverablesSection from '~/components/widgets/DeliverablesSection.astro';
+import TrustAbout from '~/components/widgets/TrustAbout.astro';
+import joshImage from '/src/assets/images/josh-circle.png';
+
 import FAQ from '~/components/widgets/FAQ.astro';
 // import FinalCTA from '~/components/widgets/FinalCTA.astro';
 import ContactSection from '~/components/widgets/ContactSection.astro';
@@ -129,7 +132,19 @@ const metadata = {
     bgColor="#FFFFFF"
   />
 
+  <TrustAbout
+    id="about-josh"
+    header="About Josh"
+    bgColor="bg-[#F7F9FF]"
+    imageSrc={joshImage}
+    imageAlt="Josh Cesana - Owner & Bookkeeper"
+    paragraphs={[
+      "I'm a Certified QuickBooks ProAdvisor and Intuit Certified Bookkeeper. I have an accounting degree from Biola University and worked in public accounting before starting Rock Bookkeeping.",
+      "I run this business by myself. I only work in QuickBooks Online, and I don't outsource to a team or hand your books off to someone else.",
+      'When you work with me, you work with me.',
+    ]}
+  />
+
   <FAQ bgColor="#f9fafb" items={quickbooksCleanupFaqs} />
   <ContactSection />
-  
 </Layout>
