@@ -9,6 +9,9 @@ import LocationPinIcon from '/src/assets/images/location-pin.svg';
 import { theme } from '~/theme';
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_E164 } from '~/config/contact';
 
+// IMPORTANT: use ?url so we can use it as an <img src="...">
+import contactBridgeUrl from '/src/assets/images/contact-bridge-white.svg?url';
+
 interface Props {
   bgColor?: string;
 }
@@ -23,57 +26,74 @@ const location = 'Pittsburgh, PA';
 
 <section id="contact" class="py-16 sm:py-20 lg:py-24" style={`background-color: ${bgColor}`}>
   <Container narrow maxWidth="max-w-[93rem]">
-    <div class="max-w-3xl">
-      <H2 align="left" color="light" weight="black">Get in Touch</H2>
+    <!-- 2-column layout on desktop: content left, illustration right -->
+    <div class="lg:grid lg:grid-cols-2 lg:items-center lg:gap-12">
+      <!-- LEFT -->
+      <div class="max-w-3xl">
+        <H2 align="left" color="light" weight="black">Get in Touch</H2>
 
-      <p class="mt-4 text-base sm:text-lg text-white">
-        Have a question or want to see if we are a fit? I reply the same business day.
-      </p>
+        <p class="mt-4 text-base sm:text-lg text-white">
+          Have a question or want to see if we are a fit? I reply the same business day.
+        </p>
 
-      <!-- Contact info -->
-      <div class="mt-6 space-y-3 text-sm sm:text-base text-white">
-        <!-- Phone -->
-        <div class="flex items-center gap-3">
-          <PhoneIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
-          <a href={phoneHref} class="hover:text-gray-100">
-            {CONTACT_PHONE}
-          </a>
+        <!-- Contact info -->
+        <div class="mt-6 space-y-3 text-sm sm:text-base text-white">
+          <!-- Phone -->
+          <div class="flex items-center gap-3">
+            <PhoneIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
+            <a href={phoneHref} class="hover:text-gray-100">
+              {CONTACT_PHONE}
+            </a>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-center gap-3">
+            <MailIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
+            <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-gray-100">
+              {CONTACT_EMAIL}
+            </a>
+          </div>
+
+          <!-- Location -->
+          <div class="flex items-center gap-3">
+            <LocationPinIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
+            <span>{location}</span>
+          </div>
         </div>
 
-        <!-- Email -->
-        <div class="flex items-center gap-3">
-          <MailIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
-          <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-gray-100">
-            {CONTACT_EMAIL}
-          </a>
+        <!-- Primary CTAs (stacked always, including desktop) -->
+        <div class="mt-8 flex flex-col gap-3 sm:gap-4 max-w-sm">
+          <CalButton narrow variant="light" label="Book a call with Josh" solidDark />
+          <CtaButton narrow variant="outlineLight" label="Send Josh a quick note" outline />
         </div>
 
-        <!-- Location -->
-        <div class="flex items-center gap-3">
-          <LocationPinIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
-          <span>{location}</span>
+        <!-- Reassurance + text CTA -->
+        <div class="mt-5 space-y-2 text-sm text-gray-100">
+          <div class="flex flex-wrap items-center gap-2">
+            <span>Prefer texting?</span>
+            <a
+              href={smsHref}
+              class="inline-flex items-center rounded-full border border-blue-100 bg-transparent px-3 py-1 text-xs sm:text-[0.8rem] font-semibold text-blue-50 hover:bg-blue-900/50 hover:border-blue-200"
+            >
+              Text Josh: {CONTACT_PHONE}
+            </a>
+          </div>
+          <p class="text-gray-100 text-xs sm:text-sm">
+            No pressure or commitment - just a quick chat about your books.
+          </p>
         </div>
       </div>
 
-      <!-- Primary CTAs -->
-      <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-        <CalButton narrow variant="light" label="Book a call with Josh" solidDark />
-
-        <CtaButton narrow variant="outlineLight" label="Send Josh a quick note" outline />
-      </div>
-
-      <!-- Reassurance + text CTA -->
-      <div class="mt-5 space-y-2 text-sm text-gray-100">
-        <div class="flex flex-wrap items-center gap-2">
-          <span>Prefer texting?</span>
-          <a
-            href={smsHref}
-            class="inline-flex items-center rounded-full border border-blue-100 bg-transparent px-3 py-1 text-xs sm:text-[0.8rem] font-semibold text-blue-50 hover:bg-blue-900/50 hover:border-blue-200"
-          >
-            Text Josh: {CONTACT_PHONE}
-          </a>
-        </div>
-        <p class="text-gray-100 text-xs sm:text-sm">No pressure or commitment - just a quick chat about your books.</p>
+      <!-- RIGHT (desktop only decorative image) -->
+      <div class="hidden lg:block pointer-events-none select-none">
+        <img
+          src={contactBridgeUrl}
+          alt=""
+          aria-hidden="true"
+          class="w-full max-w-[36rem] ml-auto opacity-25 filter grayscale"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </Container>
