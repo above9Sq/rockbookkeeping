@@ -1,6 +1,6 @@
 export const themes = {
   rockBlue: {
-    heroBg: '#012D79',
+    heroBg: '#243B86',
     ctaBannerBg: '#012D79',
     ctaBannerAltBg: '#E3EDFF',
     contactBg: '#012D79',
