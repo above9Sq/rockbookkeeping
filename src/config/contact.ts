@@ -1,9 +1,12 @@
 export const CONTACT_EMAIL = 'josh@rockbookkeeping.com';
-export const CONTACT_PHONE = '412-256-8411';
 
-// Helpers for links and structured data
-const CONTACT_PHONE_DIGITS = CONTACT_PHONE.replace(/[^0-9]/g, '');
-export const CONTACT_PHONE_E164 = `+1${CONTACT_PHONE_DIGITS}`;
+// Phone segments — assembled at runtime in UI; use CONTACT_PHONE_* only for SEO/structured data
+export const PHONE_AREA = '724';
+export const PHONE_PREFIX = '520';
+export const PHONE_LINE = '3050';
+
+export const CONTACT_PHONE = `${PHONE_AREA}-${PHONE_PREFIX}-${PHONE_LINE}`;
+export const CONTACT_PHONE_E164 = `+1${PHONE_AREA}${PHONE_PREFIX}${PHONE_LINE}`;
 export const CONTACT_PHONE_TEL = `tel:${CONTACT_PHONE_E164}`;
 export const CONTACT_PHONE_SMS = `sms:${CONTACT_PHONE_E164}`;
 

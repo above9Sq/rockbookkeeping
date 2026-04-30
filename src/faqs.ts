@@ -126,7 +126,7 @@ export const faqs: FAQItem[] = [
 
   // 13) Nationwide reassurance — last, because it's low-friction
   {
-    question: 'Do you work with businesses outside of Pittsburgh?',
+    question: 'Do you work with businesses outside of Pennsylvania?',
     paragraphs: [
       'Yes — 100% remote, nationwide.',
       "Whether you're across town or across the country, our process is fast, secure, and seamless.",

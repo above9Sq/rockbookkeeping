@@ -7,7 +7,8 @@ import PhoneIcon from '/src/assets/images/phone-no-fill.svg';
 import MailIcon from '/src/assets/images/mail.svg';
 import LocationPinIcon from '/src/assets/images/location-pin.svg';
 import { theme } from '~/theme';
-import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_E164 } from '~/config/contact';
+import PhoneLink from '~/components/widgets/PhoneLink.astro';
+import { CONTACT_EMAIL } from '~/config/contact';
 
 // IMPORTANT: use ?url so we can use it as an <img src="...">
 import contactBridgeUrl from '/src/assets/images/contact-bridge-white.svg?url';
@@ -18,10 +19,7 @@ interface Props {
 
 const { bgColor = theme.contactBg } = Astro.props;
 
-const phoneHref = `tel:${CONTACT_PHONE_E164}`;
-const smsHref = `sms:${CONTACT_PHONE_E164}`;
-
-const location = 'Pittsburgh, PA';
+const location = 'Latrobe, PA';
 ---
 
 <section id="contact" class="py-16 sm:py-20 lg:py-24" style={`background-color: ${bgColor}`}>
@@ -41,9 +39,7 @@ const location = 'Pittsburgh, PA';
           <!-- Phone -->
           <div class="flex items-center gap-3">
             <PhoneIcon class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-white" />
-            <a href={phoneHref} class="hover:text-gray-100">
-              {CONTACT_PHONE}
-            </a>
+            <PhoneLink class="hover:text-gray-100" linkType="tel" labelPrefix="" />
           </div>
 
           <!-- Email -->
@@ -71,12 +67,11 @@ const location = 'Pittsburgh, PA';
         <div class="mt-5 space-y-2 text-sm text-gray-100">
           <div class="flex flex-wrap items-center gap-2">
             <span>Prefer texting?</span>
-            <a
-              href={smsHref}
+            <PhoneLink
               class="inline-flex items-center rounded-full border border-blue-100 bg-transparent px-3 py-1 text-xs sm:text-[0.8rem] font-semibold text-blue-50 hover:bg-blue-900/50 hover:border-blue-200"
-            >
-              Text Josh: {CONTACT_PHONE}
-            </a>
+              linkType="sms"
+              labelPrefix="Text Josh: "
+            />
           </div>
           <p class="text-gray-100 text-xs sm:text-sm">
             No pressure or commitment - just a quick chat about your books.

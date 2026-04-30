@@ -2,7 +2,8 @@
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
 import { Image } from 'astro:assets';
-import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL } from '~/config/contact';
+import PhoneLink from '~/components/widgets/PhoneLink.astro';
+import { CONTACT_EMAIL } from '~/config/contact';
 
 // SVGs as components
 import Logo from '/src/assets/images/rb-logo-stacked-compact-light-v2.svg';
@@ -50,9 +51,11 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
       <div class="flex flex-col lg:flex-1 text-base text-slate-600 leading-relaxed gap-4.5">
         <div class="flex items-center gap-4">
           <PhoneIcon class="h-4 w-4 text-[#012D79]" aria-hidden="true" />
-          <a href={CONTACT_PHONE_TEL} class="font-semibold text-[#012D79] hover:text-[#0075DD] transition-colors">
-            {CONTACT_PHONE}
-          </a>
+          <PhoneLink
+            class="font-semibold text-[#012D79] hover:text-[#0075DD] transition-colors"
+            linkType="tel"
+            labelPrefix=""
+          />
         </div>
 
         <div class="flex items-center gap-4">
@@ -67,7 +70,7 @@ const flatLinks: Array<Link> = (links || []).flatMap((g) => g?.links || []).filt
 
         <div class="flex items-center gap-4">
           <LocationIcon class="h-4 w-4 text-[#012D79]" aria-hidden="true" />
-          <span class="font-semibold text-[#012D79]">Pittsburgh, PA</span>
+          <span class="font-semibold text-[#012D79]">Latrobe, PA</span>
         </div>
 
         <span class="italic mt-1.5 text-slate-500"> Serving clients locally and nationwide. </span>

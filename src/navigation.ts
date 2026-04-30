@@ -1,6 +1,5 @@
 import { getPermalink, getBlogPermalink } from './utils/permalinks';
 import { APP_BLOG } from 'astrowind:config';
-import { CONTACT_PHONE } from './config/contact';
 
 export const headerData = {
   links: [
@@ -13,7 +12,6 @@ export const headerData = {
   ],
   ctaLabel: 'Fix My Books Now',
   ctaModal: '#contact-modal',
-  phoneNumber: CONTACT_PHONE,
   useTextJoshInHeader: true,
 };
 
@@ -33,5 +31,5 @@ export const footerData = {
     { text: 'Disclaimer', href: getPermalink('/disclaimer') },
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
   ],
-  footNote: `&copy; ${new Date().getFullYear()} Rock Bookkeeping. All&nbsp;rights&nbsp;reserved. <br> Made with 💛 in Pittsburgh.`,
+  footNote: `&copy; ${new Date().getFullYear()} Rock Bookkeeping. All&nbsp;rights&nbsp;reserved. <br> Made with 💛 in PA.`,
 };

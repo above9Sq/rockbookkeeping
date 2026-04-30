@@ -1,0 +1,41 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { PHONE_AREA, PHONE_PREFIX, PHONE_LINE } from '~/config/contact';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+  linkType?: 'sms' | 'tel';
+  labelPrefix?: string;
+  fallback?: string;
+}
+
+const {
+  class: className = '',
+  linkType = 'sms',
+  labelPrefix = 'Text Josh: ',
+  fallback = 'Contact us',
+  ...rest
+} = Astro.props;
+
+const instanceId = `pl-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<a
+  id={instanceId}
+  href=""
+  class={className}
+  aria-label={fallback}
+  {...rest}
+><slot /><span data-phone-text>{fallback}</span></a>
+<script is:inline define:vars={{ PHONE_AREA, PHONE_PREFIX, PHONE_LINE, instanceId, linkType, labelPrefix }}>
+  (function () {
+    var el = document.getElementById(instanceId);
+    if (!el) return;
+    var num = PHONE_AREA + PHONE_PREFIX + PHONE_LINE;
+    var display = PHONE_AREA + '-' + PHONE_PREFIX + '-' + PHONE_LINE;
+    el.href = linkType + ':+1' + num;
+    var text = labelPrefix + display;
+    el.setAttribute('aria-label', text);
+    var span = el.querySelector('[data-phone-text]');
+    if (span) span.textContent = text;
+  })();
+</script>

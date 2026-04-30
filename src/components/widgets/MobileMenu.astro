@@ -2,17 +2,13 @@
 // MobileMenu.astro
 
 import SmsIcon from '/src/assets/images/sms.svg';
-import { headerData } from '~/navigation';
+import PhoneLink from './PhoneLink.astro';
 
 interface Props {
   navItems: { text: string; href: string }[];
 }
 
 const { navItems } = Astro.props;
-const { phoneNumber } = headerData;
-
-const numericPhone = phoneNumber.replace(/[^0-9]/g, '');
-const smsHref = `sms:${numericPhone}`;
 ---
 
 <div
@@ -43,18 +39,13 @@ const smsHref = `sms:${numericPhone}`;
         <!-- Contact row at the bottom: Text -->
         <li class="pt-4">
           <div class="flex flex-col gap-2">
-            <a
-              href={smsHref}
-              class="flex items-center justify-center gap-x-4 py-3 px-3
-                     text-lg font-semibold text-white
-                     bg-[#23335A] rounded-lg
-                     hover:bg-[#1d2a4c]
-                     transition-colors"
-              aria-label={`Text Rock Bookkeeping at ${phoneNumber}`}
+            <PhoneLink
+              class="flex items-center justify-center gap-x-4 py-3 px-3 text-lg font-semibold text-white bg-[#23335A] rounded-lg hover:bg-[#1d2a4c] transition-colors"
+              linkType="sms"
+              labelPrefix="TEXT JOSH: "
             >
               <SmsIcon class="w-6 h-6 shrink-0 text-white" />
-              <span>TEXT JOSH: {phoneNumber}</span>
-            </a>
+            </PhoneLink>
           </div>
         </li>
       </ul>

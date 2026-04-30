@@ -3,7 +3,7 @@ import Container from '~/components/widgets/Container.astro';
 import H2 from '~/components/widgets/H2.astro';
 import CalButton from '~/components/widgets/CalButton.astro';
 import CtaButton from '~/components/widgets/CtaButton.astro';
-import { headerData } from '~/navigation';
+import PhoneLink from '~/components/widgets/PhoneLink.astro';
 
 export interface Props {
   id?: string;
@@ -16,10 +16,6 @@ const { id = 'final-cta', header, paragraphs = [], bgColor = 'bg-[#002057]' } = 
 
 const safeParagraphs = Array.isArray(paragraphs) ? paragraphs : [];
 
-const { phoneNumber } = headerData;
-const strippedPhone = phoneNumber.replace(/[^0-9]/g, '');
-const smsHref = `sms:${strippedPhone}`;
-const phoneHref = `tel:${strippedPhone}`;
 ---
 
 <section id={id} class={`pt-14 sm:pt-16 lg:pt-20 pb-14 sm:pb-16 lg:pb-20 ${bgColor}`}>
@@ -48,9 +44,11 @@ const phoneHref = `tel:${strippedPhone}`;
 
       <div class="mt-5 text-sm sm:text-base text-white/75">
         <span class="italic">Prefer calling?&nbsp;</span>{' '}
-        <a href={phoneHref} class="underline underline-offset-4 hover:text-white">
-          {phoneNumber}
-        </a>
+        <PhoneLink
+          class="underline underline-offset-4 hover:text-white"
+          linkType="tel"
+          labelPrefix=""
+        />
       </div>
     </div>
   </Container>

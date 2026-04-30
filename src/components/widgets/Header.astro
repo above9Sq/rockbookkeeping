@@ -3,13 +3,10 @@ import Logo from '/src/assets/images/rb-logo-horizontal-compact-light-v2.svg';
 import PhoneIcon from '/src/assets/images/phone-no-fill.svg';
 import SmsIcon from '/src/assets/images/sms.svg';
 import MobileMenu from './MobileMenu.astro';
+import PhoneLink from './PhoneLink.astro';
 import { headerData } from '~/navigation';
 
-const { links, phoneNumber, useTextJoshInHeader } = headerData;
-
-const numericPhone = phoneNumber.replace(/[^0-9]/g, '');
-const phoneHref = `tel:${numericPhone}`;
-const smsHref = `sms:${numericPhone}`;
+const { links, useTextJoshInHeader } = headerData;
 ---
 
 <header class="sticky top-0 z-[80] w-full bg-white transition-[height] duration-300 ease-out">
@@ -41,23 +38,21 @@ const smsHref = `sms:${numericPhone}`;
     <div class="flex items-center justify-end ml-auto lg:ml-0 lg:col-span-3 lg:justify-end gap-x-6">
       {
         useTextJoshInHeader ? (
-          <a
-            href={smsHref}
+          <PhoneLink
             class="hidden lg:inline-flex items-center gap-x-2 text-gray-800 hover:text-gray-600 font-semibold text-sm transition-colors"
-            aria-label={`Text Rock Bookkeeping at ${phoneNumber}`}
+            linkType="sms"
+            labelPrefix="Text Josh: "
           >
             <SmsIcon class="w-4 h-4 shrink-0" />
-            <span>Text Josh: {phoneNumber}</span>
-          </a>
+          </PhoneLink>
         ) : (
-          <a
-            href={phoneHref}
+          <PhoneLink
             class="hidden lg:inline-flex items-center gap-x-2 text-gray-800 hover:text-gray-600 font-semibold text-sm transition-colors"
-            aria-label={`Call Rock Bookkeeping at ${phoneNumber}`}
+            linkType="sms"
+            labelPrefix=""
           >
             <PhoneIcon class="w-4 h-4 shrink-0" />
-            <span>{phoneNumber}</span>
-          </a>
+          </PhoneLink>
         )
       }
 
