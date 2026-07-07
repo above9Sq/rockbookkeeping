@@ -15,6 +15,7 @@ import ContactSection from '~/components/widgets/ContactSection.astro';
 // import FinalCTA from '~/components/widgets/FinalCTA.astro';
 
 import { monthlyBookkeepingFaqs } from '~/content/servicePages/monthlyBookkeepingFaqs';
+import { MONTHLY_PRICE_FROM, MONTHLY_PRICE_TYPICAL_MAX } from '~/config/pricing';
 
 import type { HeroProps } from '~/types/hero';
 import heroHeadshot from '~/assets/images/hero-headshot-square.png';
@@ -170,8 +171,8 @@ const metadata = {
     id="pricing"
     header="Pricing Expectations"
     paragraphs={[
-      'Monthly bookkeeping typically starts at $349/month.',
-      'Most businesses pay between $349 and $800/month depending on transaction volume and account complexity.',
+      `Monthly bookkeeping typically starts at $${MONTHLY_PRICE_FROM}/month.`,
+      `Most businesses pay between $${MONTHLY_PRICE_FROM} and $${MONTHLY_PRICE_TYPICAL_MAX}/month depending on transaction volume and account complexity.`,
     ]}
     bullets={[
       'Number of connected bank and credit card accounts',

@@ -4,6 +4,7 @@ import Container from '~/components/widgets/Container.astro';
 import CtaBanner from '~/components/widgets/CtaBanner.astro';
 import FeatureItem from '~/components/widgets/FeatureItem.astro';
 import { theme } from '~/theme';
+import { MONTHLY_PRICE_FROM, CLEANUP_PRICE_FROM } from '~/config/pricing';
 
 interface Tier {
   name: string;
@@ -27,7 +28,7 @@ const monthlyTiers: Tier[] = [
   {
     name: 'Core Bookkeeping',
     introText: 'Stress-free monthly bookkeeping that keeps your accounts accurate and your mind at ease.',
-    price: '349',
+    price: String(MONTHLY_PRICE_FROM),
     features: [
       'Reconcile all accounts',
       'Categorization of all transactions',
@@ -45,7 +46,7 @@ const monthlyTiers: Tier[] = [
 const cleanupTier: Tier = {
   name: 'Cleanup',
   introText: 'Perfect if your books are behind, messy, or you are switching to QuickBooks Online.',
-  price: '1500',
+  price: String(CLEANUP_PRICE_FROM),
   features: [
     'Fix messy or behind books',
     'QBO setup if needed',
