@@ -65,6 +65,7 @@ const ctaWrapClass =
             loading={image.loading ?? 'lazy'}
             decoding="async"
             fetchpriority={image.fetchpriority ?? 'auto'}
+            sizes="(min-width: 1024px) 385px, (min-width: 640px) 340px, 300px"
             class="w-full rounded-[20px] object-cover"
           />
 
@@ -78,6 +79,7 @@ const ctaWrapClass =
             loading="eager"
             decoding="async"
             fetchpriority="high"
+            sizes="(min-width: 1024px) 210px, (min-width: 640px) 190px, 150px"
             class="absolute -bottom-13 sm:-bottom-12 lg:-bottom-14 left-[61%] sm:left-[68%] -translate-x-1/2 w-[150px] sm:w-[190px] lg:w-[210px] h-auto"
           />
             : null
